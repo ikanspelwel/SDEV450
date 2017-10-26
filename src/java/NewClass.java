@@ -10,5 +10,6 @@
 
 //Begin Subclass NewClass
 public class NewClass {
+    // This is a test..
 
 } //End Subclass NewClass
