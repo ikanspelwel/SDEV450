@@ -9,10 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Flammino
- */
 public class BaseDBFunctions {
     Connection con;
     Statement stmt;
