@@ -17,7 +17,8 @@ public class functionTest {
         Calendar calendar = Calendar.getInstance();
         java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
         String insert = "insert into demo1.USERS VALUES('test1', 'HamBurglar', "
-                + "0000000000000000000000000000000000000000000000000000000000000000, 1111111111, 12345, 0, " + date;
+                + "0000000000000000000000000000000000000000000000000000000000000000, "
+                + "1111111111, 12345, 0, " + date + ")";
         
         // ("EMAIL, FULL_NAME, PASSWORD, SALT, ZIP, RECOVERY_KEY, DATE_JOINED)
         BaseDBFunctions dbTest = new BaseDBFunctions();
