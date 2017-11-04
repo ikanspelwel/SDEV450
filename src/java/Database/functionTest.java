@@ -15,12 +15,12 @@ public class functionTest {
         String username = "demo1";
         String password = "DirectSellDbAccess1234";
         Calendar calendar = Calendar.getInstance();
-        java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-        String insert = "insert into demo1.USERS VALUES('test1', 'HamBurglar', "
-                + "0000000000000000000000000000000000000000000000000000000000000000, "
-                + "1111111111, 12345, 0, " + date + ")";
+        String insert = "insert into demo1.USERS(EMAIL, FULL_NAME, PASSWORD, SALT, "
+                + "ZIP, RECOVERY_KEY, DATE_JOINED) VALUES('test3', 'RealName', "
+                + "0000000000000000000000000000000000000000000000000000000000000002, "
+                + "1111111113, 12347, 125, NOW())";
         
-        // ("EMAIL, FULL_NAME, PASSWORD, SALT, ZIP, RECOVERY_KEY, DATE_JOINED)
+        // 
         BaseDBFunctions dbTest = new BaseDBFunctions();
         flag = dbTest.connect(host, username, password);
         if (flag){
