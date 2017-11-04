@@ -39,6 +39,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
+                        <li><a href="listings.html">Listings</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="profile.html">Profile</a></li>
@@ -123,6 +124,25 @@
                     </div>
                 </div>
             </div>            
+        </div>
+        
+        <!-- Modal for use with trash button for confirmation-->
+        <div id="delModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Delete Messages?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete these messages?</p>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Confirm</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Add footer -->
