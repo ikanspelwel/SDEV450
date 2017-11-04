@@ -1,4 +1,5 @@
 /*
+ * Base class to interact with database
  * Adam Flammino 11/3/17
  */
 package Database;
@@ -27,11 +28,17 @@ public class BaseDBFunctions {
     }
     
     // Executes whatever sql statement is passed in, returns true if sucessful
-    boolean executeSQL(String SQL){
+    // Set manip to false for select queries, true for others
+    boolean executeSQL(String SQL, boolean manip){
         try{
             stmt = con.createStatement();
-            rs = stmt.executeQuery(SQL);
-            return true;
+            if(!manip){
+                rs = stmt.executeQuery(SQL);
+                return true;
+            }
+            else{
+                return stmt.execute(SQL);
+            }
         }
         catch (SQLException err){
             System.out.println(err.getMessage());
