@@ -14,23 +14,12 @@ import java.sql.Statement;
  * @author Flammino
  */
 public class BaseDBFunctions {
-
-    String host;
-    String username;
-    String password;
     Connection con;
     Statement stmt;
     ResultSet rs;
 
-    // Constructor
-    BaseDBFunctions(String h, String u, String p) {
-        host = h;
-        username = u;
-        password = p;
-    }
-
     // Connects to database, returns true if sucessful
-    boolean connect() {
+    boolean connect(String host, String username, String password) {
         try {
             con = DriverManager.getConnection(host, username, password);
             return true;
