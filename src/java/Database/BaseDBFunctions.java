@@ -28,17 +28,17 @@ public class BaseDBFunctions {
     }
     
     // Executes whatever sql statement is passed in, returns true if sucessful
-    // Set manip to false for select queries, true for others
+    // Set manip to false for select statements, true for others
     boolean executeSQL(String SQL, boolean manip){
         try{
             stmt = con.createStatement();
             if(!manip){
                 rs = stmt.executeQuery(SQL);
-                return true;
             }
             else{
-                return stmt.execute(SQL);
+                stmt.execute(SQL);
             }
+            return true;
         }
         catch (SQLException err){
             System.out.println(err.getMessage());
