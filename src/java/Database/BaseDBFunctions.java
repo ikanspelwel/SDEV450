@@ -16,7 +16,7 @@ public class BaseDBFunctions {
     ResultSet rs;
 
     // Connects to database, returns true if sucessful
-    boolean connect(String host, String username, String password) {
+    public boolean connect(String host, String username, String password) {
         try {
             con = DriverManager.getConnection(host, username, password);
             return true;
@@ -29,7 +29,7 @@ public class BaseDBFunctions {
     
     // Executes whatever sql statement is passed in, returns true if sucessful
     // Set manip to false for select statements, true for others
-    boolean executeSQL(String SQL, boolean manip){
+    public boolean executeSQL(String SQL, boolean manip){
         try{
             stmt = con.createStatement();
             if(!manip){
@@ -47,7 +47,7 @@ public class BaseDBFunctions {
     }
     
     // Returns results set created by ExecuteSQL()
-    ResultSet getResults(){
+    public ResultSet getResults(){
         return rs;
     }
 }
