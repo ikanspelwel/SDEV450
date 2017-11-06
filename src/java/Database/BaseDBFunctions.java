@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class BaseDBFunctions {
+
     Connection con;
     Statement stmt;
     ResultSet rs;
@@ -18,36 +19,38 @@ public class BaseDBFunctions {
     // Connects to database, returns true if sucessful
     public boolean connect(String host, String username, String password) {
         try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+
             con = DriverManager.getConnection(host, username, password);
             return true;
-        }
-        catch (SQLException err){
+        } catch (SQLException err) {
             System.out.println(err.getMessage());
+            return false;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }
-    
+
     // Executes whatever sql statement is passed in, returns true if sucessful
     // Set manip to false for select statements, true for others
-    public boolean executeSQL(String SQL, boolean manip){
-        try{
+    public boolean executeSQL(String SQL, boolean manip) {
+        try {
             stmt = con.createStatement();
-            if(!manip){
+            if (!manip) {
                 rs = stmt.executeQuery(SQL);
-            }
-            else{
+            } else {
                 stmt.execute(SQL);
             }
             return true;
-        }
-        catch (SQLException err){
+        } catch (SQLException err) {
             System.out.println(err.getMessage());
             return false;
         }
     }
-    
+
     // Returns results set created by ExecuteSQL()
-    public ResultSet getResults(){
+    public ResultSet getResults() {
         return rs;
     }
 }

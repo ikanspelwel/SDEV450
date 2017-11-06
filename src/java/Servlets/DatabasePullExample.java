@@ -8,12 +8,15 @@ package Servlets;
 import Database.BaseDBFunctions;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -36,6 +39,7 @@ public class DatabasePullExample extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -51,31 +55,31 @@ public class DatabasePullExample extends HttpServlet {
             // Vars for SQL stuff
             boolean flag;
             ResultSet rs;
-            
+
             String select = "select * from demo1.USERS";
             BaseDBFunctions dbTest = new BaseDBFunctions();
             flag = dbTest.connect(this.host, this.username, this.password);
             if (flag) {
-                System.out.println("Connected successfully! ");
+                out.println("Connected successfully! ");
             } else {
-                System.out.println("Connection failed!");
+                out.println("Connection failed!");
             }
             flag = dbTest.executeSQL(select, false);
             if (flag) {
-                System.out.println("Result set selected!");
+                out.println("Result set selected!");
                 rs = dbTest.getResults();
                 try {
                     while (rs.next()) {
-                        System.out.printf("%d %s %s %s %s %d %s %s \n", rs.getInt("UID"), rs.getString("EMAIL"),
+                        out.printf("%d %s %s %s %s %d %s %s \n", rs.getInt("UID"), rs.getString("EMAIL"),
                                 rs.getString("FULL_NAME"), rs.getString("PASSWORD"),
                                 rs.getString("SALT"), rs.getInt("ZIP"), rs.getString("RECOVERY_KEY"),
                                 rs.getDate("DATE_JOINED"));
                     }
                 } catch (SQLException err) {
-                    System.out.println(err.getMessage());
+                    out.println(err.getMessage());
                 }
             } else {
-                System.out.println("Select failed!");
+                out.println("Select failed!");
             }
 
             out.println("<pre>");
