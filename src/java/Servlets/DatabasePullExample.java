@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.sql.ResultSet;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
@@ -58,12 +56,17 @@ public class DatabasePullExample extends HttpServlet {
 
             String select = "select * from demo1.USERS";
             BaseDBFunctions dbTest = new BaseDBFunctions();
-            flag = dbTest.connect(this.host, this.username, this.password);
-            if (flag) {
-                out.println("Connected successfully! ");
-            } else {
-                out.println("Connection failed!");
+            try { 
+                // Try and connect to the DB.
+                dbTest.connect(this.host, this.username, this.password);
+            } catch ( Exception e ) {
+                // Display generic error message on failure..
+                out.println("Connection failed, see server log for details.");
+                // Log more info to the Log file.
+                System.out.printf("DB Connection failed: %s\n", e.getMessage());
+                return;
             }
+            
             flag = dbTest.executeSQL(select, false);
             if (flag) {
                 out.println("Result set selected!");

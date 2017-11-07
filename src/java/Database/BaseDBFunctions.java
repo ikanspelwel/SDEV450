@@ -16,19 +16,27 @@ public class BaseDBFunctions {
     Statement stmt;
     ResultSet rs;
 
-    // Connects to database, returns true if sucessful
-    public boolean connect(String host, String username, String password) {
+    /**
+     * 
+     * @param host The database host to connect to.
+     * @param username The username for the database.
+     * @param password The password for the database.
+     * @throws Exception 
+     */
+    public void connect(String host, String username, String password) throws Exception {
         try {
+            /**
+             * Including the MySQL JDBC class.
+             */
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-            con = DriverManager.getConnection(host, username, password);
-            return true;
-        } catch (SQLException err) {
-            System.out.println(err.getMessage());
-            return false;
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            return false;
+            /**
+             * Connecting to the DB host with the provided user/password.
+             */
+            this.con = DriverManager.getConnection(host, username, password);
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
+            /* If there was an exception toss it back up to the calling program. */
+            throw e;
         }
     }
 
@@ -36,11 +44,11 @@ public class BaseDBFunctions {
     // Set manip to false for select statements, true for others
     public boolean executeSQL(String SQL, boolean manip) {
         try {
-            stmt = con.createStatement();
+            this.stmt = this.con.createStatement();
             if (!manip) {
-                rs = stmt.executeQuery(SQL);
+                this.rs = this.stmt.executeQuery(SQL);
             } else {
-                stmt.execute(SQL);
+                this.stmt.execute(SQL);
             }
             return true;
         } catch (SQLException err) {
@@ -51,6 +59,6 @@ public class BaseDBFunctions {
 
     // Returns results set created by ExecuteSQL()
     public ResultSet getResults() {
-        return rs;
+        return this.rs;
     }
 }

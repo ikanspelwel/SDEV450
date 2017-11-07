@@ -24,13 +24,14 @@ public class functionTest {
                 + "1111111114, 12348, 126, NOW())";
         String select = "select * from demo1.USERS";
         BaseDBFunctions dbTest = new BaseDBFunctions();
-        flag = dbTest.connect(host, username, password);
-        if (flag){
-            System.out.println("Connected successfully! ");
-        }
-        else{
+        try {
+            dbTest.connect(host, username, password);
+        } catch (Exception e) {
             System.out.println("Connection failed!");
+            return;
         }
+
+        System.out.println("Connected successfully! ");
         flag = dbTest.executeSQL(insert, true);
         if (flag){
             System.out.println("Data inserted!");
