@@ -17,7 +17,7 @@ public class BaseDBFunctions {
     ResultSet rs;
 
     /**
-     * 
+     * Connects to database
      * @param host The database host to connect to.
      * @param username The username for the database.
      * @param password The password for the database.
@@ -40,9 +40,13 @@ public class BaseDBFunctions {
         }
     }
 
-    // Executes whatever sql statement is passed in, returns true if sucessful
-    // Set manip to false for select statements, true for others
-    public boolean executeSQL(String SQL, boolean manip) {
+    /**
+     * Executes SQL statements
+     * @param SQL
+     * @param manip False if select, true for all other statements
+     * @throws Exception 
+     */
+    public void executeSQL(String SQL, boolean manip) throws Exception {
         try {
             this.stmt = this.con.createStatement();
             if (!manip) {
@@ -50,10 +54,8 @@ public class BaseDBFunctions {
             } else {
                 this.stmt.execute(SQL);
             }
-            return true;
-        } catch (SQLException err) {
-            System.out.println(err.getMessage());
-            return false;
+        } catch (SQLException e) {
+            throw e;
         }
     }
 
