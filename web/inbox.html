@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
         
         <!-- Font Awesome CDN for expanded glyphicons -->
-        <script src="https://use.fontawesome.com/3d123a1bf9.js"></script>
+        <script src="https://use.fontawesome.com/3d123a1bf9.js"></script>       
 
     </head>
     <body>
@@ -86,7 +86,14 @@
                                 <thead>
                                 <tr>
                                     <th class="col-check visible-md visible-lg"><input type="checkbox" id="checkAll" title="Check All"/><a class="btn btn-danger pull-right visible-md visible-lg" title="Delete">
-                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></th>
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                        <!-- JQuery to check all checkboxes -->
+                                        <script>
+                                            $("#checkAll").click(function () {    
+                                                $('input:checkbox').prop('checked', this.checked);    
+                                            });
+                                        </script>
+                                    </th>
                                     <th class="col-tools"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></th>                                    
                                     <th class="col-text visible-md visible-lg">Date</th>
                                     <th class="col-text">Name</th>
@@ -95,7 +102,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td align="center" class="visible-md visible-lg"><input type="checkbox" class="checkThis visible-md visible-lg"/></td>
+                                        <td align="center" class="visible-md visible-lg"><input type="checkbox" id="checkItem" class="visible-md visible-lg"/></td>
                                         <td align="center">
                                             <a class="btn btn-default" title="Reply"><span <i class="fa fa-reply"
                                                                              aria-hidden="true" ></i></span></a>
@@ -107,7 +114,7 @@
                                         <td>JavaScript Subject Return</td>
                                     </tr>
                                     <tr>
-                                        <td align="center" class="visible-md visible-lg"><input type="checkbox" class="checkThis visible-md visible-lg"/></td>
+                                        <td align="center" class="visible-md visible-lg"><input type="checkbox" id="checkItem" class="visible-md visible-lg"/></td>
                                         <td align="center">
                                             <a class="btn btn-default" title="Reply"><span <i class="fa fa-reply"
                                                                              aria-hidden="true"></i></span></a>
