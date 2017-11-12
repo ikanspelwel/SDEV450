@@ -25,13 +25,13 @@
                 }
             }
             if (userName == null) {
-                response.sendRedirect("/DirectSell450/Login");
+                response.sendRedirect("/DirectSell450/login.html");
             }
         %>
         <%
             
         %>
-        <%--
+        <%-- Excess Code from Tutorial - May be deleted at later time...
         <h3>Hi <%=userName%>, Login successful.</h3>
         <br>
         <form action="LogoutServlet" method="post">
