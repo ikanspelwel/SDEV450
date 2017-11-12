@@ -37,7 +37,7 @@ public class LogoutServlet extends HttpServlet {
             loginCookie.setMaxAge(0);
             response.addCookie(loginCookie);
         }
-        response.sendRedirect("/DirectSell450/Login");
+        response.sendRedirect("/DirectSell450/login.html");
     }
 
     /**
