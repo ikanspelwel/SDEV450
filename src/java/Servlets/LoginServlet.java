@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(loginCookie);
             response.sendRedirect("LoginSuccess.jsp");
         } else {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/Login");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
             PrintWriter out = response.getWriter();
             out.println("<!DOCTYPE html><html>");
             out.println("<center><font size=14 color=red>Either user name or password is wrong.</font></center>");
