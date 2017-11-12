@@ -67,10 +67,17 @@ public class DatabasePullExample extends HttpServlet {
                 return;
             }
             
-            flag = dbTest.executeSQL(select, false);
-            if (flag) {
-                out.println("Result set selected!");
+            try{
+                dbTest.executeSQL(select, false);
                 rs = dbTest.getResults();
+                out.println("Result set selected!");
+            } catch (Exception e){
+                // Display generic error message on failure..
+                out.println("Query failed, see server log for details.");
+                // Log more info to the Log file.
+                System.out.printf("%s failed: %s\n", select, e.getMessage());
+                return;
+            }      
                 try {
                     while (rs.next()) {
                         out.printf("%d %s %s %s %s %d %s %s \n", rs.getInt("UID"), rs.getString("EMAIL"),
@@ -81,10 +88,6 @@ public class DatabasePullExample extends HttpServlet {
                 } catch (SQLException err) {
                     out.println(err.getMessage());
                 }
-            } else {
-                out.println("Select failed!");
-            }
-
             out.println("<pre>");
             out.println("</body>");
             out.println("</html>");
