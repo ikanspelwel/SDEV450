@@ -21,8 +21,8 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     //Will need to incorporate DB pull for these items
-    private final String userID = "kim@here.now";
-    private final String password = "test";
+    private final String userID = "sdev@test.user";
+    private final String password = "450";
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
