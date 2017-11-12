@@ -1,24 +1,28 @@
 <%-- 
-    Document   : LoginSuccess
-    Created on : Nov 12, 2017, 12:01:05 PM
+    Document   : ValidateSessionExists
+    Created on : Nov 12, 2017, 4:18:06 PM
     Author     : Kimberly
 --%>
 
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-         pageEncoding="US-ASCII"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-        <title>Login Success Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Validate Session Exists</title>
     </head>
     <body>
         <%
-            //Allow access only if user exists
+            //Allow access only if session exists
+            //Otherwise redirects to login.html
+            //Session established at time of login via LoginSuccess.jsp
             String user = null;
             if (session.getAttribute("user") == null) {
                 response.sendRedirect("/DirectSell450/login.html");
+                //A modal may be nice here to notify user of need to login
+                //before accessing the page they clicked on
             } else {
+                //Get the session information 
                 user = (String) session.getAttribute("user");
             }
             String userName = null;
@@ -26,7 +30,6 @@
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-
                     if (cookie.getName().equals("user")) {
                         userName = cookie.getValue();
                     }
@@ -39,7 +42,8 @@
                 //disabled on user computer
                 sessionID = session.getId();
             }
-            //Redirects user to profile page if login successful
+            //Redirects user to desired page if cookie/session/URL encoding exists
+            /****** Redirect page will need updated with applicable page *******/
             response.sendRedirect("/DirectSell450/profile.html");
 
             if (userName == null) {

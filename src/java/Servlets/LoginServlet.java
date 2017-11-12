@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,6 +22,7 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     //Will need to incorporate DB pull for these items
+    //Currently hard-coded for testing purposes
     private final String userID = "sdev@test.user";
     private final String password = "450";
 
@@ -42,12 +44,22 @@ public class LoginServlet extends HttpServlet {
         String pwd = request.getParameter("pwd");
 
         if (userID.equals(user) && password.equals(pwd)) {
-            Cookie loginCookie = new Cookie("user", user);
+            //Create the session
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            //setting session to expiry in 30 mins
+            session.setMaxInactiveInterval(30 * 60);
+            //Create the cookie
+            Cookie userName = new Cookie("user", user);
             //setting cookie to expiry in 30 mins
-            loginCookie.setMaxAge(30 * 60);
-            response.addCookie(loginCookie);
-            response.sendRedirect("LoginSuccess.jsp");
+            userName.setMaxAge(30 * 60);
+            response.addCookie(userName);
+            //Get the encoded URL string
+            String encodedURL = response.encodeRedirectURL("LoginSuccess.jsp");
+            response.sendRedirect(encodedURL);
         } else {
+            //A modal may be nice here to notify user of invalid login
+            //This alert needs refinement, but I couldn't easily change            
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
             PrintWriter out = response.getWriter();
             out.println("<!DOCTYPE html><html>");
