@@ -73,16 +73,16 @@ Purpose: A webpage that allows login and account creation.
         <div class="container">
             <div class="row">         
                 <div class="col-sm-12 col-md-6">             
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="LoginServlet" method="post">
                         <h2 class="signin-heading">Please sign in</h2>
                         <label for="inputEmail" class="control-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                        <input type="email" name="user" class="form-control" id="inputEmail" placeholder="Email" required>
                         <label for="inputPassword" class="control-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                        <input type="password" name="pwd" class="form-control" id="inputPassword" placeholder="Password" required>
                         <div class="checkbox">
                             <label><input type="checkbox"> Remember me</label>
                         </div>
-                        <button href="profile.html" class="btn btn-primary" type="submit" id="loginSubmit">Sign in</button>
+                        <button class="btn btn-primary" type="submit" id="loginSubmit">Sign in</button>
                      </form><br>
                     <a href="#" id="resetPass">Forgot your password?</a>
                 </div>         
@@ -104,7 +104,7 @@ Purpose: A webpage that allows login and account creation.
                         <div class="checkbox">
                             <label><input type="checkbox"> Remember me</label>
                         </div>
-                        <button href="profile.html" class="btn btn-primary" type="submit" id="createAccount">Create Account</button>
+                        <button class="btn btn-primary" type="submit" id="createAccount">Create Account</button>
                     </form><br>         
                 </div>         
             </div>
