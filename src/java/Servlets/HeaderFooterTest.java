@@ -36,13 +36,10 @@ public class HeaderFooterTest extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");  
-            out.println("<head>\n");
             out.println(CommonComponents.header());
+            out.println("<body>\n\n");
             out.println(CommonComponents.navBar());
-            out.println("</head>\n");
-            out.println("<body>");
-            out.println("\n\n\n\n\n<h1>Servlet HeaderFooterTest at " + 
-                    request.getContextPath() + "</h1>\n\n\n\n\n\n");
+            out.println("Hello? Is this still on top of the nav bar?\n\n");
             out.println(CommonComponents.footer());
             out.println("</body>");
             out.println("</html>");
