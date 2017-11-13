@@ -19,7 +19,7 @@
         <!-- Font Awesome CDN for expanded glyphicons -->
         <script src="https://use.fontawesome.com/3d123a1bf9.js"></script>
         
-        <!-- Example JavaScript function for modal use with the chack all trash button-->
+        <!-- JavaScript function for modal use with the check all trash button -->
         <script type="text/javascript">
             $(document).ready(function(){
                 $("#trash").click(function(){
@@ -95,7 +95,14 @@
                                 <thead>
                                 <tr>
                                     <th class="col-check visible-md visible-lg"><input type="checkbox" id="checkAll" title="Check All"/><a class="btn btn-danger pull-right visible-md visible-lg"
-                                        id="trash" title="Permanently Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></th>
+                                        id="trash" title="Permanently Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                        <!-- JQuery to check all checkboxes -->
+                                        <script>
+                                            $("#checkAll").click(function () {    
+                                                $('input:checkbox').prop('checked', this.checked);    
+                                            });
+                                        </script>
+                                    </th>
                                     <th class="col-tools"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></th>                                    
                                     <th class="col-text visible-md visible-lg">Date</th>
                                     <th class="col-text">Name</th>

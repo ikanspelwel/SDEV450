@@ -85,7 +85,12 @@
 
 .bot-border {
   border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0;
-  }
+}
+
+.modal-form {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 /* Footer style */
 /* Sticky footer source code credit goes to Jeremiah Flaga at
