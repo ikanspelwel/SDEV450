@@ -30,8 +30,8 @@ public class Messages extends BaseDBFunctions {
         String sql = "insert into Messages (Sender, Recipient, Message) values "
                 + "('"+sender+"','"+recipient+"','"+msgContents+"')";
         try {
-            ps = con.prepareStatement(sql);
-            ps.execute();
+            preparedStmt = con.prepareStatement(sql);
+            preparedStmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(Messages.class.getName()).log(Level.SEVERE, null, ex);
         }                
@@ -41,8 +41,8 @@ public class Messages extends BaseDBFunctions {
     public void deleteMessage(int msgID){
         String sql = ("delete from Messages where MessageID =" + "'"+msgID+"'");
         try {
-            ps = con.prepareStatement(sql);
-            ps.execute();
+            preparedStmt = con.prepareStatement(sql);
+            preparedStmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(Messages.class.getName()).log(Level.SEVERE, null, ex);
         }

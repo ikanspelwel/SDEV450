@@ -5,26 +5,19 @@
  */
 package Servlets;
 
-import Database.BaseDBFunctions;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 /**
  *
  * @author ikanspelwel
  */
-public class DatabasePullExample extends HttpServlet {
-
-    protected String host = "jdbc:mysql://sdev450.gmavt.net:3306";
-    protected String username = "demo1";
-    protected String password = "DirectSellDbAccess1234";
+public class TestingUserFunctions extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,58 +30,28 @@ public class DatabasePullExample extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DatabasePullExample</title>");
+            out.println("<title>Servlet TestingUserFunctions</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DatabasePullExample at " + request.getContextPath() + "</h1>");
-            out.println("<pre>");
+            out.println("<h1>Servlet TestingUserFunctions at " + request.getContextPath() + "</h1>");
 
-            // Vars for SQL stuff
-            boolean flag;
-            ResultSet rs;
+            Database.UserDB userDB = new Database.UserDB();
 
-            String select = "select * from demo1.USERS";
-            try { 
-                BaseDBFunctions dbTest = new BaseDBFunctions();
-                // Try and connect to the DB.
-                dbTest.connect(this.host, this.username, this.password);
-            } catch ( Exception e ) {
+            try {
+                Objects.User me = userDB.newUser("Adam Ring", "adam@test2.com", "1234", 05452);
+            } catch (SQLException e) {
                 // Display generic error message on failure..
-                out.println("Connection failed, see server log for details.");
+                out.println("Error, see server log for details.");
                 // Log more info to the Log file.
-                System.out.printf("DB Connection failed: %s\n", e.getMessage());
-                return;
+                System.out.printf("Error: %s\n", e.getMessage());
             }
-            
-            try{
-                dbTest.executeSQL(select, false);
-                rs = dbTest.getResults();
-                out.println("Result set selected!");
-            } catch (Exception e){
-                // Display generic error message on failure..
-                out.println("Query failed, see server log for details.");
-                // Log more info to the Log file.
-                System.out.printf("%s failed: %s\n", select, e.getMessage());
-                return;
-            }      
-                try {
-                    while (rs.next()) {
-                        out.printf("%d %s %s %s %s %d %s %s \n", rs.getInt("UID"), rs.getString("EMAIL"),
-                                rs.getString("FULL_NAME"), rs.getString("PASSWORD"),
-                                rs.getString("SALT"), rs.getInt("ZIP"), rs.getString("RECOVERY_KEY"),
-                                rs.getDate("DATE_JOINED"));
-                    }
-                } catch (SQLException err) {
-                    out.println(err.getMessage());
-                }
-            out.println("<pre>");
+
             out.println("</body>");
             out.println("</html>");
         }

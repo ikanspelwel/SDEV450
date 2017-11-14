@@ -16,6 +16,10 @@
         <servlet-name>DatabasePullExample</servlet-name>
         <servlet-class>Servlets.DatabasePullExample</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TestingUserFunctions</servlet-name>
+        <servlet-class>Servlets.TestingUserFunctions</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>DatabasePullExample</servlet-name>
         <url-pattern>/DatabasePullExample</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestingUserFunctions</servlet-name>
+        <url-pattern>/TestingUserFunctions</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

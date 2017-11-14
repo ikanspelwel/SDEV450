@@ -13,17 +13,33 @@ import java.sql.Statement;
 
 public class BaseDBFunctions {
 
-    Connection con;
-    Statement stmt;
-    PreparedStatement ps;
-    ResultSet rs;
+    protected Connection con;
+    protected Statement stmt;
+    protected PreparedStatement preparedStmt;
+    protected ResultSet rs;
+
+    /**
+     * Default constructor that will auto connect to our DB.
+     * @throws java.lang.Exception
+     */
+    public BaseDBFunctions() {
+        String host = "jdbc:mysql://sdev450.gmavt.net:3306/demo1";
+        String username = "demo1";
+        String password = "DirectSellDbAccess1234";
+        try {
+            this.connect(host, username, password);
+        } catch (Exception e) {
+            System.out.printf("DB Connection failed: %s\n", e.getMessage());            
+        }
+    }
 
     /**
      * Connects to database
+     *
      * @param host The database host to connect to.
      * @param username The username for the database.
      * @param password The password for the database.
-     * @throws Exception 
+     * @throws Exception
      */
     public void connect(String host, String username, String password) throws Exception {
         try {
@@ -44,9 +60,10 @@ public class BaseDBFunctions {
 
     /**
      * Executes SQL statements
+     *
      * @param SQL
      * @param manip False if select, true for all other statements
-     * @throws Exception 
+     * @throws Exception
      */
     public void executeSQL(String SQL, boolean manip) throws Exception {
         try {
