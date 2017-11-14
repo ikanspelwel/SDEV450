@@ -55,8 +55,9 @@ public class DatabasePullExample extends HttpServlet {
             ResultSet rs;
 
             String select = "select * from demo1.USERS";
+            BaseDBFunctions dbTest;
             try { 
-                BaseDBFunctions dbTest = new BaseDBFunctions();
+                dbTest = new BaseDBFunctions();
                 // Try and connect to the DB.
                 dbTest.connect(this.host, this.username, this.password);
             } catch ( Exception e ) {
