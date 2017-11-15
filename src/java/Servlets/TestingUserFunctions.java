@@ -42,14 +42,33 @@ public class TestingUserFunctions extends HttpServlet {
             out.println("<h1>Servlet TestingUserFunctions at " + request.getContextPath() + "</h1>");
 
             Database.UserDB userDB = new Database.UserDB();
-
+            Objects.User me = null;
+            
             try {
-                Objects.User me = userDB.newUser("Adam Ring", "adam@test2.com", "1234", 05452);
-            } catch (SQLException e) {
+                me = userDB.CheckLogIn("adam@test23.com", "1234-");
+            } catch (Exception e) {
                 // Display generic error message on failure..
                 out.println("Error, see server log for details.");
                 // Log more info to the Log file.
                 System.out.printf("Error: %s\n", e.getMessage());
+            }
+
+            if (me == null) {
+                out.println("User credentials WRONG!<br>\n");
+            } else {
+                out.println("User credentials correct!<br>\n");
+            }
+
+            try {
+                me = userDB.AddNewUser("Adam Ring", "adam@test23.com", "1234", 05452);
+                out.println("User created successfully!<br>\n");
+            } catch (SQLException e) {
+                // Display generic error message on failure..
+                out.println("Error, see server log for details.<br>\n");
+                // Log more info to the Log file.
+                System.out.printf("Error: %s\n", e.getMessage());
+            } catch (IllegalArgumentException e) {
+                out.println("That email address is already in use.<br>\n");
             }
 
             out.println("</body>");

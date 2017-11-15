@@ -15,11 +15,11 @@
     <body>
         <%
             //Allow access only if user exists
-            String user = null;
-            if (session.getAttribute("user") == null) {
+            Integer uID = null;
+            if (session.getAttribute("UID") == null) {
                 response.sendRedirect("/DirectSell450/login.html");
             } else {
-                user = (String) session.getAttribute("user");
+                uID = (Integer) session.getAttribute("UID");
             }
             String userName = null;
             String sessionID = null;
@@ -27,7 +27,7 @@
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
 
-                    if (cookie.getName().equals("user")) {
+                    if (cookie.getName().equals("login")) {
                         userName = cookie.getValue();
                     }
                     if (cookie.getName().equals("JSESSIONID")) {

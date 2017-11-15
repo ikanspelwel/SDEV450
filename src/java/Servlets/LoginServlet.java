@@ -1,7 +1,9 @@
 package Servlets;
 
+import Database.UserDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,19 +16,13 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Kimberly
+ * @author Kimberly, created base code Adam Ring integrated Database Class
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    //Will need to incorporate DB pull for these items
-    //Currently hard-coded for testing purposes
-    private final String userID = "sdev@test.user";
-    private final String password = "450";
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -39,18 +35,25 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // get request parameters for userID and password
-        String user = request.getParameter("user");
-        String pwd = request.getParameter("pwd");
+        /* Instance of our userDB and user class */
+        Database.UserDB userCheck = new UserDB();
+        Objects.User user = null;
+        
+        /* Getting a user object (or null) back from the CheckLogIn method */
+        try {
+            user = userCheck.CheckLogIn(request.getParameter("user"), request.getParameter("pwd"));
+        } catch (SQLException e) {
+            //TODO Report error.
+        }
 
-        if (userID.equals(user) && password.equals(pwd)) {
+        if (user != null) {
             //Create the session
             HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+            session.setAttribute("UID", user.getUid());
             //setting session to expiry in 30 mins
             session.setMaxInactiveInterval(30 * 60);
             //Create the cookie
-            Cookie userName = new Cookie("user", user);
+            Cookie userName = new Cookie("login", user.getUid().toString());
             //setting cookie to expiry in 30 mins
             userName.setMaxAge(30 * 60);
             response.addCookie(userName);

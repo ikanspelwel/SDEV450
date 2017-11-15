@@ -1,15 +1,12 @@
-/**
- * Core of this function obtained from 
- * https://stackoverflow.com/questions/415953/how-can-i-generate-an-md5-hash
- * but modified for our use.
- * 
- * Adam Ring.
- */
 package Tools;
 
-/**
- *
- * @author ikanspelwel
+/** 
+ * @Course: SDEV 450 ~ Enterprise Java Programming
+ * @Author Name: Adam Ring
+ * @Date: Nov 15, 2017
+ * @Subclass Hash Description: Core of this function obtained from 
+ * https://stackoverflow.com/questions/415953/how-can-i-generate-an-md5-hash
+ * but modified for our use.
  */
 public class Hash {
 

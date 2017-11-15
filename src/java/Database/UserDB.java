@@ -1,11 +1,12 @@
 /**
  * Original created by Allison
  *
- * Adam Ring adding Prepared Statements to prevent againts SQL injection.
+ * Adam Ring adding Prepared Statements to prevent against SQL injection.
  */
 package Database;
 
 //Imports
+import Objects.User;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,10 +14,13 @@ import java.sql.Statement;
 //Begin Class UserDB
 public class UserDB extends BaseDBFunctions {
 
-    /* Include an instance of our User Object. */
-    protected Objects.User user;
-
-    // Checks database to see if username exists
+    /**
+     * Checks the database to see if username exists
+     *
+     * @param email
+     * @return true if user exists false otherwise.
+     * @throws SQLException
+     */
     private boolean accountExists(String email) throws SQLException {
         try {
             /* Setup a perpared statement */
@@ -40,13 +44,25 @@ public class UserDB extends BaseDBFunctions {
         }
     }
 
-    //Inserts new user information into database 
-    public Objects.User newUser(String fullName, String email, String password, Integer zip) throws SQLException {
+    /**
+     * Inserts a new user into database
+     *
+     * @param fullName
+     * @param email
+     * @param password
+     * @param zip
+     * @return a user instance, if null there was an issue.
+     * @throws SQLException
+     */
+    public Objects.User AddNewUser(String fullName, String email, String password, Integer zip) throws SQLException, IllegalArgumentException {
 
+        /* Set the user object to null */
         Objects.User user = null;
 
         try {
-            if (!accountExists(email)) {
+            if (accountExists(email)) {
+                throw new IllegalArgumentException("Account already exists.");
+            } else {
                 /* Create the salted hashed password. */
                 String salt = Objects.User.RadomSalt();
                 String hashedPass = Objects.User.HashPassword(password, salt);
@@ -70,15 +86,15 @@ public class UserDB extends BaseDBFunctions {
                 this.preparedStmt.setString(4, salt);
                 this.preparedStmt.setInt(5, zip);
                 this.preparedStmt.setDate(6, now);
-                
+
                 this.preparedStmt.executeUpdate();
 
                 this.rs = preparedStmt.getGeneratedKeys();
 
                 if (rs.next()) {
                     Integer uid = rs.getInt(1);
-                    
-                    this.user = new Objects.User(uid, fullName, email, hashedPass, salt, "", zip, now);
+
+                    user = new Objects.User(uid, fullName, email, hashedPass, salt, "", zip, now);
                 }
             }
 
@@ -87,29 +103,59 @@ public class UserDB extends BaseDBFunctions {
         }
 
         /* If we were unable to create the user it will return null */
-        return this.user;
+        return user;
     }
-    //Logs user into site
 
-    public boolean logIn(String email, String pw) {
-        boolean loggedIn = false;
+    /**
+     * Method to check if email/password combination match the database. Method
+     * returns a user object or SQLException. If the user object is null no
+     * matching account could be found.
+     *
+     * @param email
+     * @param password
+     * @return User Object could be null.
+     * @throws SQLException
+     */
+    public Objects.User CheckLogIn(String email, String password) throws SQLException {
+        /* Set the user object to null */
+        Objects.User user = null;
+
         try {
-            if (accountExists(email) == true) {
-                String sql = ("select Password from UserInfo where UserName="
-                        + "'" + email + "'");
-                stmt.executeQuery(sql);
-                if (rs.getString("Password").equals(pw)) { //double check logic for this
-                    loggedIn = true;
-                }
-            } else {
-                //Output error message to login/signup html page
+            /* Setup a perpared statement */
+            this.preparedStmt = this.con.prepareStatement(
+                    "SELECT * FROM `USERS` "
+                    + "WHERE `EMAIL` = ? AND "
+                    + "MD5(CONCAT(`SALT`, '/', ?)) = `PASSWORD`"
+            );
+
+            /**
+             * Safely add the email and password into the statement, in
+             * replacement of the question marks.
+             */
+            this.preparedStmt.setString(1, email);
+            this.preparedStmt.setString(2, password);
+
+            /* Safely execute the statement */
+            this.rs = this.preparedStmt.executeQuery();
+
+            /* Returns true if a result was found, false if not */
+            if (rs.next()) {
+
+                /* Store everying in a new user instance. */
+                user = new User(rs.getInt("UID"), rs.getString("FULL_NAME"),
+                        rs.getString("EMAIL"), rs.getString("PASSWORD"),
+                        rs.getString("SALT"), rs.getString("RECOVERY_KEY"),
+                        rs.getInt("ZIP"), rs.getDate("DATE_JOINED"));
             }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+
+        } catch (SQLException e) {
+            throw e;
         }
-        return loggedIn;
+
+        return user;
     }
 
+    /**
     //Changes user's password 
     public void changePassword(String userName, String oldPW, String newPW) {
         try {
@@ -126,5 +172,6 @@ public class UserDB extends BaseDBFunctions {
             //Output incorrect password/username message
         }
     }
+    */
 
 } //End Class UserDB
