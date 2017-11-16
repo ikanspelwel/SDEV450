@@ -37,4 +37,62 @@ public class Listing {
         this.category = category;        
         this.email = email;        
     }
+
+
+/**
+     * @return the listingID
+     */
+    public Integer getListingid() {
+        return listingID;
+    }
+
+    /**
+     * @return the price
+     */
+    public Double getPrice() {
+        return price;
+    }
+
+    /**
+     * @return the user id
+     */
+    public Integer getUid() {
+        return UID;
+    }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @return the listing title
+     */
+    public String getListingTitle() {
+        return listingTitle;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @return the category
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+    
 }
