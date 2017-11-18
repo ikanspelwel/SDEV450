@@ -64,7 +64,7 @@ public class CommonComponents {
                     + "                        </form>\n"
                     + "                    </ul>\n"
                     + "                    <ul class=\"nav navbar-nav navbar-right\">\n"
-                    + "                        <li class=\"active\"><a href=\"login.html\">Login</a></li>\n"
+                    + "                        <li class=\"active\"><a href=\"login.jsp\">Login</a></li>\n"
                     + "                    </ul>\n"
                     + "                </div>\n"
                     + "            </div>\n"

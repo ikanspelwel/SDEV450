@@ -22,6 +22,7 @@ public class User {
     private Integer zip;
     private Date dateJoined;
     private static final Random RAND = new Random();
+    // List of all charactors alpha numeric charactors: a-z, A-Z, 0-9.
     private static final String RANDOMCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "abcdefghijklmnopqrstuvwzyz"
             + "0123456789";

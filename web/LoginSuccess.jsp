@@ -17,7 +17,7 @@
             //Allow access only if user exists
             Integer uID = null;
             if (session.getAttribute("UID") == null) {
-                response.sendRedirect("/DirectSell450/login.html");
+                response.sendRedirect("/DirectSell450/login.jsp");
             } else {
                 uID = (Integer) session.getAttribute("UID");
             }
@@ -43,7 +43,7 @@
             response.sendRedirect("/DirectSell450/profile.html");
 
             if (userName == null) {
-                response.sendRedirect("/DirectSell450/login.html");
+                response.sendRedirect("/DirectSell450/login.jsp");
             }
         %>
     </body>

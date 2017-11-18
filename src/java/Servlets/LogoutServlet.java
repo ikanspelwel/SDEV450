@@ -40,7 +40,7 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
         //no encoding because we have invalidated the session
-        response.sendRedirect("/DirectSell450/login.html");
+        response.sendRedirect("/DirectSell450/login.jsp");
     }
 
     /**

@@ -1,8 +1,10 @@
-<!--
-Author: SDEV 450 Direct Sell Team
-Date: 10/2017
-Purpose: A webpage that allows login and account creation.  
--->
+<%-- 
+    Document   : login
+    Created on : Nov 18, 2017, 9:41:15 AM
+    Author     : ikanspelwel
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -63,7 +65,7 @@ Purpose: A webpage that allows login and account creation.
                         </form>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="login.html">Login</a></li>
+                        <li class="active"><a href="login.jsp">Login</a></li>
                     </ul>
                 </div>
             </div>

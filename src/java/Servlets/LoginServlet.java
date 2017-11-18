@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             //A modal may be nice here to notify user of invalid login
             //This alert needs refinement, but I couldn't easily change            
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
             PrintWriter out = response.getWriter();
             out.println("<!DOCTYPE html><html>");
             out.println("<center><font size=14 color=red>Either user name or password is wrong.</font></center>");

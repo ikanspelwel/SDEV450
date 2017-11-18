@@ -14,11 +14,11 @@
     <body>
         <%
             //Allow access only if session exists
-            //Otherwise redirects to login.html
+            //Otherwise redirects to login.jsp
             //Session established at time of login via LoginSuccess.jsp
             String user = null;
             if (session.getAttribute("user") == null) {
-                response.sendRedirect("/DirectSell450/login.html");
+                response.sendRedirect("/DirectSell450/login.jsp");
                 //A modal may be nice here to notify user of need to login
                 //before accessing the page they clicked on
             } else {
@@ -47,7 +47,7 @@
             response.sendRedirect("/DirectSell450/profile.html");
 
             if (userName == null) {
-                response.sendRedirect("/DirectSell450/login.html");
+                response.sendRedirect("/DirectSell450/login.jsp");
             }
         %>
     </body>
