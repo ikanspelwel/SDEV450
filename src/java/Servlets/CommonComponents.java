@@ -48,7 +48,7 @@ public class CommonComponents {
                     + "                        <li class=\"dropdown\">\n"
                     + "                            <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">Messages <b class=\"caret\"></b></a>\n"
                     + "                            <ul class=\"dropdown-menu\">\n"
-                    + "                                <li><a href=\"inbox.html\">Inbox</a></li>                        \n"
+                    + "                                <li><a href=\"inbox.jsp\">Inbox</a></li>                        \n"
                     + "                                <li><a href=\"sent.html\">Sent Items</a></li>\n"
                     + "                                <li class=\"divider\"></li>\n"
                     + "                                <li><a href=\"trash.html\">Trash</a></li>\n"
