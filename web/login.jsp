@@ -77,6 +77,9 @@
                 <div class="col-sm-12 col-md-6">             
                     <form class="form-horizontal" action="LoginServlet" method="post">
                         <h2 class="signin-heading">Please sign in</h2>
+                        <% if( request.getParameter("e1") != null ) { %>
+                        <h3 class="alert alert-danger">Invalid login credentials.</h3>
+                        <% } %>
                         <label for="inputEmail" class="control-label">Email</label>
                         <input type="email" name="user" class="form-control" id="inputEmail" placeholder="Email" required>
                         <label for="inputPassword" class="control-label">Password</label>
