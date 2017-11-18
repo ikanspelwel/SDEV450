@@ -20,6 +20,10 @@
         <servlet-name>TestingUserFunctions</servlet-name>
         <servlet-class>Servlets.TestingUserFunctions</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddListing</servlet-name>
+        <servlet-class>Servlets.AddListing</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>TestingUserFunctions</servlet-name>
         <url-pattern>/TestingUserFunctions</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddListing</servlet-name>
+        <url-pattern>/AddListing</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
