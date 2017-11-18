@@ -3,7 +3,7 @@ package Database;
 
 //Imports
 import java.sql.SQLException;
-
+import java.sql.Statement;
 //Begin Class User
 public class Listing extends BaseDBFunctions{        
         
@@ -31,6 +31,37 @@ public class Listing extends BaseDBFunctions{
         }
     }        
     
+    //Pulls listings in order
+    public Objects.Listing inOrder(int id) throws SQLException {
+        Objects.Listing listing = null;
+        try{
+            this.preparedStmt = this.con.prepareStatement(
+                    "SELECT * FROM 'LISTINGS' "
+                    + "WHERE 'LISTING_ID' = ? ");
+            /**
+             * Safely add the id into the statement in replacement of the question mark
+             */
+           this.preparedStmt.setInt(1, id);
+           /* Safely execute the statement */
+           this.rs = this.preparedStmt.executeQuery();
+           
+           /* Returns true if a result was found, false if not */
+           if (rs.next()) {
+               
+               /*Store everything in a new listing instince. */
+               listing = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
+                       rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), rs.getString("LISTING_TITLE"), 
+                       rs.getString("DESCRIPTION"), rs.getString("CATEGORY"), rs.getString("EMAIL")
+                       
+                       );
+           }
+        } catch (SQLException e) {
+            throw e;
+        }
+       
+    
+        return listing;
+    }
     
    //Inserts new user information into database 
    public void newListing(String Title, String Desc, Class Image,
