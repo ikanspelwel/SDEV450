@@ -2,10 +2,8 @@ package Servlets;
 
 import Database.UserDB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -38,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         /* Instance of our userDB and user class */
         Database.UserDB userCheck = new UserDB();
         Objects.User user = null;
-        
+
         /* Getting a user object (or null) back from the CheckLogIn method */
         try {
             user = userCheck.CheckLogIn(request.getParameter("user"), request.getParameter("pwd"));
@@ -58,16 +56,11 @@ public class LoginServlet extends HttpServlet {
             userName.setMaxAge(30 * 60);
             response.addCookie(userName);
             //Get the encoded URL string
-            String encodedURL = response.encodeRedirectURL("LoginSuccess.jsp");
+            //String encodedURL = response.encodeRedirectURL("LoginSuccess.jsp");
+            String encodedURL = response.encodeRedirectURL("/DirectSell450/profile.html");
             response.sendRedirect(encodedURL);
         } else {
-            //A modal may be nice here to notify user of invalid login
-            //This alert needs refinement, but I couldn't easily change            
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html><html>");
-            out.println("<center><font size=14 color=red>Either user name or password is wrong.</font></center>");
-            rd.include(request, response);
+            response.sendRedirect("/DirectSell450/login.jsp?e1=true");
         }
     }
 
