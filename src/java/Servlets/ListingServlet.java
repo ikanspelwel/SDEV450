@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Servlets;
-import Database.Image;
+import Database.ImageDB;
 import Database.Listing;
 import java.io.IOException;
 import java.io.PrintWriter;
