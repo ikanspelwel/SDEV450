@@ -5,15 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="header.jsp" %>
+<%@include file="navbar.jsp" %>
+<%@include file="footer.jsp" %>
 <!DOCTYPE html>
-<html>
-    <%-- include header --%>
-    <%@include file="header.jsp" %>
+<html> 
     <body>
-        <%-- include navbar --%>
-        <%@include file="navbar.jsp" %>
-    <h1>Hello World!</h1>
-    <%-- include footer --%>
-    <%@include file="footer.jsp" %>
-</body>
+        <h1>Hello World!</h1>
+    </body>
 </html>
