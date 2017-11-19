@@ -4,8 +4,9 @@ package Database;
 //Imports
 import java.sql.SQLException;
 import java.sql.Statement;
+import Objects.Listing;
 //Begin Class User
-public class Listing extends BaseDBFunctions{        
+public class ListingDB extends BaseDBFunctions{        
         
     //Checks listings based on search term
     public boolean search(String keyword) {
@@ -32,28 +33,31 @@ public class Listing extends BaseDBFunctions{
     }        
     
     //Pulls listings in order
-    public Objects.Listing inOrder(int id) throws SQLException {
-        Objects.Listing listing = null;
+    public Objects.Listing[] inOrder(int low, int high) throws SQLException {
+        Objects.Listing[] listing = new Listing[high-low];
         try{
             this.preparedStmt = this.con.prepareStatement(
                     "SELECT * FROM 'LISTINGS' "
-                    + "WHERE 'LISTING_ID' = ? ");
+                    + "ORDER BY LISTING_ID DESC"
+                    + "LIMIT ?, ?");
             /**
-             * Safely add the id into the statement in replacement of the question mark
+             * Safely add the limits into the statement in replacement of the question mark
              */
-           this.preparedStmt.setInt(1, id);
+           this.preparedStmt.setInt(1, low);
+           this.preparedStmt.setInt(2, high);
            /* Safely execute the statement */
            this.rs = this.preparedStmt.executeQuery();
-           
+           int i=0;
            /* Returns true if a result was found, false if not */
-           if (rs.next()) {
+           while (rs.next()) {
                
                /*Store everything in a new listing instince. */
-               listing = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
+               listing[i] = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
                        rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), rs.getString("LISTING_TITLE"), 
                        rs.getString("DESCRIPTION"), rs.getString("CATEGORY"), rs.getString("EMAIL")
                        
                        );
+               i++;
            }
         } catch (SQLException e) {
             throw e;
@@ -62,6 +66,8 @@ public class Listing extends BaseDBFunctions{
     
         return listing;
     }
+    
+    
     
    //Inserts new user information into database 
    public void newListing(String Title, String Desc, Class Image,

@@ -5,7 +5,7 @@
  */
 package Servlets;
 import Database.ImageDB;
-import Database.Listing;
+import Database.ListingDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -36,11 +36,11 @@ public class ListingServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        Database.Listing listingLookup = new Listing();
+        /*
+        Database.ListingDB listingLookup = new ListingDB();
         Objects.Listing listing = null;
         try {
-        listing = listingLookup.inOrder(Integer.parseInt(request.getParameter("ID")));
+        listing = listingLookup.inOrder(1,20);
                 } catch(SQLException e)  {
                     //TODO Report error
                 }
@@ -49,7 +49,7 @@ public class ListingServlet extends HttpServlet {
             String desc = listing.getDescription();
             response.getWriter();
         }
-            
+            */
        
     }
 
