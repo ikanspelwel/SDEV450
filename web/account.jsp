@@ -11,10 +11,11 @@
 <!DOCTYPE html>
 <html>    
     <body>
+        
         <!-- Profile panel; Idea credit for panel: https://bootsnipp.com/snippets/nPvnk -->
         <div class="container">
             <div class="row">                       
-                <div class="col-lg-12">
+                <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading"><h4 >User Profile <button class="btn btn-default pull-right" title="Edit Profile" id="edit"><span <i class="fa fa-pencil"
                                 aria-hidden="true" ></i></span></button></h4>
@@ -48,6 +49,39 @@
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Panel display for active listings -->
+        <div class="container">            
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col col-xs-6">
+                                    <h3 class="panel-title"></i>Active Listings</h3>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table id="inboxTable" class="table table-bordered table-list">                                
+                                <tbody>
+                                    <tr>
+                                        <td>Listing 1</td>
+                                        <td>Listing 2</td>
+                                        <td>Listing 3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Listing 4</td>
+                                        <td>Listing 5</td>
+                                        <td>Listing 6</td>
+                                    </tr>
+                                </tbody>
+                            </table>        
+                        </div>                        
+                    </div>
+                </div>
+            </div>            
         </div>
         
         <!-- Modal for use with edit profile button -->
