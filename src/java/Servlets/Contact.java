@@ -17,11 +17,7 @@ import javax.mail.internet.*;
 
 //Begin Subclass Contact
 public class Contact extends HttpServlet{
-    
-    String sender;
-    String host;
-    String msg;
-    
+
     Contact(String sender, String host, String msg){    
     }
     
