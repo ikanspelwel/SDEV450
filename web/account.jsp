@@ -14,7 +14,7 @@
         <!-- Profile panel; Idea credit for panel: https://bootsnipp.com/snippets/nPvnk -->
         <div class="container">
             <div class="row">                       
-                <div class="col-md-7 ">
+                <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading"><h4 >User Profile <button class="btn btn-default pull-right" title="Edit Profile" id="edit"><span <i class="fa fa-pencil"
                                 aria-hidden="true" ></i></span></button></h4>
