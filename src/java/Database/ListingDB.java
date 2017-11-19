@@ -37,8 +37,8 @@ public class ListingDB extends BaseDBFunctions{
         Objects.Listing[] listing = new Listing[high-low];
         try{
             this.preparedStmt = this.con.prepareStatement(
-                    "SELECT * FROM 'LISTINGS' "
-                    + "ORDER BY LISTING_ID DESC"
+                    "SELECT * FROM `LISTINGS` "
+                    + "ORDER BY `LISTING_ID` DESC "
                     + "LIMIT ?, ?");
             /**
              * Safely add the limits into the statement in replacement of the question mark
