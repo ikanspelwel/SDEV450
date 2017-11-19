@@ -116,4 +116,13 @@ body {
 .footer .footer-text{
     text-align: center;
     padding-top: 20px;
-    }
+    }    
+
+/* About us page styling */
+.box > .icon { text-align: center; position: relative; }
+.box > .icon > .image { position: relative; z-index: 2; margin: auto; width: 88px; height: 88px; border: 8px solid white; line-height: 88px; border-radius: 50%; background: #2180d6; vertical-align: middle; }
+.box > .icon > .image > i { font-size: 36px !important; color: #fff !important; }
+.box > .icon > .info { margin-top: -24px; background: rgba(0, 0, 0, 0.04); border: 1px solid #e0e0e0; padding: 15px 0 10px 0; }
+.box > .icon > .info > h3.title { font-family: "Roboto",sans-serif !important; font-size: 16px; color: #222; font-weight: 500; }
+.box > .icon > .info > p { font-family: "Roboto",sans-serif !important; font-size: 13px; color: #666; line-height: 1.5em; margin: 20px;}
+.box .space { height: 30px; }

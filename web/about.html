@@ -20,6 +20,10 @@ Purpose: A webpage that displays some information about us.
         
         <!-- Custom styles -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        
+        <!-- Font Awesome CDN for expanded glyphicons -->
+        <script src="https://use.fontawesome.com/3d123a1bf9.js"></script>
+        
     </head>
     <body>
         
@@ -47,7 +51,7 @@ Purpose: A webpage that displays some information about us.
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Messages <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="inbox.jsp">Inbox</a></li>                        
+                                <li><a href="inbox.html">Inbox</a></li>                        
                                 <li><a href="sent.html">Sent Items</a></li>
                                 <li class="divider"></li>
                                 <li><a href="trash.html">Trash</a></li>
@@ -63,11 +67,58 @@ Purpose: A webpage that displays some information about us.
                         </form>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.jsp">Login</a></li>
+                    <li><a href="login.html">Login</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        
+        <!-- About us blocks.  Idea credit goes to gutomoraes @ https://bootsnipp.com/snippets/featured/boxes-with-icon-hover -->
+        <div class="container">
+            <div class="row">        
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="box">
+                        <div class="icon">
+                            <div class="image"><i class="fa fa-graduation-cap"></i></div>
+                            <div class="info">
+                                <h3 class="title">Who We Are</h3>
+                                    <p>We are a group of students who decided to create a web application that people could use to sell their unused
+                                       items.  We wanted to make this process as easy as possible, all within one easy to use application.</p>                                
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </div> 
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="box">
+                        <div class="icon">
+                            <div class="image"><i class="fa fa-envelope"></i></div>
+                            <div class="info">
+                                <h3 class="title">We'd Love To Hear From You!</h3>
+                                    <p>We are always looking for feedback.  Please don't hesitate to contact us and let us know what you think!</p>
+                                <div class="more">
+                                    <a href="contact.html" class="btn btn-primary btn-lsm"  title="Contact US">Contact US</a>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </div> 
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="box">
+                        <div class="icon">
+                            <div class="image"><i class="fa fa-users"></i></div>
+                            <div class="info">
+                                <h3 class="title">Humble Beginnings</h3>
+                                    <p>All of us attend Champlain College and were taking a Java 3 course.  The course required us to come up
+                                       with a group project and meet certain goals.  This led to us designing the Direct Sell! application.</p>                                
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </div> 
+                </div>
+            </div>
+        </div>
 
         <!-- Add footer -->
         <footer class="footer">
