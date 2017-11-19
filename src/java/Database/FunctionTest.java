@@ -49,9 +49,9 @@ public class FunctionTest {
         }
             try{
             while (rs.next()){
-             System.out.printf("%d %s %s %s %s %d %s %s \n", rs.getInt("UID"), rs.getString("EMAIL"),
+             System.out.printf("%d %s %s %s %s %s %s %s \n", rs.getInt("UID"), rs.getString("EMAIL"),
                      rs.getString("FULL_NAME"), rs.getString("PASSWORD"), 
-                     rs.getString("SALT"), rs.getInt("ZIP"), rs.getString("RECOVERY_KEY"), 
+                     rs.getString("SALT"), rs.getString("ZIP"), rs.getString("RECOVERY_KEY"), 
                      rs.getDate("DATE_JOINED"));  
             }
             }

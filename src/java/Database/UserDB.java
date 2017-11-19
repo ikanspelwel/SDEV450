@@ -54,7 +54,7 @@ public class UserDB extends BaseDBFunctions {
      * @return a user instance, if null there was an issue.
      * @throws SQLException
      */
-    public Objects.User AddNewUser(String fullName, String email, String password, Integer zip) throws SQLException, IllegalArgumentException {
+    public Objects.User AddNewUser(String fullName, String email, String password, String zip) throws SQLException, IllegalArgumentException {
 
         /* Set the user object to null */
         Objects.User user = null;
@@ -84,7 +84,7 @@ public class UserDB extends BaseDBFunctions {
                 this.preparedStmt.setString(2, fullName);
                 this.preparedStmt.setString(3, hashedPass);
                 this.preparedStmt.setString(4, salt);
-                this.preparedStmt.setInt(5, zip);
+                this.preparedStmt.setString(5, zip);
                 this.preparedStmt.setDate(6, now);
 
                 this.preparedStmt.executeUpdate();
@@ -145,7 +145,7 @@ public class UserDB extends BaseDBFunctions {
                 user = new User(rs.getInt("UID"), rs.getString("FULL_NAME"),
                         rs.getString("EMAIL"), rs.getString("PASSWORD"),
                         rs.getString("SALT"), rs.getString("RECOVERY_KEY"),
-                        rs.getInt("ZIP"), rs.getDate("DATE_JOINED"));
+                        rs.getString("ZIP"), rs.getDate("DATE_JOINED"));
             }
 
         } catch (SQLException e) {

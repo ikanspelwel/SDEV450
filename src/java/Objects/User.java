@@ -19,7 +19,7 @@ public class User {
     private String password;
     private String salt;
     private String recoverKey;
-    private Integer zip;
+    private String zip;
     private Date dateJoined;
     private static final Random RAND = new Random();
     // List of all charactors alpha numeric charactors: a-z, A-Z, 0-9.
@@ -39,7 +39,7 @@ public class User {
      * @param zip
      * @param dateJoined
      */
-    public User(Integer uid, String fullName, String email, String password, String salt, String recoverKey, Integer zip, Date dateJoined) {
+    public User(Integer uid, String fullName, String email, String password, String salt, String recoverKey, String zip, Date dateJoined) {
         this.uid = uid;
         this.fullName = fullName;
         this.email = email;
@@ -95,7 +95,7 @@ public class User {
     /**
      * @return the zip
      */
-    public Integer getZip() {
+    public String getZip() {
         return zip;
     }
 

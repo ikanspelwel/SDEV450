@@ -81,9 +81,9 @@ public class DatabasePullExample extends HttpServlet {
             }      
                 try {
                     while (rs.next()) {
-                        out.printf("%d %s %s %s %s %d %s %s \n", rs.getInt("UID"), rs.getString("EMAIL"),
+                        out.printf("%d %s %s %s %s %s %s %s \n", rs.getInt("UID"), rs.getString("EMAIL"),
                                 rs.getString("FULL_NAME"), rs.getString("PASSWORD"),
-                                rs.getString("SALT"), rs.getInt("ZIP"), rs.getString("RECOVERY_KEY"),
+                                rs.getString("SALT"), rs.getString("ZIP"), rs.getString("RECOVERY_KEY"),
                                 rs.getDate("DATE_JOINED"));
                     }
                 } catch (SQLException err) {

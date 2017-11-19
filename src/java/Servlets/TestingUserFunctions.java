@@ -60,7 +60,7 @@ public class TestingUserFunctions extends HttpServlet {
             }
 
             try {
-                me = userDB.AddNewUser("Adam Ring", "adam@test23.com", "1234", 05452);
+                me = userDB.AddNewUser("Adam Ring", "adam@test23.com", "1234", "05452");
                 out.println("User created successfully!<br>\n");
             } catch (SQLException e) {
                 // Display generic error message on failure..
