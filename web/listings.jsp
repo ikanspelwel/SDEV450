@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-                
+
         <!-- Add listing header, listings -->
         <!-- Style taken from inbox -->
         <!-- Credit for panel idea goes to harogaston @ https://bootsnipp.com/snippets/ORE6d -->
@@ -29,37 +29,37 @@
                                 </div>                                
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="panel-body">
                             <table id="listingTable" class="table table-striped table-bordered table-list">
                                 <tbody>
                                     <tr>
-                                      
-                                        
-                                            <% Database.ListingDB listingLookup = new ListingDB();
-                        Objects.Listing[] listing = null;
-                       try {
-        listing = listingLookup.inOrder(1,20);
-                } catch(SQLException e)  {
-                    //TODO Report error
-                }
-                       
-        if (listing != null) {
-            for(int i=0;i<listing.length;i++){
-            String title = listing[i].getListingTitle();
-            String desc = listing[i].getDescription();
-            out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
-            out.print( String.format( "<option value='%s'>%s</option>", title, desc ));
-            out.print("</td>");
-        }
-        }
-        else {
-            out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
-            out.print("no listing found");
-            out.print("</td>");
-        }                      %>
-                                        
+
+
+                                        <% Database.ListingDB listingLookup = new ListingDB();
+                                            Objects.Listing[] listing = null;
+                                            try {
+                                                listing = listingLookup.inOrder(1, 20);
+                                            } catch (SQLException e) {
+                                                //TODO Report error
+                                                System.out.printf("DB Connection failed: %s\n", e.getMessage());
+                                            }
+
+                                            if (listing != null) {
+                                                for (int i = 0; i < listing.length; i++) {
+                                                    String title = listing[i].getListingTitle();
+                                                    String desc = listing[i].getDescription();
+                                                    out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
+                                                    out.print(String.format("<option value='%s'>%s</option>", title, desc));
+                                                    out.print("</td>");
+                                                }
+                                            } else {
+                                                out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
+                                                out.print("no listing found");
+                                                out.print("</td>");
+                                                }%>
+
                                         <td align="center" class="visible-md visible-lg">Listing 2</td>
                                         <td align="center" class="visible-md visible-lg">Listing 3</td>
                                         <td align="center" class="visible-md visible-lg">Listing 4</td>
