@@ -22,5 +22,46 @@
               
         <!-- Custom styles -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        
+        <!-- Font Awesome CDN for expanded glyphicons -->
+        <script src="https://use.fontawesome.com/3d123a1bf9.js"></script>
+        
+        <!-- JavaScript for active page navbar highlight -->
+        <script>
+            $(function(){
+                $('a').each(function(){
+                    if ($(this).prop('href') == window.location.href) {
+                        $(this).addClass('active'); $(this).parents('li').addClass('active');
+                    }
+                });
+            });
+        </script>
+        
+        <!-- JavaScript function for modal use with the check all trash button -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#trash").click(function(){
+                    $("#permDelModal").modal('show');
+                });
+            });
+        </script>
+        
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#trash").click(function(){
+                    $("#delModal").modal('show');
+                });
+            });
+        </script>
+        
+        <!-- JavaScript function for modal use with the edit profile button -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#edit").click(function(){
+                    $("#editModal").modal('show');
+                });
+            });
+        </script>
+        
     </head>
 </html>
