@@ -51,7 +51,7 @@
             </div>
         </div>
         
-        <!-- Panel display for active listings -->
+        <!-- Panel display for active listings table-->
         <div class="container">            
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
