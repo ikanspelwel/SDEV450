@@ -26,6 +26,9 @@ public class Listing {
      * @param category
      * @param email     
      */
+    public Listing(){
+        
+    }
     public Listing(Integer listingID, Double price, Integer UID, Date date, 
             String listingTitle, String description, String category, String email){
         this.listingID = listingID;

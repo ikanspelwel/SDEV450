@@ -2,6 +2,7 @@ package Database;
 
 
 //Imports
+import java.util.ArrayList;
 import java.sql.SQLException;
 import java.sql.Statement;
 import Objects.Listing;
@@ -33,8 +34,9 @@ public class ListingDB extends BaseDBFunctions{
     }        
     
     //Pulls listings in order
-    public Objects.Listing[] inOrder(int low, int high) throws SQLException {
-        Objects.Listing[] listing = new Listing[high-low];
+    public ArrayList<Listing> inOrder(int low, int high) throws SQLException {
+        ArrayList<Listing> arrListing = new ArrayList<>();
+        Objects.Listing listing = null;
         try{
             this.preparedStmt = this.con.prepareStatement(
                     "SELECT * FROM `LISTINGS` "
@@ -47,24 +49,29 @@ public class ListingDB extends BaseDBFunctions{
            this.preparedStmt.setInt(2, high);
            /* Safely execute the statement */
            this.rs = this.preparedStmt.executeQuery();
-           int i=0;
+    
            /* Returns true if a result was found, false if not */
+         /*  for (int i=0; i<high-low;i++) {*/
+          /* int i=0;*/
            while (rs.next()) {
-               
                /*Store everything in a new listing instince. */
-               listing[i] = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
+               listing = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
                        rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), rs.getString("LISTING_TITLE"), 
                        rs.getString("DESCRIPTION"), rs.getString("CATEGORY"), rs.getString("EMAIL")
                        
                        );
-               i++;
-           }
+               arrListing.add(listing);}
+               
+             /* i++;
+           }*/
+               
+           
         } catch (SQLException e) {
             throw e;
         }
        
     
-        return listing;
+        return arrListing;
     }
     
     

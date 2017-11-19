@@ -9,7 +9,9 @@
 <%@include file="navbar.jsp" %>
 <%@include file="footer.jsp" %>
 <%@page import="Database.ListingDB" %>
+<%@page import="Objects.Listing" %>
 <%@page import="java.sql.SQLException" %>
+<%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
     <body>
@@ -41,37 +43,32 @@
                                             int low = 0;
                                             int high = 20;
                                             try {
-                                                Objects.Listing[] listing = listingLookup.inOrder(low, high);
+                                                ArrayList<Objects.Listing> arrListing = listingLookup.inOrder(low, high);
                                             
 
-                                           
-                                                for (int i = 0; i < listing.length; i++) {
-                                                    String title = listing[i].getListingTitle();
-                                                    String desc = listing[i].getDescription();
+                                           if(!arrListing.isEmpty()){
+                                                for (int i=0;i<(high-low);i++){
+                                                    String title = arrListing.get(i).getListingTitle();
+                                                    String desc = arrListing.get(i).getDescription();
                                                     out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
-                                                    out.print(String.format("<option value='%s'>%s</option>", title, desc));
+                                                    out.print(String.format("<option value='%s'>\n%s</option>", title, desc));
                                                     out.print("</td>");
-                                                }
-                                             /*else {
+                                                    if((i==4)||(i==9)||(i==14)||(i==19)){
+                                                        out.print("</tr><tr>");
+                                                                
+                                                    }
+                                                    
+                                                } 
+                                           }else {
                                                 out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
                                                 out.print("no listing found");
                                                 out.print("</td>");
-                                                }*/} catch (SQLException e) {
+                                                }} catch (SQLException e) {
                                                 //TODO Report error
                                                 System.out.printf("DB Connection failed: %s\n", e.getMessage());
                                             }%>
 
-                                        <td align="center" class="visible-md visible-lg">Listing 2</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 3</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 4</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 5</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center" class="visible-md visible-lg">Listing 6</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 7</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 8</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 9</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 10</td>
+                                        
                                     </tr>
                                 </tbody>
                             </table>        
