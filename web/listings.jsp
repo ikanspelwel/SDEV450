@@ -38,15 +38,13 @@
 
 
                                         <% Database.ListingDB listingLookup = new ListingDB();
-                                            Objects.Listing[] listing = null;
+                                            int low = 0;
+                                            int high = 20;
                                             try {
-                                                listing = listingLookup.inOrder(1, 20);
-                                            } catch (SQLException e) {
-                                                //TODO Report error
-                                                System.out.printf("DB Connection failed: %s\n", e.getMessage());
-                                            }
+                                                Objects.Listing[] listing = listingLookup.inOrder(low, high);
+                                            
 
-                                            if (listing != null) {
+                                           
                                                 for (int i = 0; i < listing.length; i++) {
                                                     String title = listing[i].getListingTitle();
                                                     String desc = listing[i].getDescription();
@@ -54,11 +52,14 @@
                                                     out.print(String.format("<option value='%s'>%s</option>", title, desc));
                                                     out.print("</td>");
                                                 }
-                                            } else {
+                                             /*else {
                                                 out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
                                                 out.print("no listing found");
                                                 out.print("</td>");
-                                                }%>
+                                                }*/} catch (SQLException e) {
+                                                //TODO Report error
+                                                System.out.printf("DB Connection failed: %s\n", e.getMessage());
+                                            }%>
 
                                         <td align="center" class="visible-md visible-lg">Listing 2</td>
                                         <td align="center" class="visible-md visible-lg">Listing 3</td>
