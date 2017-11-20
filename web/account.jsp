@@ -54,7 +54,7 @@
         <!-- Panel display for active listings table-->
         <div class="container">            
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                     <div class="panel panel-default panel-table">
                         <div class="panel-heading">
                             <div class="row">
