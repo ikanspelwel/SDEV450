@@ -41,7 +41,7 @@ public class CommonComponents {
         return "<div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\n"
                     + "                    <ul class=\"nav navbar-nav\">\n"
                     + "                        <li><a href=\"index.html\">Home</a></li>\n"
-                    + "                        <li><a href=\"listings.html\">Listings</a></li>\n"
+                    + "                        <li><a href=\"listings.jsp\">Listings</a></li>\n"
                     + "                        <li><a href=\"about.html\">About</a></li>\n"
                     + "                        <li><a href=\"contact.html\">Contact</a></li>\n"
                     + "                        <li><a href=\"profile.html\">Profile</a></li>\n"

@@ -47,11 +47,11 @@
                                             
 
                                            if(!arrListing.isEmpty()){
-                                                for (int i=0;i<(high-low);i++){
+                                                for (int i=0;i<arrListing.size();i++){
                                                     String title = arrListing.get(i).getListingTitle();
                                                     String desc = arrListing.get(i).getDescription();
-                                                    out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
-                                                    out.print(String.format("<option value='%s'>\n%s</option>", title, desc));
+                                                    out.print("<td align=\"center\">");
+                                                    out.print(String.format("<strong>%s:</strong> %s", title, desc));
                                                     out.print("</td>");
                                                     if((i==4)||(i==9)||(i==14)||(i==19)){
                                                         out.print("</tr><tr>");
@@ -60,7 +60,7 @@
                                                     
                                                 } 
                                            }else {
-                                                out.print("<td align=\"center\" class=\"visible-md visible-lg\">");
+                                                out.print("<td align=\"center\">");
                                                 out.print("no listing found");
                                                 out.print("</td>");
                                                 }} catch (SQLException e) {
