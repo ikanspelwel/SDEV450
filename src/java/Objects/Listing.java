@@ -24,13 +24,12 @@ public class Listing {
      * @param listingTitle
      * @param description
      * @param category
-     * @param email     
      */
     public Listing(){
         
     }
     public Listing(Integer listingID, Double price, Integer UID, Date date, 
-            String listingTitle, String description, String category, String email){
+            String listingTitle, String description, String category){
         this.listingID = listingID;
         this.price= price;
         this.UID = UID;
@@ -38,7 +37,6 @@ public class Listing {
         this.listingTitle = listingTitle;
         this.description = description;
         this.category = category;        
-        this.email = email;        
     }
 
 
@@ -91,11 +89,5 @@ public class Listing {
         return category;
     }
 
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-    
+   
 }

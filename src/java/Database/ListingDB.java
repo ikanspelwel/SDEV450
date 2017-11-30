@@ -57,8 +57,7 @@ public class ListingDB extends BaseDBFunctions{
                /*Store everything in a new listing instince. */
                listing = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
                        rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), rs.getString("LISTING_TITLE"), 
-                       rs.getString("DESCRIPTION"), rs.getString("CATEGORY"), rs.getString("EMAIL")
-                       
+                       rs.getString("DESCRIPTION"), rs.getString("CATEGORY")
                        );
                arrListing.add(listing);}
                

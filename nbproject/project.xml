@@ -23,13 +23,17 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.javax.mail-1.6.0.jar}</file>
+                    <file>${file.reference.javax.mail-1.6.0.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries>
                 <library dirs="200">
                     <file>${libs.MySQLDriver.classpath}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.javax.mail-1.6.0.jar-1}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>
