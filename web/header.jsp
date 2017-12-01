@@ -3,7 +3,6 @@
     Created on : Nov 18, 2017, 6:25:05 PM
     Author     : Flammino
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -64,4 +63,3 @@
         </script>
         
     </head>
-</html>

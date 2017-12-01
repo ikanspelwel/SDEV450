@@ -3,10 +3,6 @@
     Created on : Nov 18, 2017, 6:29:15 PM
     Author     : Flammino
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
     <body>
         <!-- Create Navbar that collapses for mobile and expands for larger screens -->
         <nav id="myNavbar" class="navbar navbar-default" role="navigation">    
@@ -32,9 +28,9 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Messages <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="inbox.jsp">Inbox</a></li>                        
-                                <li><a href="sent.html">Sent Items</a></li>
+                                <li><a href="sent.jsp">Sent Items</a></li>
                                 <li class="divider"></li>
-                                <li><a href="trash.html">Trash</a></li>
+                                <li><a href="trash.jsp">Trash</a></li>
                             </ul>
                         </li>
                         <form class="navbar-form navbar-left">
@@ -52,5 +48,3 @@
                 </div>
             </div>
         </nav>
-    </body>
-</html>

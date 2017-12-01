@@ -43,9 +43,9 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Messages <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="inbox.jsp">Inbox</a></li>                        
-                                <li><a href="sent.html">Sent Items</a></li>
+                                <li><a href="sent.jsp">Sent Items</a></li>
                                 <li class="divider"></li>
-                                <li><a href="trash.html">Trash</a></li>
+                                <li><a href="trash.jsp">Trash</a></li>
                             </ul>
                         </li>
                         <form class="navbar-form navbar-left">
