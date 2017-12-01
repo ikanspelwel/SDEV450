@@ -21,6 +21,9 @@
                         <% if( request.getParameter("e1") != null ) { %>
                         <h3 class="alert alert-danger">Invalid login credentials.</h3>
                         <% } %>
+                        <% if( request.getParameter("e2") != null ) { %>
+                        <h3 class="alert alert-danger">Please login first.</h3>
+                        <% } %>
                         <label for="inputEmail" class="control-label">Email</label>
                         <input type="email" name="user" class="form-control" id="inputEmail" placeholder="Email" required>
                         <label for="inputPassword" class="control-label">Password</label>

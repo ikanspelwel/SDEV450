@@ -154,6 +154,41 @@ public class UserDB extends BaseDBFunctions {
 
         return user;
     }
+    
+    public Objects.User GetUser(Integer uID) throws SQLException {
+        Objects.User user = null;
+
+        try {
+            /* Setup a perpared statement */
+            this.preparedStmt = this.con.prepareStatement(
+                    "SELECT * FROM `USERS` WHERE `UID` = ?"
+            );
+
+            /**
+             * Safely add the email and password into the statement, in
+             * replacement of the question marks.
+             */
+            this.preparedStmt.setInt(1, uID);
+
+            /* Safely execute the statement */
+            this.rs = this.preparedStmt.executeQuery();
+
+            /* Returns true if a result was found, false if not */
+            if (rs.next()) {
+
+                /* Store everying in a new user instance. */
+                user = new User(rs.getInt("UID"), rs.getString("FULL_NAME"),
+                        rs.getString("EMAIL"), rs.getString("PASSWORD"),
+                        rs.getString("SALT"), rs.getString("RECOVERY_KEY"),
+                        rs.getString("ZIP"), rs.getDate("DATE_JOINED"));
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        }
+
+        return user;
+    }
 
     /**
     //Changes user's password 

@@ -13,14 +13,14 @@ import java.util.logging.Logger;
  */
 //Imports
 
-//Begin Subclass Messages
-public class Messages extends BaseDBFunctions {
+//Begin Subclass MessagesDB
+public class MessagesDB extends BaseDBFunctions {
 
     String sender;
     String recipient;    
     String msgContents;
 
-    Messages(String msg, String toUser, String fromUser) {
+    MessagesDB(String msg, String toUser, String fromUser) {
         msg = msgContents;
         toUser = recipient;
         fromUser = sender;
@@ -33,7 +33,7 @@ public class Messages extends BaseDBFunctions {
             preparedStmt = con.prepareStatement(sql);
             preparedStmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(Messages.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MessagesDB.class.getName()).log(Level.SEVERE, null, ex);
         }                
     }
     
@@ -44,8 +44,8 @@ public class Messages extends BaseDBFunctions {
             preparedStmt = con.prepareStatement(sql);
             preparedStmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(Messages.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MessagesDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
-} //End Subclass Messages
+} //End Subclass MessagesDB
