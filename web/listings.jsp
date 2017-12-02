@@ -34,7 +34,7 @@
 
 
                         <div class="panel-body">
-                            <table id="listingTable" class="table table-striped table-bordered table-list">
+                            <table id="listingTable" class="table  table-responsive table-striped table-bordered table-list">
                                 <tbody>
                                     <tr>
 
@@ -52,11 +52,9 @@
                                                     String desc = arrListing.get(i).getDescription();
                                                     out.print("<td align=\"center\">");
                                                     out.print(String.format("<strong>%s:</strong> %s", title, desc));
-                                                    out.print("</td>");
-                                                    if((i==4)||(i==9)||(i==14)||(i==19)){
-                                                        out.print("</tr><tr>");
-                                                                
-                                                    }
+                                                    out.print("</td>");                                                    
+                                                    out.print("</tr><tr>");                                                    
+                                                    
                                                     
                                                 } 
                                            }else {
