@@ -53,7 +53,8 @@
                                                     out.print("<td align=\"center\">");
                                                     out.print(String.format("<strong>%s:</strong> %s", title, desc));
                                                     out.print("</td>");                                                    
-                                                    out.print("</tr><tr>");                                                    
+                                                    out.print("</tr><tr>");
+                                                                
                                                     
                                                     
                                                 } 
