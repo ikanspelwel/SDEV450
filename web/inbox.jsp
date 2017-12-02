@@ -3,6 +3,7 @@
     Created on : Nov 18, 2017, 10:30:16 AM
     Author     : ikanspelwel
 --%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Database.UserDB"%>
 <%@page import="Database.MessagesDB"%>
@@ -10,6 +11,7 @@
     /* Instance of our userDB and user class */
     Database.UserDB userCheck = new UserDB();
     Objects.User user = null;
+    List<Objects.Messages> allMessages = new ArrayList<>();
 
     //Allow access only if user exists
     Integer uID = null;
@@ -33,7 +35,7 @@
 
     Database.MessagesDB messageDb = new MessagesDB();
     try {
-        ArrayList<Objects.Messages> allMessages = messageDb.GetMessages(user.getUid(), "Inbox");
+        allMessages = messageDb.GetMessages(user.getUid(), "Inbox");
     } catch (Exception e) {
         System.out.printf("Retrieving messages failed: %s\n", e.getMessage());
     }
@@ -71,35 +73,24 @@
                                 </th>
                                 <th class="col-tools"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></th>                                    
                                 <th class="col-text visible-md visible-lg">Date</th>
-                                <th class="col-text">Name</th>
-                                <th class="col-text">Subject</th>
+                                <th class="col-text">Item</th>
+                                <th class="col-text">Message</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <% System.out.printf("Count of allMessages %d\n", allMessages.size()); %>
+                            <% for (int i = 0; i < allMessages.size(); i++) { %>
                             <tr>
                                 <td align="center" class="visible-md visible-lg"><input type="checkbox" id="checkItem" class="visible-md visible-lg"/></td>
                                 <td align="center">
-                                    <a class="btn btn-default" title="Reply"><span <i class="fa fa-reply"
-                                                                                      aria-hidden="true" ></i></span></a>
-                                    <a class="btn btn-danger" title="Delete"><span class="glyphicon glyphicon-trash"
-                                                                                   aria-hidden="true" ></span></a>
+                                    <a class="btn btn-default" title="Reply"><span <i class="fa fa-reply" aria-hidden="true" ></i></span></a>
+                                    <a class="btn btn-danger" title="Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true" ></span></a>
                                 </td>
-                                <td class="visible-md visible-lg">Javascript Date Return</td>
-                                <td>JavaScript Name Return</td>
-                                <td>JavaScript Subject Return</td>
+                                <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).dateSent.toString())); %></td>
+                                <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).listingTitle)); %></td>
+                                <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).messageText)); %></td>
                             </tr>
-                            <tr>
-                                <td align="center" class="visible-md visible-lg"><input type="checkbox" id="checkItem" class="visible-md visible-lg"/></td>
-                                <td align="center">
-                                    <a class="btn btn-default" title="Reply"><span <i class="fa fa-reply"
-                                                                                      aria-hidden="true"></i></span></a>
-                                    <a class="btn btn-danger" title="Delete"><span class="glyphicon glyphicon-trash"
-                                                                                   aria-hidden="true"></span></a>
-                                </td>
-                                <td class="visible-md visible-lg">Javascript Date Return</td>
-                                <td>JavaScript Name Return</td>
-                                <td>JavaScript Subject Return</td>
-                            </tr>
+                            <%}%>
                         </tbody>
                     </table>        
                 </div>                        

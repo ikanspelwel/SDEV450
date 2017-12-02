@@ -47,7 +47,9 @@ public class MessagesDB extends BaseDBFunctions {
         // Array of Messages
         ArrayList<Objects.Messages> allMessages = new ArrayList<>();
 
-        String selectStatement = "SELECT * FROM `MESSAGES` WHERE ";
+        String selectStatement = "SELECT `MESSAGES`.*, `LISTINGS`.`LISTING_TITLE`"
+                + " FROM `MESSAGES` LEFT JOIN `LISTINGS` "
+                + "ON `MESSAGES`.`LISTING_REF` = `LISTINGS`.`LISTING_ID` WHERE ";
 
         /**
          * Simple switch, based on the value of msgType.
@@ -95,13 +97,16 @@ public class MessagesDB extends BaseDBFunctions {
             /* Returns true if a result was found, false if not */
             if (rs.next()) {
 
-                /* Add all messages in the ArrayList. */
-                allMessages.add(new Messages(rs.getInt("MESSAGE_ID"),
+                Objects.Messages newMessage = new Messages(rs.getInt("MESSAGE_ID"),
                         rs.getInt("FK_SENDER_ID"), rs.getInt("FK_RECEIVER_ID"),
                         rs.getInt("LISTING_REF"), rs.getInt("FLAG_READ"),
                         rs.getString("MESSAGE_TEXT"), rs.getDate("DATE_SENT"),
-                        rs.getInt("DELETED"))
-                );
+                        rs.getInt("DELETED"));
+                
+                newMessage.listingTitle = rs.getString("LISTING_TITLE");
+                
+                /* Add all messages in the ArrayList. */
+                allMessages.add(newMessage);
             }
 
         } catch (SQLException e) {

@@ -4,10 +4,10 @@ import java.sql.Date;
 
 public class Messages {
 
-    protected Integer messageID, senderID, receiverID, listingRef, deleted;
-    protected Integer flagRead;
-    protected String messageText;
-    protected Date dateSent;
+    public Integer messageID, senderID, receiverID, listingRef, deleted;
+    public Integer flagRead;
+    public String messageText, listingTitle;
+    public Date dateSent;
 
     /**
      * Constructor for Messages
