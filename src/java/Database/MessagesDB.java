@@ -1,51 +1,126 @@
 package Database;
 
+import Objects.Messages;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** 
+/**
  * @Course: SDEV 250 ~ Java Programming I
- * @Author Name: Ari
+ * @Author Name: Allison
  * @Assignment Name: Database
  * @Date: Nov 9, 2017
- * @Subclass Message Description: 
+ * @Subclass Message Description: Original Base code by Allison. Converted to
+ * stored procedures by Adam Ring, and added GetMessages method.
  */
 //Imports
+import java.util.ArrayList;
 
 //Begin Subclass MessagesDB
 public class MessagesDB extends BaseDBFunctions {
 
-    String sender;
-    String recipient;    
-    String msgContents;
-
-    MessagesDB(String msg, String toUser, String fromUser) {
-        msg = msgContents;
-        toUser = recipient;
-        fromUser = sender;
-    }
-    
-    public void newMessage(){
+    public void newMessage(Objects.Messages message) {
+        /*
         String sql = "insert into Messages (Sender, Recipient, Message) values "
-                + "('"+sender+"','"+recipient+"','"+msgContents+"')";
-        try {
-            preparedStmt = con.prepareStatement(sql);
-            preparedStmt.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(MessagesDB.class.getName()).log(Level.SEVERE, null, ex);
-        }                
-    }
-    
-    //Deletes message using message ID associated with HTML checkbox
-    public void deleteMessage(int msgID){
-        String sql = ("delete from Messages where MessageID =" + "'"+msgID+"'");
+                + "('" + sender + "','" + recipient + "','" + msgContents + "')";
         try {
             preparedStmt = con.prepareStatement(sql);
             preparedStmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(MessagesDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        */
+    }
+
+    /**
+     * Method to retrieve all the messages of a certain type, and return them in
+     * an ArrayList of Message Objects.
+     *
+     * Created by Adam Ring.
+     *
+     * @param userID The userID to retrieve messages for.
+     * @param msgType The type of message to get.
+     * @return
+     * @throws java.sql.SQLException
+     */
+    public ArrayList<Objects.Messages> GetMessages(Integer userID, String msgType) throws SQLException {
+        // Array of Messages
+        ArrayList<Objects.Messages> allMessages = new ArrayList<>();
+
+        String selectStatement = "SELECT * FROM `MESSAGES` WHERE ";
+
+        /**
+         * Simple switch, based on the value of msgType.
+         */
+        switch (msgType) {
+            case "Inbox":
+                // FK_RECEIVER_ID
+                selectStatement += "`FK_RECEIVER_ID` = ?";
+                break;
+
+            case "Sent":
+                // FK_SENDER_ID
+                selectStatement += "`FK_SENDER_ID` = ?";
+                break;
+
+            case "Trash":
+                // FK_RECEIVER_ID or FK_SENDER_ID
+                selectStatement += "`FK_RECEIVER_ID` = ? OR `FK_SENDER_ID` = ?";
+                break;
+
+            default:
+                break;
+        }
+
+        // Adding sort clauses.
+        selectStatement += " ORDER BY `FLAG_READ` DESC, `DATE_SENT` DESC";
+
+        try {
+            /* Setup a perpared statement */
+            this.preparedStmt = this.con.prepareStatement(selectStatement);
+
+            /**
+             * Safely add the email and password into the statement, in
+             * replacement of the question marks.
+             */
+            this.preparedStmt.setInt(1, userID);
+            if(msgType.equals("Trash")) {
+                // If trash we need to search for userID in either field.
+                this.preparedStmt.setInt(2, userID);
+            }
+
+            /* Safely execute the statement */
+            this.rs = this.preparedStmt.executeQuery();
+
+            /* Returns true if a result was found, false if not */
+            if (rs.next()) {
+
+                /* Add all messages in the ArrayList. */
+                allMessages.add(new Messages(rs.getInt("MESSAGE_ID"),
+                        rs.getInt("FK_SENDER_ID"), rs.getInt("FK_RECEIVER_ID"),
+                        rs.getInt("LISTING_REF"), rs.getInt("FLAG_READ"),
+                        rs.getString("MESSAGE_TEXT"), rs.getDate("DATE_SENT"),
+                        rs.getInt("DELETED"))
+                );
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        }
+
+        // Return the ArrayList
+        return allMessages;
+    }
+
+    //Deletes message using message ID associated with HTML checkbox
+    public void deleteMessage(int msgID) {
+        String sql = ("delete from Messages where MessageID =" + "'" + msgID + "'");
+        try {
+            preparedStmt = con.prepareStatement(sql);
+            preparedStmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(MessagesDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 } //End Subclass MessagesDB
