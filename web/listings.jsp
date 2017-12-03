@@ -51,7 +51,6 @@
                                             try {
                                                 ArrayList<Objects.Listing> arrListing = listingLookup.inOrder(low, high);
                                             
-
                                            if(!arrListing.isEmpty()){
                                                 for (int i=0;i<arrListing.size();i++){
                                                     String title = arrListing.get(i).getListingTitle();

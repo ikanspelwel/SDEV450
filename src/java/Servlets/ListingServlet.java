@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author kmh5004
  */
+@WebServlet("/ListingServlet/*")
 public class ListingServlet extends HttpServlet {
 
     /**
