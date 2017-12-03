@@ -67,7 +67,8 @@ public class MessagesDB extends BaseDBFunctions {
 
             case "Trash":
                 // FK_RECEIVER_ID or FK_SENDER_ID
-                selectStatement += "`FK_RECEIVER_ID` = ? OR `FK_SENDER_ID` = ?";
+                selectStatement += "`FK_RECEIVER_ID` = ? OR `FK_SENDER_ID` = ? "
+                        + "AND `DELETED` = 1";
                 break;
 
             default:
