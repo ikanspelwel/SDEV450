@@ -9,7 +9,12 @@
 <%@include file="navbar.jsp" %>
 <%@include file="footer.jsp" %>
 <%@page import="Database.ListingDB" %>
+<%@page import="javax.imageio.ImageIO" %>"
+
 <%@page import="Objects.Listing" %>
+<%@page import="java.sql.Blob" %>
+<%@page import="Database.ImageDB" %>
+<%@page import="Objects.Images" %>
 <%@page import="java.sql.SQLException" %>
 <%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
@@ -40,6 +45,7 @@
 
 
                                         <% Database.ListingDB listingLookup = new ListingDB();
+                                        ImageDB imageLookup = new ImageDB();
                                             int low = 0;
                                             int high = 20;
                                             try {
@@ -50,13 +56,27 @@
                                                 for (int i=0;i<arrListing.size();i++){
                                                     String title = arrListing.get(i).getListingTitle();
                                                     String desc = arrListing.get(i).getDescription();
+                                                    int listing_id = arrListing.get(i).getListingid();
+                                                    //out.print(String.format("<jsp: param name=\"listing_id\" value=\"%d\"/>",listing_id));
+                                                    Images image=imageLookup.getImage(1);//This seems to be killing it, not sure whats wrong
+                                                    //int Image_id = image.getImageid();
+                                                  //  Blob imageBlob = image.getImage();
+                                                  //  String image_type = image.getImageType();
+                                                    
                                                     out.print("<td align=\"center\">");
+                                                    out.print("<div class=\"thumbnail\">");
+                                                    
+                                                    //out.print("<img src=\"ListingServlet\"/>");
+                                                    //out.print("width=\"117\" height=\"160\"");
+                         //    out.print("onError=\"loadImage()\" onAbort=\"loadImage()\" />");
+                                                    //out.print("alt=\"test\" title=\"test\" style=\"width:100%\">");
+                                                    out.print("</div>");
                                                     out.print(String.format("<strong>%s:</strong> %s", title, desc));
+                                                    //out.print(String.format("%d",Image_id));
                                                     out.print("</td>");                                                    
                                                     out.print("</tr><tr>");
                                                                 
-                                                    
-                                                    
+                                                  
                                                 } 
                                            }else {
                                                 out.print("<td align=\"center\">");

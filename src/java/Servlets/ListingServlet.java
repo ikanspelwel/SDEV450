@@ -6,6 +6,8 @@
 package Servlets;
 import Database.ImageDB;
 import Database.ListingDB;
+import java.sql.Blob;
+import Objects.Images;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -50,7 +52,26 @@ public class ListingServlet extends HttpServlet {
             response.getWriter();
         }
             */
-       
+        //Credit for below from Mohamed Saligh https://stackoverflow.com/questions/5243726/how-to-display-an-image-in-jsp
+        
+        ImageDB imageLookup= new ImageDB();
+        try{
+        Images image = imageLookup.getImage(1);//return blob...
+        //From Timothy Groot https://stackoverflow.com/questions/6662432/easiest-way-to-convert-a-blob-into-a-byte-array
+        Blob blob = image.getImage();
+        int blobLength = (int) blob.length();
+        byte[] imgByt = blob.getBytes(1, blobLength);
+
+//release the blob and free up memory. (since JDBC 4.0)
+blob.free();
+response.setContentType("image/jpg");
+response.getOutputStream().write(imgByt);
+response.getOutputStream().flush();
+response.getOutputStream().close();
+        }
+        catch (SQLException e) {
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

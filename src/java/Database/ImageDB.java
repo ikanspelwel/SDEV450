@@ -3,6 +3,8 @@
  */
 package Database;
 
+import Objects.Listing;
+import Objects.Images;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 //Begin Class ImageDB
@@ -38,6 +41,44 @@ public class ImageDB extends BaseDBFunctions {
             throw e;
         }
 
+    }
+    public Images getImage(int listing_id) throws SQLException {
+        Images image = null;
+        try{
+            this.preparedStmt = this.con.prepareStatement(
+                    "SELECT * FROM `IMAGES` "
+                            + "WHERE `FK_LISTING_ID` = ?"
+                            + "ORDER BY `IMAGE_ID` ASC"
+            + "LIMIT 1");
+            /**
+             * Safely add the limits into the statement in replacement of the question mark
+             */
+           this.preparedStmt.setInt(1, listing_id);
+           /* Safely execute the statement */
+           this.rs = this.preparedStmt.executeQuery();
+    
+           /* Returns true if a result was found, false if not */
+         /*  for (int i=0; i<high-low;i++) {*/
+          /* int i=0;*/
+           if (rs.next()) {
+               /*Store everything in a new listing instince. */
+               image = new Objects.Images(rs.getInt("IMAGE_ID"), rs.getInt("FK_LISTING_ID"),
+                       rs.getString("IMAGE_TYPE"), rs.getString("IMAGE_METADATA"), rs.getBlob("IMAGE")
+                       );
+               }
+          
+           
+               
+             /* i++;
+           }*/
+               
+           
+        } catch (SQLException e) {
+            throw e;
+        }
+       
+    
+        return image;
     }
 
     /*
