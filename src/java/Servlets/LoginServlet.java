@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
             session.setMaxInactiveInterval(31536000);
 
             //Get the encoded URL string
-            String encodedURL = response.encodeRedirectURL("/DirectSell450/profile.html");
+            String encodedURL = response.encodeRedirectURL("/DirectSell450/account.jsp");
             response.sendRedirect(encodedURL);
 
         } else { //Alert user to login
