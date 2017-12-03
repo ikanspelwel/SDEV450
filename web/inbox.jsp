@@ -73,7 +73,7 @@
                                 </th>
                                 <th class="col-tools"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></th>                                    
                                 <th class="col-text visible-md visible-lg">Date</th>
-                                <th class="col-text">Item</th>
+                                <th class="col-text visible-md visible-lg">Item</th>
                                 <th class="col-text">Message</th>
                             </tr>
                         </thead>
@@ -89,6 +89,7 @@
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).dateSent.toString())); %></td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).listingTitle)); %></td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).messageText)); %></td>
+                                <td class="visible-xs visible-sm"><% out.print(String.format("%s", allMessages.get(i).messageText)); %></td>
                             </tr>
                             <%}%>
                         </tbody>
