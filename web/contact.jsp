@@ -1,8 +1,9 @@
-<!--
-Author: SDEV 450 Direct Sell Team
-Date: 10/2017
-Purpose: A webpage that shows listings.  
--->
+<%-- 
+    Document   : contact
+    Created on : Dec 3, 2017, 3:13:08 PM
+    Author     : Ari
+--%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +18,7 @@ Purpose: A webpage that shows listings.
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
               integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+        
         <!-- Custom styles -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
@@ -38,18 +39,19 @@ Purpose: A webpage that shows listings.
                 
                 <!-- Navigation links and forms -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="nav navbar-nav">                        
-                        <li class="active"><a href="listings.jsp">Listings</a></li>
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" target="_blank">Home</a></li>
+                        <li><a href="listings.html">Listings</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="contact.jsp">Contact</a></li>
-                        <li><a href="account.jsp">Account</a></li>
+                        <li class="active"><a href="contact.jsp">Contact</a></li>
+                        <li><a href="profile.html">Profile</a></li>
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Messages <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="inbox.jsp">Inbox</a></li>                        
-                                <li><a href="sent.jsp">Sent Items</a></li>
+                                <li><a href="sent.html">Sent Items</a></li>
                                 <li class="divider"></li>
-                                <li><a href="trash.jsp">Trash</a></li>
+                                <li><a href="trash.html">Trash</a></li>
                             </ul>
                         </li>
                         <form class="navbar-form navbar-left">
@@ -62,51 +64,32 @@ Purpose: A webpage that shows listings.
                         </form>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="login.jsp">Login</a></li>
+                    <li><a href="login.jsp">Login</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Add listing header, listings -->
-        <!-- Style taken from inbox -->
-        <!-- Credit for panel idea goes to harogaston @ https://bootsnipp.com/snippets/ORE6d -->
+        
+        <!-- Contact Form -->
         <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="panel panel-default panel-table">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col col-xs-6">
-                                    <button href="profile.html" class="btn btn-primary" type="submit" id="loginSubmit">Listings</button>
-                                    <button href="profile.html" class="btn btn-primary" type="submit" id="loginSubmit">New Listing</button>
-                                    <button href="profile.html" class="btn btn-primary" type="submit" id="loginSubmit"><span class="glyphicon glyphicon-search"></span>Search</button>
-                                </div>                                
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <table id="listingTable" class="table table-striped table-bordered table-list">
-                                <tbody>
-                                    <tr>
-                                        <td align="center" class="visible-md visible-lg">Listing 1</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 2</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 3</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 4</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 5</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center" class="visible-md visible-lg">Listing 6</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 7</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 8</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 9</td>
-                                        <td align="center" class="visible-md visible-lg">Listing 10</td>
-                                    </tr>
-                                </tbody>
-                            </table>        
-                        </div>                        
-                    </div>
+            <div class="row">         
+                <div class="col-xs-12">             
+                    <form class="form-horizontal" action="Contact" method="post">
+                        <h2 class="signin-heading">Question or concern?  Let us know!</h2>
+                        <label for="inputEmail" class="control-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required><br>
+                        <label for="pw" class="control-label">Password</label>
+                        <input type="password" name="pw" class="form-control" id="pw" placeholder="Password" required><br>
+                        <label for="inputSubject" class="control-label">Subject</label>
+                        <input type="text" name="subject" class="form-control" id="inputSubject" placeholder="Subject" required><br>
+                        <label for="comment" class="control-label">Comment:</label>
+                        <textarea class="form-control" name="message" rows="5" id="inputComment" placeholder="Comment..." required></textarea><br>
+                        <button class="btn btn-primary btn-lg" type="submit" id="contactSubmit"><a href="#">Submit</a></button>
+                    </form>                    
                 </div>
-            </div>            
+            </div>
         </div>
+        
         <!-- Add footer -->
         <footer class="footer">
             <div class="container">
@@ -119,3 +102,4 @@ Purpose: A webpage that shows listings.
         </footer>
     </body>
 </html>
+
