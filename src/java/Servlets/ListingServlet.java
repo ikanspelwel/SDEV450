@@ -57,7 +57,7 @@ public class ListingServlet extends HttpServlet {
         
         ImageDB imageLookup= new ImageDB();
         try{
-        Images image = imageLookup.getImage(1);//return blob...
+        Images image = imageLookup.getImage(Integer.parseInt(request.getParameter("listing_id")));//return blob...
         //From Timothy Groot https://stackoverflow.com/questions/6662432/easiest-way-to-convert-a-blob-into-a-byte-array
         Blob blob = image.getImage();
         int blobLength = (int) blob.length();

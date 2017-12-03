@@ -2,11 +2,11 @@ package Servlets;
 
 import Database.UserDB;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +33,9 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        /* Instance of printwriter for try/catch exception*/
+        PrintWriter out = response.getWriter();
+
         /* Instance of our userDB and user class */
         Database.UserDB userCheck = new UserDB();
         Objects.User user = null;
@@ -41,25 +44,27 @@ public class LoginServlet extends HttpServlet {
         try {
             user = userCheck.CheckLogIn(request.getParameter("user"), request.getParameter("pwd"));
         } catch (SQLException e) {
-            //TODO Report error.
+            // Display generic error message on failure..
+            out.println("Error, see server log for details.");
+            // Log more info to the Log file.
+            System.out.printf("Error: %s\n", e.getMessage());
         }
 
+        /* If user exists in the database, create session */
         if (user != null) {
+
             //Create the session
             HttpSession session = request.getSession();
             session.setAttribute("UID", user.getUid());
-            //setting session to expiry in 30 mins
-            session.setMaxInactiveInterval(30 * 60);
-            //Create the cookie
-            Cookie userName = new Cookie("login", user.getUid().toString());
-            //setting cookie to expiry in 30 mins
-            userName.setMaxAge(30 * 60);
-            response.addCookie(userName);
+
+            //setting session to expiry in 1 year
+            session.setMaxInactiveInterval(31536000);
+
             //Get the encoded URL string
-            //String encodedURL = response.encodeRedirectURL("LoginSuccess.jsp");
-            String encodedURL = response.encodeRedirectURL("/DirectSell450/profile.html");
+            String encodedURL = response.encodeRedirectURL("/DirectSell450/account.jsp");
             response.sendRedirect(encodedURL);
-        } else {
+
+        } else { //Alert user to login
             response.sendRedirect("/DirectSell450/login.jsp?e1=true");
         }
     }
@@ -72,7 +77,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
 
-        return "Login Servlet to authenticate user, establish cookie & session.";
+        return "Login Servlet to authenticate user, establish user session.";
     }// </editor-fold>
 
 }

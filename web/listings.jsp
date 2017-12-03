@@ -57,15 +57,17 @@
                                                     String desc = arrListing.get(i).getDescription();
                                                     int listing_id = arrListing.get(i).getListingid();
                                                     //out.print(String.format("<jsp: param name=\"listing_id\" value=\"%d\"/>",listing_id));
-                                                    Images image=imageLookup.getImage(1);//This seems to be killing it, not sure whats wrong
+                                                    Images image=imageLookup.getImage(listing_id);
                                                     //int Image_id = image.getImageid();
                                                   //  Blob imageBlob = image.getImage();
                                                   //  String image_type = image.getImageType();
-                                                    
+                                                    request.setAttribute("listing_id","1");
                                                     out.print("<td align=\"center\">");
                                                     out.print("<div class=\"thumbnail\">");
-                                                    
-                                                    //out.print("<img src=\"ListingServlet\"/>");
+                                                    if(image!=null){
+                                                    out.print(String.format("<img src=\"ListingServlet?listing_id=%d\"",listing_id));
+                                                    out.print("style=\"width:25%\"/>");
+                                                    }
                                                     //out.print("width=\"117\" height=\"160\"");
                          //    out.print("onError=\"loadImage()\" onAbort=\"loadImage()\" />");
                                                     //out.print("alt=\"test\" title=\"test\" style=\"width:100%\">");

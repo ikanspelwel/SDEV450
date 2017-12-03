@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,22 +22,14 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("JSESSIONID")) {
-                    System.out.println("JSESSIONID=" + cookie.getValue());
-                }
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-        }
+
         //invalidate the session if exists
+        //https://stackoverflow.com/questions/24677949/why-session-is-not-null-after-session-invalidate-in-java
         HttpSession session = request.getSession(false);
-        System.out.println("User=" + session.getAttribute("user"));
         if (session != null) {
             session.invalidate();
         }
+
         //no encoding because we have invalidated the session
         response.sendRedirect("/DirectSell450/login.jsp");
     }
@@ -53,7 +44,7 @@ public class LogoutServlet extends HttpServlet {
         //There is no method to remove the cookie but we can set the 
         //maximum age to 0 so that it will be deleted from client browser immediately.
 
-        return "Logout Servlet to remove cookie and end session when user logs out.";
+        return "Logout Servlet to end session when user logs out.";
     }// </editor-fold>
 
 }

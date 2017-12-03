@@ -43,12 +43,12 @@ public class ImageDB extends BaseDBFunctions {
 
     }
     public Images getImage(int listing_id) throws SQLException {
-        Images image = null;
+        Images image = new Images();
         try{
             this.preparedStmt = this.con.prepareStatement(
                     "SELECT * FROM `IMAGES` "
-                            + "WHERE `FK_LISTING_ID` = ?"
-                            + "ORDER BY `IMAGE_ID` ASC"
+                            + "WHERE `FK_LISTING_ID` =? "
+                            + "ORDER BY `IMAGE_ID` ASC "
             + "LIMIT 1");
             /**
              * Safely add the limits into the statement in replacement of the question mark
