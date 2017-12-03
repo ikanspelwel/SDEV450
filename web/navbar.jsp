@@ -3,7 +3,10 @@
     Created on : Nov 18, 2017, 6:29:15 PM
     Author     : Flammino
 --%>
-    <body>
+<%@page import="Database.UserDB"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<body>
         <!-- Create Navbar that collapses for mobile and expands for larger screens -->
         <nav id="myNavbar" class="navbar navbar-default" role="navigation">    
             <div class="container">
@@ -42,9 +45,16 @@
                             </div>
                         </form>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
+    <%
+    if (session.getAttribute("UID") == null) { %>
+        <ul class="nav navbar-nav navbar-right">
                         <li><a href="login.jsp">Login</a></li>
                     </ul>
+    <%} else { //Show logout button %>
+        <ul class="nav navbar-nav navbar-right">
+                        <li><a href="login.jsp">Logout</a></li>
+                    </ul>
+        <%}%>
                 </div>
             </div>
         </nav>
