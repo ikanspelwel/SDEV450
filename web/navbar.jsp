@@ -52,7 +52,7 @@
                 </ul>
                 <%} else { //Show logout button %>
                 <form class="nav navbar-nav navbar-right" action="LogoutServlet" method="post">
-                    <button><li><a href="LogoutServlet.java">Logout</a></li></button>
+                    <li><button class="logout" href="LogoutServlet.java">Logout</button></li>
                 </form>
                 <%}%>
             </div>

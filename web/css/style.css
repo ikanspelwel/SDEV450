@@ -72,6 +72,12 @@
   }
 }
 
+.logout {
+    border: 0 none;
+    padding-top: 14px;    
+    background-color: #2180d6;
+}
+
 /* Form/Profile styles */
 
 .form-horizontal .checkbox {
