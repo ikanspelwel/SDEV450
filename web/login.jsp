@@ -36,20 +36,34 @@
                     <a href="passReset.html" id="resetPass">Forgot your password?</a>
                 </div>         
                 <div class="col-sm-12 col-md-6">         
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="AccountCreation" method="post">
                         <h2 class="register-heading">Need to make an account?</h2>
+                        <% if( request.getParameter("e3") != null ) { %>
+                        <h3 class="alert alert-danger">Email already in use.</h3>
+                        <% } %>
+                        <% if( request.getParameter("e4") != null ) { %>
+                        <h3 class="alert alert-danger">Unknown database error has occurred please try again later.</h3>
+                        <% } %>
+                        <% if( request.getParameter("e5") != null ) { %>
+                        <h3 class="alert alert-danger">Unknown Java error has occurred please try again later.</h3>
+                        <% } %>
                         <label for="fullName" class="control-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                        <input name="user" type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                        
                         <label for="zippCode" class="control-label">Zip Code</label>
-                        <input type="text" class="form-control" id="zipCode" placeholder="Zip Code" required>
+                        <input name="zip" type="text" class="form-control" id="zipCode" placeholder="Zip Code" required>
+                        
                         <label for="inputEmail" class="control-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                        <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                       
                         <label for="confirmEmail" class="control-label">Confirm Email</label>
-                        <input type="email" class="form-control" id="confirmEmail" placeholder="Confirm Email" required>
+                        <input name="emailConfirm" type="email" class="form-control" id="confirmEmail" placeholder="Confirm Email" required>
+                        
                         <label for="inputPassword" class="control-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                        <input name="pwd" nametype="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                        
                         <label for="confirmPassword" class="control-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                        <input name="pwdConfirm" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
                         <div class="checkbox">
                             <label><input type="checkbox"> Remember me</label>
                         </div>

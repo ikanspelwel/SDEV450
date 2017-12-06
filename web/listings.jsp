@@ -76,8 +76,6 @@
                                                     //out.print(String.format("%d",Image_id));
                                                     out.print("</td>");                                                    
                                                     out.print("</tr><tr>");
-                                                                
-                                                  
                                                 } 
                                            }else {
                                                 out.print("<td align=\"center\">");

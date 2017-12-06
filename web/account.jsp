@@ -3,7 +3,11 @@
     Created on : Nov 19, 2017, 12:52:33 PM
     Author     : hack3
 --%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="Objects.Images"%>
+<%@page import="Database.ImageDB"%>
 <%@page import="Database.UserDB"%>
+<%@page import="Database.ListingDB" %>
 <%
     /* Instance of our userDB and user class */
     Database.UserDB userCheck = new UserDB();
@@ -54,19 +58,20 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <hr style="margin:5px 0 5px 0;">              
-                                    <div class="col-sm-5 col-xs-6" >Full Name:</div><div class="col-sm-7 col-xs-6 ">fName</div>
+                                    <div class="col-sm-5 col-xs-6" >Full Name:</div><div class="col-sm-7 col-xs-6 "> <% out.print(user.getFullName()); %> </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>                                                                 
-                                    <div class="col-sm-5 col-xs-6" >Email:</div><div class="col-sm-7">email@email.com</div>
+                                    <div class="col-sm-5 col-xs-6" >Email:</div><div class="col-sm-7"><% out.print(user.getEmail()); %></div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>                                    
-                                    <div class="col-sm-5 col-xs-6" >Date Joined:</div><div class="col-sm-7">11 Nov 201</div>                                    
+                                    <div class="col-sm-5 col-xs-6" >Date Joined:</div><div class="col-sm-7"><% out.print(user.getDateJoined()); %></div>                                    
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>                                    
-                                    <div class="col-sm-5 col-xs-6" >Zip Code:</div><div class="col-sm-7">12345</div>                                    
+                                    <div class="col-sm-5 col-xs-6" >Zip Code:</div><div class="col-sm-7"><% out.print(user.getZip()); %></div>                                    
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
-                                    <div class="col-sm-5 col-xs-6" >Password:</div><div class="col-sm-7">***********</div>                                    
+                                    <!-- <div class="col-sm-5 col-xs-6" >Password:</div><div class="col-sm-7"><% //out.print(user.getPassword()); %></div> -->
+                                    <div class="col-sm-5 col-xs-6" >Password:</div><div class="col-sm-7">*********</div> <!-- no need to show the password or even how long it is -->
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
                                 </div>
@@ -85,7 +90,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col col-xs-6">
-                                    <h3 class="panel-title"></i>Active Listings</h3>
+                                    <h3 class="panel-title"></i>Your Listings</h3>
                                 </div>                                
                             </div>
                         </div>
@@ -93,14 +98,47 @@
                             <table id="inboxTable" class="table table-bordered table-list">                                
                                 <tbody>
                                     <tr>
-                                        <td>Listing 1</td>
-                                        <td>Listing 2</td>
-                                        <td>Listing 3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Listing 4</td>
-                                        <td>Listing 5</td>
-                                        <td>Listing 6</td>
+                                        <%  
+                                            Database.ListingDB listingLookup = new ListingDB();
+                                            ImageDB imageLookup = new ImageDB();
+                                            int low = 0;
+                                            int high = 20;
+                                            try {
+                                                ArrayList<Objects.Listing> arrListing = listingLookup.inOrder(low, high);
+
+                                                if (!arrListing.isEmpty()) {
+                                                    for (int i = 0; i < arrListing.size(); i++) {
+                                                        // only display the postings associated with the user
+                                                        // we're doing it this way instead of reworking the ListingDB functions due to time/potenial recfactoring issues
+                                                        if(arrListing.get(i).getUid() == user.getUid()) {
+                                                            String title = arrListing.get(i).getListingTitle();
+                                                            String desc = arrListing.get(i).getDescription();
+                                                            int listing_id = arrListing.get(i).getListingid();
+                                                            Images image = imageLookup.getImage(listing_id);
+                                                            request.setAttribute("listing_id", "1");
+                                                            out.print("<td align=\"center\">");
+                                                            out.print("<div class=\"thumbnail\">");
+                                                            if (image != null) {
+                                                                out.print(String.format("<img src=\"ListingServlet?listing_id=%d\"", listing_id));
+                                                                out.print("style=\"width:25%\"/>");
+                                                            }
+                                                            out.print("</div>");
+                                                            // print out the post title and description
+                                                            out.print(String.format("<strong>%s:</strong> %s", title, desc));
+                                                            out.print("</td>");
+                                                            out.print("</tr><tr>");
+                                                        }
+                                                    }
+                                                } else {
+                                                    out.print("<td align=\"center\">");
+                                                    out.print("no listing found");
+                                                    out.print("</td>");
+                                                }
+                                            } catch (SQLException e) {
+                                                //TODO Report error
+                                                System.out.printf("DB Connection failed: %s\n", e.getMessage());
+								    }%>
+
                                     </tr>
                                 </tbody>
                             </table>        

@@ -85,7 +85,7 @@ public class AccountCreation extends HttpServlet {
             userCookie.setMaxAge(30 * 60);
             response.addCookie(userCookie);
             //Get the encoded URL string
-            String encodedURL = response.encodeRedirectURL("/DirectSell450/profile.html");
+            String encodedURL = response.encodeRedirectURL("/DirectSell450/account.jsp");
             response.sendRedirect(encodedURL);
 	} else {
             // TODO deal with error that is not SQLException or IllegalArgumentException

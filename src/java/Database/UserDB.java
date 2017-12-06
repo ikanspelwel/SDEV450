@@ -21,7 +21,7 @@ public class UserDB extends BaseDBFunctions {
      * @return true if user exists false otherwise.
      * @throws SQLException
      */
-    private boolean accountExists(String email) throws SQLException {
+    public boolean accountExists(String email) throws SQLException {
         try {
             /* Setup a perpared statement */
             this.preparedStmt = this.con.prepareStatement(
