@@ -61,9 +61,12 @@
                     <table id="inboxTable" class="table table-striped table-bordered table-list">
                         <thead>
                             <tr>
-                                <th class="col-check visible-md visible-lg"><input type="checkbox" id="checkAll" title="Check All"/><a class="btn btn-danger pull-right visible-md visible-lg" 
-                                                                                                                                       title="Delete" id="trash"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-
+                                <% if(allMessages.size() == 0) { %>
+                                    <th class="col-text">None...</th>
+                                <% } else { %>
+                                <th class="col-check visible-md visible-lg">
+                                    <input type="checkbox" id="checkAll" title="Check All"/>
+                                    <a class="btn btn-danger pull-right visible-md visible-lg"  title="Delete" id="trash"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                     <!-- JQuery to check all checkboxes -->
                                     <script>
                                         $("#checkAll").click(function () {
@@ -75,6 +78,7 @@
                                 <th class="col-text visible-md visible-lg">Date</th>
                                 <th class="col-text visible-md visible-lg">Item</th>
                                 <th class="col-text">Message</th>
+                                <% } %>
                             </tr>
                         </thead>
                         <tbody>

@@ -4,6 +4,7 @@ import Objects.Messages;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * @Course: SDEV 250 ~ Java Programming I
@@ -67,7 +68,7 @@ public class MessagesDB extends BaseDBFunctions {
 
             case "Trash":
                 // FK_RECEIVER_ID or FK_SENDER_ID
-                selectStatement += "`FK_RECEIVER_ID` = ? OR `FK_SENDER_ID` = ? "
+                selectStatement += "(`FK_RECEIVER_ID` = ? OR `FK_SENDER_ID` = ?) "
                         + "AND `DELETED` = 1";
                 break;
 
@@ -101,10 +102,10 @@ public class MessagesDB extends BaseDBFunctions {
                 Objects.Messages newMessage = new Messages(rs.getInt("MESSAGE_ID"),
                         rs.getInt("FK_SENDER_ID"), rs.getInt("FK_RECEIVER_ID"),
                         rs.getInt("LISTING_REF"), rs.getInt("FLAG_READ"),
-                        rs.getString("MESSAGE_TEXT"), rs.getDate("DATE_SENT"),
+                        HtmlUtils.htmlEscape(rs.getString("MESSAGE_TEXT")), rs.getDate("DATE_SENT"),
                         rs.getInt("DELETED"));
                 
-                newMessage.listingTitle = rs.getString("LISTING_TITLE");
+                newMessage.listingTitle = HtmlUtils.htmlEscape(rs.getString("LISTING_TITLE"));
                 
                 /* Add all messages in the ArrayList. */
                 allMessages.add(newMessage);
