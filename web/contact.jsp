@@ -13,9 +13,7 @@
                     <form class="form-horizontal" action="Contact" method="post">
                         <h2 class="signin-heading">Question or concern?  Let us know!</h2>
                         <label for="inputEmail" class="control-label">Email</label>
-                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required><br>
-                        <label for="pw" class="control-label">Password</label>
-                        <input type="password" name="pw" class="form-control" id="pw" placeholder="Password" required><br>
+                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required><br>                        
                         <label for="inputSubject" class="control-label">Subject</label>
                         <input type="text" name="subject" class="form-control" id="inputSubject" placeholder="Subject" required><br>
                         <label for="comment" class="control-label">Comment:</label>
