@@ -43,7 +43,6 @@
 %>
 <%@include file="header.jsp" %>
 <%@include file="navbar.jsp" %>
-<%@include file="footer.jsp" %>
 <!-- Add inbox header, mail options and messages -->
 <!-- Credit for panel idea goes to harogaston @ https://bootsnipp.com/snippets/ORE6d -->
 <div class="container">            
@@ -122,5 +121,7 @@
         </div>
     </div>
 </div>
+
+<%@include file="footer.jsp" %>
 </body>
 </html>

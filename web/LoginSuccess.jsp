@@ -40,7 +40,7 @@ use something very similar to this in different code.
                 response.sendRedirect("/DirectSell450/login.jsp?e1=true");
             } else {
                 //Redirects user to profile page if login successful
-                response.sendRedirect("/DirectSell450/profile.html");
+                response.sendRedirect("/DirectSell450/account.jsp");
             }
         %>
     </body>

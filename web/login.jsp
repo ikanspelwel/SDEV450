@@ -33,7 +33,7 @@
                         </div>
                         <button class="btn btn-primary" type="submit" id="loginSubmit">Sign in</button>
                      </form><br>
-                    <a href="passReset.html" id="resetPass">Forgot your password?</a>
+                    <a href="passReset.jsp" id="resetPass">Forgot your password?</a>
                 </div>         
                 <div class="col-sm-12 col-md-6">         
                     <form class="form-horizontal" action="AccountCreation" method="post">
