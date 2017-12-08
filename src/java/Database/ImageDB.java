@@ -1,5 +1,6 @@
 /**
- * Base Stub by Allison, expansion and DB integration by Adam Ring.
+ * Base Stub by Allison, expansion and DB integration by Adam Ring.  
+ * getImages and lookupImage by Kyle holmes
  */
 package Database;
 
@@ -42,18 +43,16 @@ public class ImageDB extends BaseDBFunctions {
         }
 
     }
-    public Images getImage(int listing_id) throws SQLException {
+    public Images getImages(int image_id) throws SQLException {
         Images image = new Images();
         try{
             this.preparedStmt = this.con.prepareStatement(
                     "SELECT * FROM `IMAGES` "
-                            + "WHERE `FK_LISTING_ID` =? "
-                            + "ORDER BY `IMAGE_ID` ASC "
-            + "LIMIT 1");
+                            + "WHERE `IMAGE_ID` =? ");
             /**
              * Safely add the limits into the statement in replacement of the question mark
              */
-           this.preparedStmt.setInt(1, listing_id);
+           this.preparedStmt.setInt(1, image_id);
            /* Safely execute the statement */
            this.rs = this.preparedStmt.executeQuery();
     
@@ -80,23 +79,45 @@ public class ImageDB extends BaseDBFunctions {
     
         return image;
     }
-
-    /*
-   
-    String imageName;
-
-    ImageDB(String file) {
-        imageName = file;
-    }
-
-    public BufferedImage getImage() {
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File(imageName));
-        } catch (IOException e) {
+    
+    public ArrayList<Integer> lookupImage(int listing_id) throws SQLException {
+        ArrayList<Integer> arrImage = new ArrayList<>();
+        Images image = new Images();
+        try{
+            this.preparedStmt = this.con.prepareStatement(
+                    "SELECT * FROM `IMAGES` "
+                            + "WHERE `FK_LISTING_ID` =? ");
+            /**
+             * Safely add the limits into the statement in replacement of the question mark
+             */
+           this.preparedStmt.setInt(1, listing_id);
+           /* Safely execute the statement */
+           this.rs = this.preparedStmt.executeQuery();
+    
+           /* Returns true if a result was found, false if not */
+         /*  for (int i=0; i<high-low;i++) {*/
+          /* int i=0;*/
+           while (rs.next()) {
+               /*Store everything in a new listing instince. */
+               image = new Objects.Images(rs.getInt("IMAGE_ID"), rs.getInt("FK_LISTING_ID"),
+                       rs.getString("IMAGE_TYPE"), rs.getString("IMAGE_METADATA"), rs.getBlob("IMAGE")
+                       );
+               arrImage.add(image.getImageid());
+               }
+          
+           
+               
+             /* i++;
+           }*/
+               
+           
+        } catch (SQLException e) {
+            throw e;
         }
-        return img;
+       
+    
+        return arrImage;
     }
 
-     */
+    
 } //End Class ImageDB

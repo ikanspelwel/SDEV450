@@ -1,4 +1,6 @@
-package Database;
+/**
+ * inOrder and getListing by Kyle Holmes
+ */package Database;
 
 //Imports
 import java.util.ArrayList;
@@ -75,9 +77,6 @@ public class ListingDB extends BaseDBFunctions {
 	    /* Safely execute the statement */
 	    this.rs = this.preparedStmt.executeQuery();
 
-	    /* Returns true if a result was found, false if not */
- /*  for (int i=0; i<high-low;i++) {*/
- /* int i=0;*/
 	    while (rs.next()) {
 		/*Store everything in a new listing instince. */
 		listing = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
@@ -94,6 +93,41 @@ public class ListingDB extends BaseDBFunctions {
 	}
 
 	return arrListing;
+    }
+    
+        //Pulls listings in order
+    public Listing getListing(int listing_id) throws SQLException {
+	Objects.Listing listing = null;
+	try {
+	    this.preparedStmt = this.con.prepareStatement(
+		    "SELECT * FROM `LISTINGS` "
+		    + "WHERE `LISTING_ID` = ? ");
+	    /**
+	     * Safely add the limits into the statement in replacement of the
+	     * question mark
+	     */
+	    this.preparedStmt.setInt(1, listing_id);
+	    /* Safely execute the statement */
+	    this.rs = this.preparedStmt.executeQuery();
+
+	    /* Returns true if a result was found, false if not */
+ /*  for (int i=0; i<high-low;i++) {*/
+ /* int i=0;*/
+	    while (rs.next()) {
+		/*Store everything in a new listing instince. */
+		listing = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
+			rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), rs.getString("LISTING_TITLE"),
+			rs.getString("DESCRIPTION"), rs.getString("CATEGORY")
+		);
+		}
+
+	    /* i++;
+           }*/
+	} catch (SQLException e) {
+	    throw e;
+	}
+
+	return listing;
     }
 
     //Inserts new user information into database 

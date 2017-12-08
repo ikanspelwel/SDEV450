@@ -1,29 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Servlet created by Kyle Holmes
  */
 package Servlets;
+
 import Database.ImageDB;
-import Database.ListingDB;
 import java.sql.Blob;
 import Objects.Images;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author kmh5004
+ * @author Kyle Holmes
  */
 @WebServlet("/ListingServlet/*")
 public class ListingServlet extends HttpServlet {
@@ -39,39 +33,26 @@ public class ListingServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*
-        Database.ListingDB listingLookup = new ListingDB();
-        Objects.Listing listing = null;
-        try {
-        listing = listingLookup.inOrder(1,20);
-                } catch(SQLException e)  {
-                    //TODO Report error
-                }
-        if (listing != null) {
-            String title = listing.getListingTitle();
-            String desc = listing.getDescription();
-            response.getWriter();
-        }
-            */
+
         //Credit for below from Mohamed Saligh https://stackoverflow.com/questions/5243726/how-to-display-an-image-in-jsp
-        
-        ImageDB imageLookup= new ImageDB();
-        try{
-        Images image = imageLookup.getImage(Integer.parseInt(request.getParameter("listing_id")));//return blob...
-        //From Timothy Groot https://stackoverflow.com/questions/6662432/easiest-way-to-convert-a-blob-into-a-byte-array
-        Blob blob = image.getImage();
-        int blobLength = (int) blob.length();
-        byte[] imgByt = blob.getBytes(1, blobLength);
+        ImageDB imageLookup = new ImageDB();
+        try {
+            int image_id = Integer.parseInt(request.getParameter("image_id"));
+            Images image = imageLookup.getImages(image_id);
+            
+            //From Timothy Groot https://stackoverflow.com/questions/6662432/easiest-way-to-convert-a-blob-into-a-byte-array
+            Blob blob = image.getImage();
+            int blobLength = (int) blob.length();
+            byte[] imgByt = blob.getBytes(1, blobLength);
 
 //release the blob and free up memory. (since JDBC 4.0)
-blob.free();
-response.setContentType("image/jpg");
-response.getOutputStream().write(imgByt);
-response.getOutputStream().flush();
-response.getOutputStream().close();
-        }
-        catch (SQLException e) {
-            
+            blob.free();
+            response.setContentType("image/" + image.getImageType());
+            response.getOutputStream().write(imgByt);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+        } catch (SQLException e) {
+
         }
     }
 

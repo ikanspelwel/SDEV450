@@ -1,3 +1,7 @@
+/**
+ * Kyle Holmes added the gets
+ */
+
 package Objects;
 
 import java.sql.Blob;

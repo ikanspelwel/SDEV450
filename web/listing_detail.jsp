@@ -1,8 +1,8 @@
 <%-- 
-    Document   : listings
-    Created on : Nov 19, 2017, 1:47:29 PM
+    Document   : listing_detail
+    Created on : Dec 6, 2017, 9:19:18 PM
     Author     : Kyle Holmes
-    Notes      : java (starting line 48) created primarily by Kyle Holmes, with HTML taken from originally from Cody.
+    Notes      : Page created primarily by Kyle Holmes, with HTML taken from originally from Cody.  Copied mostly from listings page
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,8 +22,6 @@
     <body>
 
         <!-- Add listing header, listings -->
-        <!-- Style taken from inbox -->
-        <!-- Credit for panel idea goes to harogaston @ https://bootsnipp.com/snippets/ORE6d -->
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -44,38 +42,42 @@
                                     <tr>
 
 
-                                        <% Database.ListingDB listingLookup = new ListingDB();
+                                        <% //Setup DBs for lookup
+                                            Database.ListingDB listingLookup = new ListingDB();
                                         ImageDB imageLookup = new ImageDB();
-                                        /*do we have some way to get these values from the URL to determine how many appear on the page?
-                                           //it would be "listings.jsp?low=0&high=20"
-                                            int low = Integer.parseInt(request.getParameter("low"));
-                                            int high = Integer.parseInt(request.getParameter("high"));
-                                        */
-                                        //I'd like to delete these next 2 lines and use the ones above
-                                        int low=0;
-                                        int high=20;
+                                        //get listing_id from URL
+                                        int listing_id = Integer.parseInt(request.getParameter("listing_id"));
                                             try {
-                                                ArrayList<Objects.Listing> arrListing = listingLookup.inOrder(low, high);
-                                            ArrayList<Integer> imageIDs = null;
-                                           if(!arrListing.isEmpty()){
-                                                for (int i=0;i<arrListing.size();i++){
-                                                    String title = arrListing.get(i).getListingTitle();
-                                                    String desc = arrListing.get(i).getDescription();
-                                                    int listing_id = arrListing.get(i).getListingid();
-                                                    imageIDs = imageLookup.lookupImage(listing_id);
+                                                Objects.Listing listing = listingLookup.getListing(listing_id);
+                                                
+                                            ArrayList<Integer> imageIDs = imageLookup.lookupImage(listing_id);
+                                            
+                                            //make sure listing is not empty(unlikely if someone clicked on link)
+                                           if(listing!=null){
+                                                String title = listing.getListingTitle();
+                                                String desc = listing.getDescription();
+                                               out.print(String.format("<p><strong>%s:</strong></p><p> %s</p>", title, desc));
+                                                                                                       
+                                                    
+                                                    //Only execute below if images are present
+                                               if(!imageIDs.isEmpty()){
+                                                for (int i=0;i<imageIDs.size();i++){
+                                                    //this if statement should put 2 images per line.  We can take it out if there are issues
+                                                    if ((i & 1)==0){
+                                                        out.print("</tr><tr>");
+                                                    }
+                                                    //prints the images
+                                                    Images image=imageLookup.getImages(imageIDs.get(i));
+                                                    request.setAttribute("listing_id","1");
                                                     out.print("<td align=\"center\">");
                                                     out.print("<div class=\"thumbnail\">");
-                                                    if(!imageIDs.isEmpty()){
-                                                    out.print(String.format("<img src=\"ListingServlet?image_id=%d\"",imageIDs.get(0)));
-                                                    out.print("style=\"width:25%\"/>");
-                                                    out.print("</div>");
-                                                    }
-                                                    out.print(String.format("<a href=\"listing_detail.jsp?listing_id=%d\"><strong>%s:</strong> %s</a>", listing_id,title, desc));
-                                                    out.print("</td>");                                                    
-                                                    out.print("</tr><tr>");
-                                                    imageIDs.clear();
+                                                    if(image!=null){
+                                                    out.print(String.format("<img src=\"ListingServlet?image_id=%d\"",imageIDs.get(i)));//servlet to pull images
+                                                    out.print("style=\"width:40%\"/>");//images were too big before
+                                                    out.print("</div></td>");}}
+                                                    
                                                 } 
-                                           }else {
+                                           }else {//if for some reason no listing is found (if someone edits url directly)
                                                 out.print("<td align=\"center\">");
                                                 out.print("no listing found");
                                                 out.print("</td>");
