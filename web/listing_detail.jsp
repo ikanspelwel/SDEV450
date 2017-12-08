@@ -13,6 +13,8 @@
 <%@page import="javax.imageio.ImageIO" %>"
 
 <%@page import="Objects.Listing" %>
+<%@page import="java.text.SimpleDateFormat" %>
+
 <%@page import="Database.ImageDB" %>
 <%@page import="Objects.Images" %>
 <%@page import="java.sql.SQLException" %>
@@ -56,7 +58,8 @@
                                            if(listing!=null){
                                                 String title = listing.getListingTitle();
                                                 String desc = listing.getDescription();
-                                               out.print(String.format("<p><strong>%s:</strong></p><p> %s</p>", title, desc));
+                                                String date = new SimpleDateFormat("dd/MM/yyyy").format(listing.getDate());
+                                               out.print(String.format("<p><strong>%s:</strong></p><p> %s</p><p> Date Posted:%s</p>", title, desc,date));
                                                                                                        
                                                     
                                                     //Only execute below if images are present
