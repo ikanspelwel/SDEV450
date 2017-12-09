@@ -46,15 +46,6 @@ public class AccountCreation extends HttpServlet {
         String pwd = request.getParameter("pwd");
 	String pwdConfirm = request.getParameter("pwdConfirm");
         String zip = request.getParameter("zip");
-        
-	// TODO validate all the front end info
-        // verify all the user information because you cannot trust the front end
-	/*
-        if(userName.length() == 0){
-            // not valid
-            return;
-        }
-	*/
 
         /* Instance of our userDB and user class */
         Database.UserDB userCheck = new UserDB();

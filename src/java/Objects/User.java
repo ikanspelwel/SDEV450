@@ -13,6 +13,10 @@ import java.sql.Date;
 
 public class User {
 
+    public static String RandomSalt() {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private Integer uid;
     private String fullName;
     private String email;
