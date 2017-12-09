@@ -1,7 +1,7 @@
 <%-- 
     Document   : addListing
     Created on : Nov 18, 2017, 12:14:23 PM
-    Author     : ikanspelwel, modified to include required text fields by Adam Flammino
+    Author     : Adam Ring, modified to include required text fields by Adam Flammino and Cory Hack
 --%>
 
 
@@ -10,13 +10,34 @@
 <%@include file="navbar.jsp" %>
 <%@include file="footer.jsp" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>File Upload to Database Demo</title>
-    </head>
-    <body>
-    <center>
+<html>   
+    <body>        
+    
+        <!-- Add Listing Form -->
+        <div class="container">
+            <div class="row">         
+                <div class="col-xs-12">             
+                    <form class="form-horizontal">
+                        <h2>Add a new listing</h2>                        
+                        <label for="inputTitle" class="control-label">Listing Title:</label>
+                        <input type="text" class="form-control" id="inputTitle" placeholder="Listing Title..." required>
+                        <label for="inputDesc" class="control-label">Description:</label>
+                        <textarea class="form-control" rows="5" id="inputDesc" placeholder="Description..." required></textarea>
+                        <label for="inputCat" class="control-label">Category:</label>
+                        <input type="text" class="form-control" id="inputCat" placeholder="Category..." required>
+                        <label for="inputPrice" class="control-label">Price:</label>
+                        <input type="text" class="form-control" id="inputTitle" placeholder="Price..." required>
+                        <label for="inputFile" class="control-label">File:</label><br>
+                        <!--Browse button credit to Cory LaViska @ https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3 -->
+                        <label class="btn btn-default btn-file">Browse...<input type="file"></label><br>
+                        <br><input href="listings.jsp" class="btn btn-primary btn-lg" type="submit" value="Submit" id="listingsSubmit"></input>
+                        <a href="listings.jsp" class="btn btn-warning btn-lg" type="button" id="emailCancel">Cancel</a>
+                    </form><br>                    
+                </div>
+            </div>
+        </div>
+
+<!--    <center>
         <h2>Add a new listing</h2>
         <form method="post" action="AddListing" enctype="multipart/form-data">
             <table border="0">
@@ -83,6 +104,6 @@
                 </tr>
             </table>
         </form>
-    </center>
-</body>
+    </center>-->
+    </body>
 </html>

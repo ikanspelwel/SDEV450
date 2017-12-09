@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="nav navbar-nav">                        
                     <li><a href="listings.jsp">Listings</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.jsp">About</a></li>
                     <li><a href="contact.jsp">Contact</a></li>
                     <li><a href="account.jsp">Account</a></li>
                     <li class="dropdown">

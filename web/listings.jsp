@@ -2,7 +2,7 @@
     Document   : listings
     Created on : Nov 19, 2017, 1:47:29 PM
     Author     : Kyle Holmes
-    Notes      : java (starting line 48) created primarily by Kyle Holmes, with HTML taken from originally from Cody.
+    Notes      : java (starting line 48) created primarily by Kyle Holmes, with HTML taken from originally from Cory.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col col-xs-6">
                                     <button href="profile.html" class="btn btn-primary" type="submit" id="loginSubmit">Listings</button>
-                                    <button href="profile.html" class="btn btn-primary" type="submit" id="addListing"><a href = addListing.jsp>New Listing</a></button>
+                                    <a href="addListing.jsp" class="btn btn-primary" role="button" id="addListing">New Listing</a>
                                 </div>                                
                             </div>
                         </div>
@@ -92,16 +92,6 @@
                     </div>
                 </div>
             </div>            
-        </div>
-        <!-- Add footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-text">
-                        <p>Copyright &copy; &ndash; All Rights Reserved 2017</p>
-                    </div>                    
-                </div>
-            </div>
-        </footer>
+        </div>        
     </body>
 </html>
