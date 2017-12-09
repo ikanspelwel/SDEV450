@@ -10,8 +10,7 @@
 <%@include file="navbar.jsp" %>
 <%@include file="footer.jsp" %>
 <%@page import="Database.ListingDB" %>
-<%@page import="javax.imageio.ImageIO" %>"
-
+<%@page import="javax.imageio.ImageIO" %>
 <%@page import="Objects.Listing" %>
 <%@page import="Database.ImageDB" %>
 <%@page import="Objects.Images" %>
