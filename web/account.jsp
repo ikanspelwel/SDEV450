@@ -41,14 +41,14 @@
 <!DOCTYPE html>
 <html>    
     <body>
-        
+
         <!-- Profile panel; Idea credit for panel: https://bootsnipp.com/snippets/nPvnk -->
         <div class="container">
             <div class="row">                       
                 <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading"><h4 >User Profile <button class="btn btn-default pull-right" title="Edit Profile" id="edit"><span <i class="fa fa-pencil"
-                                aria-hidden="true" ></i></span></button></h4>
+                                                                                                                                                        aria-hidden="true" ></i></span></button></h4>
                         </div>
                         <div class="panel-body">       
                             <div class="box box-info">        
@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Panel display for active listings table-->
         <div class="container">            
             <div class="row">
@@ -101,32 +101,30 @@
                                         <%  
                                             Database.ListingDB listingLookup = new ListingDB();
                                             ImageDB imageLookup = new ImageDB();
+
                                             int low = 0;
                                             int high = 20;
                                             try {
                                                 ArrayList<Objects.Listing> arrListing = listingLookup.inOrder(low, high);
-
+                                                ArrayList<Integer> imageIDs = null;
                                                 if (!arrListing.isEmpty()) {
                                                     for (int i = 0; i < arrListing.size(); i++) {
-                                                        // only display the postings associated with the user
-                                                        // we're doing it this way instead of reworking the ListingDB functions due to time/potenial recfactoring issues
-                                                        if(arrListing.get(i).getUid() == user.getUid()) {
+                                                        if (arrListing.get(i).getUid() == user.getUid()) {
                                                             String title = arrListing.get(i).getListingTitle();
                                                             String desc = arrListing.get(i).getDescription();
                                                             int listing_id = arrListing.get(i).getListingid();
-                                                            Images image = imageLookup.getImage(listing_id);
-                                                            request.setAttribute("listing_id", "1");
+                                                            imageIDs = imageLookup.lookupImage(listing_id);
                                                             out.print("<td align=\"center\">");
                                                             out.print("<div class=\"thumbnail\">");
-                                                            if (image != null) {
-                                                                out.print(String.format("<img src=\"ListingServlet?listing_id=%d\"", listing_id));
+                                                            if (!imageIDs.isEmpty()) {
+                                                                out.print(String.format("<img src=\"ListingServlet?image_id=%d\"", imageIDs.get(0)));
                                                                 out.print("style=\"width:25%\"/>");
+                                                                out.print("</div>");
                                                             }
-                                                            out.print("</div>");
-                                                            // print out the post title and description
-                                                            out.print(String.format("<strong>%s:</strong> %s", title, desc));
+                                                            out.print(String.format("<a href=\"listing_detail.jsp?listing_id=%d\"><strong>%s:</strong> %s</a>", listing_id, title, desc));
                                                             out.print("</td>");
                                                             out.print("</tr><tr>");
+                                                            imageIDs.clear();
                                                         }
                                                     }
                                                 } else {
@@ -137,7 +135,8 @@
                                             } catch (SQLException e) {
                                                 //TODO Report error
                                                 System.out.printf("DB Connection failed: %s\n", e.getMessage());
-								    }%>
+                                            }
+                                        %>
 
                                     </tr>
                                 </tbody>
@@ -147,7 +146,7 @@
                 </div>
             </div>            
         </div>
-        
+
         <!-- Modal for use with edit profile button -->
         <div id="editModal" class="modal fade">
             <div class="modal-dialog">
@@ -156,34 +155,38 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Edit Profile</h4>
                     </div>
-                    <form class="modal-form">
+                    <form class="modal-form" action="AccountUpdate" method="post">
                         <div class="form-group">
-                          <label for="fullName">Full Name</label>
-                          <input type="text" class="form-control" id="fullName" placeholder="User's current full name">
+                            <label for="fullName">Full Name</label>
+                            <input name="fullName" type="text" class="form-control" id="fullName" placeholder="User's current full name">
                         </div>
                         <div class="form-group">
-                          <label for="email">Email address</label>
-                          <input type="email" class="form-control" id="email" placeholder="Users current email">
+                            <label for="email">Email address</label>
+                            <input name="email" type="email" class="form-control" id="email" placeholder="Users current email">
                         </div>
                         <div class="form-group">
-                          <label for="zipCode">Zip Code</label>
-                          <input type="text" class="form-control" id="zipCode" placeholder="Users current zip code">
+                            <label for="zipCode">Zip Code</label>
+                            <input name="zipCode" type="text" class="form-control" id="zipCode" placeholder="Users current zip code">
                         </div>
                         <div class="form-group">
-                          <label for="password">Password</label>
-                          <input type="password" class="form-control" id="password" placeholder="**********">
-                        </div>                
-                    </form>
-                    <div class="modal-footer">
-                        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Cancel</button>
-                            </div>                            
-                            <div class="btn-group" role="group">
-                                <button type="button" id="submit" class="btn btn-default btn-hover-green" data-action="save" role="button">Submit</button>
+                            <label for="password">Old Password</label>
+                            <input name="oldPwd" type="password" class="form-control" id="oldPwd" placeholder="**********">
+                        </div>  
+                        <div class="form-group">
+                            <label for="password">New Password</label>
+                            <input name="newPwd" type="password" class="form-control" id="newPwd" placeholder="**********">
+                        </div>    
+                        <div class="modal-footer">
+                            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Cancel</button>
+                                </div>                            
+                                <div class="btn-group" role="group">
+                                    <button type="submit" id="submit" class="btn btn-default btn-hover-green" data-action="save" role="button">Submit</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div
