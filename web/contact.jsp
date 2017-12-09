@@ -18,12 +18,11 @@
                         <input type="text" name="subject" class="form-control" id="inputSubject" placeholder="Subject" required><br>
                         <label for="comment" class="control-label">Comment:</label>
                         <textarea class="form-control" name="message" rows="5" id="inputComment" placeholder="Comment..." required></textarea><br>
-                        <button class="btn btn-primary btn-lg" type="submit" id="contactSubmit"><a href="#">Submit</a></button>
-                    </form>                    
+                        <button href="#" class="btn btn-primary btn-lg" type="submit" id="contactSubmit">Submit</button>
+                    </form><br>                   
                 </div>
             </div>
         </div>
-<%@include file="footer.jsp" %>
     </body>
 </html>
 
