@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Direct Sell!</a>
+                <a class="navbar-brand" href="index.jsp">Direct Sell!</a>
             </div>
 
             <!-- Navigation links and forms -->
