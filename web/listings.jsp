@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col col-xs-6">
                                     <button href="profile.html" class="btn btn-primary" type="submit" id="loginSubmit">Listings</button>
-                                    <button href="profile.html" class="btn btn-primary" type="submit" id="loginSubmit">New Listing</button>
+                                    <button href="profile.html" class="btn btn-primary" type="submit" id="addListing"><a href = addListing.jsp>New Listing</a></button>
                                 </div>                                
                             </div>
                         </div>
