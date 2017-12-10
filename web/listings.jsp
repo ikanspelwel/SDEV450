@@ -29,8 +29,7 @@
                     <div class="panel panel-default panel-table">
                         <div class="panel-heading">
                             <div class="row">
-                                <div class="col col-xs-6">
-                                    <button href="profile.html" class="btn btn-primary" type="submit" id="loginSubmit">Listings</button>
+                                <div class="col col-xs-6">                                    
                                     <a href="addListing.jsp" class="btn btn-primary" role="button" id="addListing">New Listing</a>
                                 </div>                                
                             </div>
@@ -41,7 +40,6 @@
                             <table id="listingTable" class="table  table-responsive table-striped table-bordered table-list">
                                 <tbody>
                                     <tr>
-
 
                                         <% Database.ListingDB listingLookup = new ListingDB();
                                         ImageDB imageLookup = new ImageDB();

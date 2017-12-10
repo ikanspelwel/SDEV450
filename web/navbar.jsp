@@ -35,15 +35,7 @@
                             <li class="divider"></li>
                             <li><a href="trash.jsp">Trash</a></li>
                         </ul>
-                    </li>
-                    <form class="navbar-form navbar-left">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </div>
-                    </form>
+                    </li>                    
                 </ul>
                 <%
                     if (session.getAttribute("UID") == null) { %>

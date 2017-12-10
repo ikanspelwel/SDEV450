@@ -2,7 +2,7 @@
     Document   : index
     Created on : Dec 9, 2017, 11:20:00 AM
     Author     : Cory Hack
-    Notes      : Home page of site in jsp
+    Notes      : Home page of the site in jsp
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
