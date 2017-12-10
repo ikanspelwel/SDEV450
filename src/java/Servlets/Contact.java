@@ -36,8 +36,7 @@ public class Contact extends HttpServlet {
             String msg = request.getParameter("message");
             if (from != null && subj != null && msg != null) {
                 Properties properties = new Properties();
-                properties.put("mail.smtp.host", "smtp."
-                        + from.substring(from.lastIndexOf("@") + 1)); //finds mail server
+                properties.put("mail.smtp.host", "smtp.gmail.com");
                 properties.put("mail.smtp.starttls.enable", "true");
                 properties.setProperty("mail.smtp.auth", "true");
 
