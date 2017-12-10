@@ -64,7 +64,7 @@ public class UserDB extends BaseDBFunctions {
 		throw new IllegalArgumentException("Account already exists.");
 	    } else {
 		/* Create the salted hashed password. */
-		String salt = Objects.User.RadomSalt();
+		String salt = Objects.User.RandomSalt();
 		String hashedPass = Objects.User.HashPassword(password, salt);
 		Date now = new java.sql.Date(System.currentTimeMillis());
 
