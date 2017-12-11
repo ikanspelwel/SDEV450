@@ -27,9 +27,9 @@
                         <input type="text" class="form-control" id="inputCat" name="inputCat" placeholder="Category..." required>
                         <label for="inputPrice" class="control-label" id="inputPrice">Price:</label>
                         <input type="text" class="form-control" id="inputTitle" name="inputPrice" placeholder="Price..." required>
-                        <label for="inputFile" class="control-label">File:</label><br>
+                        <label for="inputFile" class="control-label">Image (JPEG ONLY): </label><br>
                         <!--Browse button credit to Cory LaViska @ https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3 -->
-                        <label class="btn btn-default btn-file">Browse...<input type="file"></label><br>
+                        <label class="btn btn-default btn-file">Browse...<input type="file" name="image"></label><br>
                         <br><input href="listings.jsp" class="btn btn-primary btn-lg" type="submit" value="Save" id="listingsSubmit"></input>
                         <a href="listings.jsp" class="btn btn-warning btn-lg" type="button" id="emailCancel">Cancel</a>
                     </form><br>                    
