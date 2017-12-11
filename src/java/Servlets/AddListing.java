@@ -52,27 +52,7 @@ public class AddListing extends HttpServlet {
         Double dblPrice = null;
         int uid = 2;  // Account.jsp is currently broken- this will have to be changed when it is fixed.
         
-        // Redirects if fields are left blank 
-        if("".equals(title) || "".equals(description) || "".equals(category)||"".equals(strPrice)){
-           try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Add Listing </title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Error!</h1>");
-                out.println("<pre>");
-                out.println("All fields required, redirecting to add listing page"
-                        + " in 5 seconds..");
-                out.println("<a href = addListing.jsp>Try Again Now.</a>");
-                out.println("<meta http-equiv=\"refresh\" content=\"5; url=/DirectSell450/addListing.jsp\" />");
-                out.println("</pre>");
-                out.println("</body>");
-                out.println("</html>");
-            }
-        }
+      
         
         // redirects if price isn't a digit
         try{

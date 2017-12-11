@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import Objects.Listing;
 import java.sql.Date;
+import java.sql.ResultSet;
 //Begin Class User
 
 public class ListingDB extends BaseDBFunctions {
@@ -144,7 +145,7 @@ public class ListingDB extends BaseDBFunctions {
      * @throws SQLException
      * @throws IllegalArgumentException
      */
-    public void newListing(String title, String description,
+    public int newListing(String title, String description,
             String category, int uid, double price) throws SQLException {
 
         try {
@@ -170,6 +171,13 @@ public class ListingDB extends BaseDBFunctions {
             this.preparedStmt.setDouble(6, price);
 
             this.preparedStmt.executeUpdate();
+            this.rs = preparedStmt.getGeneratedKeys();
+            int listingID = -1;
+            if (rs.next()) {
+               listingID = rs.getInt(1); 
+            }
+            
+            return listingID;
         } catch (SQLException e) {
             throw e;
         }
