@@ -45,10 +45,10 @@ public class AddListing extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         // gets values of text fields
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String category = request.getParameter("category");
-        String strPrice = (request.getParameter("price"));
+        String title = request.getParameter("inputTitle");
+        String description = request.getParameter("inputDesc");
+        String category = request.getParameter("inputCat");
+        String strPrice = (request.getParameter("inputPrice"));
         Double dblPrice = null;
         int uid = 2;  // Account.jsp is currently broken- this will have to be changed when it is fixed.
         

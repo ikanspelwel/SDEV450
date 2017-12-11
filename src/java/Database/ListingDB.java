@@ -153,7 +153,7 @@ public class ListingDB extends BaseDBFunctions {
             /* Setup a perpared statement */
             this.preparedStmt = this.con.prepareStatement(
                     "INSERT INTO `LISTINGS` "
-                    + "(`TITLE`, `DESCRIPTION`, `CATEGORY`,`FK_UID`, `DATE_POSTED`, `PRICE`) "
+                    + "(`LISTING_TITLE`, `DESCRIPTION`, `CATEGORY`,`FK_UID`, `DATE_POSTED`, `PRICE`) "
                     + "VALUES (?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );

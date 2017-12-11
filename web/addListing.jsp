@@ -17,20 +17,20 @@
         <div class="container">
             <div class="row">         
                 <div class="col-xs-12">             
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post" action="AddListing" enctype="multipart/form-data">
                         <h2>Add a new listing</h2>                        
                         <label for="inputTitle" class="control-label">Listing Title:</label>
-                        <input type="text" class="form-control" id="inputTitle" placeholder="Listing Title..." required>
+                        <input type="text" class="form-control" id="inputTitle" name="inputTitle" placeholder="Listing Title..." required>
                         <label for="inputDesc" class="control-label">Description:</label>
-                        <textarea class="form-control" rows="5" id="inputDesc" placeholder="Description..." required></textarea>
+                        <textarea class="form-control" rows="5" id="inputDesc" name="inputDesc" placeholder="Description..." required></textarea>
                         <label for="inputCat" class="control-label">Category:</label>
-                        <input type="text" class="form-control" id="inputCat" placeholder="Category..." required>
-                        <label for="inputPrice" class="control-label">Price:</label>
-                        <input type="text" class="form-control" id="inputTitle" placeholder="Price..." required>
+                        <input type="text" class="form-control" id="inputCat" name="inputCat" placeholder="Category..." required>
+                        <label for="inputPrice" class="control-label" id="inputPrice">Price:</label>
+                        <input type="text" class="form-control" id="inputTitle" name="inputPrice" placeholder="Price..." required>
                         <label for="inputFile" class="control-label">File:</label><br>
                         <!--Browse button credit to Cory LaViska @ https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3 -->
                         <label class="btn btn-default btn-file">Browse...<input type="file"></label><br>
-                        <br><input href="listings.jsp" class="btn btn-primary btn-lg" type="submit" value="Submit" id="listingsSubmit"></input>
+                        <br><input href="listings.jsp" class="btn btn-primary btn-lg" type="submit" value="Save" id="listingsSubmit"></input>
                         <a href="listings.jsp" class="btn btn-warning btn-lg" type="button" id="emailCancel">Cancel</a>
                     </form><br>                    
                 </div>
