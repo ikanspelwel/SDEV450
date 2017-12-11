@@ -58,6 +58,7 @@
                                                 for (int i=0;i<arrListing.size();i++){
                                                     String title = arrListing.get(i).getListingTitle();
                                                     String desc = arrListing.get(i).getDescription();
+                                                    double price = arrListing.get(i).getPrice();
                                                     int listing_id = arrListing.get(i).getListingid();
                                                     imageIDs = imageLookup.lookupImage(listing_id);
                                                     out.print("<td align=\"center\">");
@@ -67,7 +68,7 @@
                                                     out.print("style=\"width:25%\"/>");
                                                     out.print("</div>");
                                                     }
-                                                    out.print(String.format("<a href=\"listing_detail.jsp?listing_id=%d\"><strong>%s:</strong> %s</a>", listing_id,title, desc));
+                                                    out.print(String.format("<a href=\"listing_detail.jsp?listing_id=%d\"><strong>%s($%.2f):</strong> %s</a>", listing_id,title, price, desc));
                                                     out.print("</td>");                                                    
                                                     out.print("</tr><tr>");
                                                     imageIDs.clear();
