@@ -58,9 +58,10 @@
                                                 //make sure listing is not empty(unlikely if someone clicked on link)
                                                 if (listing != null) {
                                                     String title = listing.getListingTitle();
+                                                    double price = listing.getPrice();
                                                     String desc = listing.getDescription();
                                                     String date = new SimpleDateFormat("dd/MM/yyyy").format(listing.getDate());
-                                                    out.print(String.format("<p><strong>%s:</strong></p><p> %s</p><p> Date Posted:%s</p>", title, desc, date));
+                                                    out.print(String.format("<p><strong>%s($%.2f):</strong></p><p> %s</p><p> Date Posted:%s</p>", title, price, desc, date));
 
                                                     //Only execute below if images are present
                                                     if (!imageIDs.isEmpty()) {
