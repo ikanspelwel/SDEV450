@@ -9,6 +9,7 @@ import Database.ImageDB;
 import Database.ListingDB;
 import Objects.Listing;
 import Objects.User;
+import Database.UserDB;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -21,6 +22,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -43,6 +45,7 @@ public class AddListing extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         
         // gets values of text fields
         String title = request.getParameter("inputTitle");
@@ -50,7 +53,7 @@ public class AddListing extends HttpServlet {
         String category = request.getParameter("inputCat");
         String strPrice = (request.getParameter("inputPrice"));
         Double dblPrice = null;
-        int uid = 2;  // Account.jsp is currently broken- this will have to be changed when it is fixed.
+        int uid = (int) session.getAttribute("UID");
         
       
         
@@ -113,7 +116,7 @@ public class AddListing extends HttpServlet {
                 out.println("<body>");
                 out.println("<h1>Listing added successfully!</h1>");
                 out.println("<pre>");
-                out.println("Redirecting to listing in 5 seconds");
+                out.println("Redirecting to Index");
                 out.println("<a href = index.html>Return to index now.</a>");
                 out.println("<meta http-equiv=\"refresh\" content=\"0; url=/DirectSell450/index.html\" />");
                 out.println("</pre>");

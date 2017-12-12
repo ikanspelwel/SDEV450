@@ -2,9 +2,35 @@
     Document   : addListing
     Created on : Nov 18, 2017, 12:14:23 PM
     Author     : Adam Ring, modified to include required text fields by Adam Flammino and Cory Hack
+                interaction with other files fixed by Adam Flammino
 --%>
 
+<%@page import="Database.UserDB"%>
+<%
+    /* Instance of our userDB and user class */
+    Database.UserDB userCheck = new UserDB();
+    Objects.User user = null;
 
+    //Allow access only if user exists
+    Integer uID = null;
+    if (session.getAttribute("UID") == null) {
+        response.sendRedirect("/DirectSell450/login.jsp?e2=true");
+        throw new javax.servlet.jsp.SkipPageException();
+    } else {
+        uID = (Integer) session.getAttribute("UID");
+        user = userCheck.GetUser(uID);
+        if (user == null) {
+            /*
+            If user is null, then that user ID wasn't found. Something very 
+            fishy there, as this shouldn't really happen, but just going to 
+            reset the UID session var and kick them out to the login screen. 
+             */
+            session.setAttribute("UID", null);
+            response.sendRedirect("/DirectSell450/login.jsp?e2=true");
+            throw new javax.servlet.jsp.SkipPageException();
+        }
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
 <%@include file="navbar.jsp" %>
@@ -19,6 +45,7 @@
                 <div class="col-xs-12">             
                     <form class="form-horizontal" method="post" action="AddListing" enctype="multipart/form-data">
                         <h2>Add a new listing</h2>                        
+                        <input type ="hidden" name="uid" value=uID)>
                         <label for="inputTitle" class="control-label">Listing Title:</label>
                         <input type="text" class="form-control" id="inputTitle" name="inputTitle" placeholder="Listing Title..." required>
                         <label for="inputDesc" class="control-label">Description:</label>
