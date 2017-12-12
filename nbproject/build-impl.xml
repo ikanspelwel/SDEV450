@@ -1323,7 +1323,7 @@ exists or setup the property manually. For example like this:
         </copy>
     </target>
     <target depends="init,javadoc-build" if="netbeans.home" name="javadoc-browse" unless="no.javadoc.preview">
-        <nbbrowse file="${dist.javadoc.dir}/index.html"/>
+        <nbbrowse file="${dist.javadoc.dir}/index.jsp"/>
     </target>
     <target depends="init,javadoc-build,javadoc-browse" description="Build Javadoc." name="javadoc"/>
     <!--

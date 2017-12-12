@@ -117,8 +117,8 @@ public class AddListing extends HttpServlet {
                 out.println("<h1>Listing added successfully!</h1>");
                 out.println("<pre>");
                 out.println("Redirecting to Index");
-                out.println("<a href = index.html>Return to index now.</a>");
-                out.println("<meta http-equiv=\"refresh\" content=\"0; url=/DirectSell450/index.html\" />");
+                out.println("<a href = index.jsp>Return to index now.</a>");
+                out.println("<meta http-equiv=\"refresh\" content=\"0; url=/DirectSell450/index.jsp\" />");
                 out.println("</pre>");
                 out.println("</body>");
                 out.println("</html>");

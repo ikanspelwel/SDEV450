@@ -13,14 +13,6 @@
         <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>DatabasePullExample</servlet-name>
-        <servlet-class>Servlets.DatabasePullExample</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TestingUserFunctions</servlet-name>
-        <servlet-class>Servlets.TestingUserFunctions</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AddListing</servlet-name>
         <servlet-class>Servlets.AddListing</servlet-class>
     </servlet>
@@ -35,14 +27,6 @@
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DatabasePullExample</servlet-name>
-        <url-pattern>/DatabasePullExample</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TestingUserFunctions</servlet-name>
-        <url-pattern>/TestingUserFunctions</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddListing</servlet-name>
