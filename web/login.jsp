@@ -59,7 +59,7 @@
                         <input name="emailConfirm" type="email" class="form-control" id="confirmEmail" placeholder="Confirm Email" required>
                         
                         <label for="inputPassword" class="control-label">Password</label>
-                        <input name="pwd" nametype="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                        <input name="pwd" type="password" class="form-control" id="inputPassword" placeholder="Password" required>
                         
                         <label for="confirmPassword" class="control-label">Confirm Password</label>
                         <input name="pwdConfirm" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
