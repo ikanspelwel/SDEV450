@@ -1,6 +1,7 @@
 /**
  * inOrder and getListing by Kyle Holmes
  * newListing by Adam Flammino
+ * Added html escaping to prevent CSS - Adam Ring
  */package Database;
 
 //Imports
@@ -9,58 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import Objects.Listing;
 import java.sql.Date;
-import java.sql.ResultSet;
+import org.springframework.web.util.HtmlUtils;
 //Begin Class User
 
 public class ListingDB extends BaseDBFunctions {
-
-    //Checks listings based on search term
-    public boolean search(String keyword) {
-        boolean hasResults = false;
-        try {
-            this.stmt = this.con.createStatement();
-            String sql = "select Title, Description, FK_UID from Listings"; //change tablename as needed            
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                if (rs.getString("Title") == keyword
-                        || rs.getString("Description").contains(keyword)) { //double check syntax                         
-                    String ID = rs.getString("ListingID");
-                    sql = ("select * from Listings where ListingID="
-                            + "'" + ID + "'"); //may be repetitve given previous line
-                    stmt.executeQuery(sql);
-                    hasResults = true;
-                }
-            }
-            return hasResults;
-        } catch (SQLException err) {
-            System.out.println(err.getMessage());
-            return false;
-        }
-    }
-
-    //Checks listings associated to a certain user ID
-    public boolean searchUserPosts(String keyword) {
-        boolean hasResults = false;
-        try {
-            this.stmt = this.con.createStatement();
-            String sql = "select Title, Description from Listings"; //change tablename as needed            
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                if (rs.getString("Title") == keyword
-                        || rs.getString("Description").contains(keyword)) { //double check syntax                         
-                    String ID = rs.getString("ListingID");
-                    sql = ("select * from Listings where ListingID="
-                            + "'" + ID + "'"); //may be repetitve given previous line
-                    stmt.executeQuery(sql);
-                    hasResults = true;
-                }
-            }
-            return hasResults;
-        } catch (SQLException err) {
-            System.out.println(err.getMessage());
-            return false;
-        }
-    }
 
     //Pulls listings in order
     public ArrayList<Listing> inOrder(int low, int high) throws SQLException {
@@ -83,8 +36,8 @@ public class ListingDB extends BaseDBFunctions {
             while (rs.next()) {
                 /*Store everything in a new listing instince. */
                 listing = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
-                        rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), rs.getString("LISTING_TITLE"),
-                        rs.getString("DESCRIPTION"), rs.getString("CATEGORY")
+                        rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), HtmlUtils.htmlEscape(rs.getString("LISTING_TITLE")),
+                        HtmlUtils.htmlEscape(rs.getString("DESCRIPTION")), HtmlUtils.htmlEscape(rs.getString("CATEGORY"))
                 );
                 arrListing.add(listing);
             }
@@ -119,8 +72,8 @@ public class ListingDB extends BaseDBFunctions {
             while (rs.next()) {
                 /*Store everything in a new listing instince. */
                 listing = new Objects.Listing(rs.getInt("LISTING_ID"), rs.getDouble("PRICE"),
-                        rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), rs.getString("LISTING_TITLE"),
-                        rs.getString("DESCRIPTION"), rs.getString("CATEGORY")
+                        rs.getInt("FK_UID"), rs.getDate("DATE_POSTED"), HtmlUtils.htmlEscape(rs.getString("LISTING_TITLE")),
+                        HtmlUtils.htmlEscape(rs.getString("DESCRIPTION")), HtmlUtils.htmlEscape(rs.getString("CATEGORY"))
                 );
             }
 
