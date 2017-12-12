@@ -72,14 +72,16 @@
 <div class="container">
     <div class="row">         
         <div class="col-xs-12">             
-            <form class="form-horizontal" action="Contact" method="post">
+            <form class="form-horizontal" action="SendMessage" method="post">
                 <h2 class="signin-heading">Compose Email</h2>                              
                 <label for="inputSubject" class="control-label">Subject</label>
-                <input type="text" class="form-control" id="inputSubject" placeholder="Subject" required value="<% out.print(listing.getListingTitle()); %>" readonly="true"><br>
+                <input name="subject" type="text" class="form-control" id="inputSubject" placeholder="Subject" required value="<% out.print(listing.getListingTitle()); %>" readonly="true"><br>
                 <label for="comment" class="control-label">Message:</label>
-                <textarea class="form-control" rows="5" id="inputComment" placeholder="Message..." required></textarea><br>
+                <textarea name="body" class="form-control" rows="5" id="inputComment" placeholder="Message..." required></textarea>
+                <input name="listing_id" value="<% out.print(listing.getListingid()); %>" type="hidden">
+                <br>
                 <button href="inbox.jsp" class="btn btn-primary btn-lg" type="submit" id="emailSubmit">Submit</button>
-                <button href="inbox.jsp" class="btn btn-warning btn-lg" type="button" id="emailCancel">Cancel</button>
+                <a href="listings.jsp" class="btn btn-warning btn-lg" role="button" id="emailCancel">Cancel</a>
             </form><br>                    
         </div>
     </div>

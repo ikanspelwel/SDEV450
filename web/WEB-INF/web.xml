@@ -28,6 +28,10 @@
         <servlet-name>ListingServlet</servlet-name>
         <servlet-class>Servlets.ListingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendMessage</servlet-name>
+        <servlet-class>Servlets.SendMessage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ListingServlet</servlet-name>
         <url-pattern>/ListingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMessage</servlet-name>
+        <url-pattern>/SendMessage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
