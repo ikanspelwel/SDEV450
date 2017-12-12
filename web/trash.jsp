@@ -64,16 +64,6 @@
                                 <% if (allMessages.size() == 0) { %>
                                 <th class="col-text">None...</th>
                                     <% } else { %>
-                                <th class="col-check">
-                                    <input type="checkbox" id="checkAll" title="Check All"/>
-                                    <a class="btn btn-danger pull-right visible-md visible-lg" id="trash" title="Permanently Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                                    <!-- JQuery to check all checkboxes -->
-                                    <script>
-                                        $("#checkAll").click(function () {
-                                            $('input:checkbox').prop('checked', this.checked);
-                                        });
-                                    </script>
-                                </th>
                                 <th class="col-tools"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></th>                                    
                                 <th class="col-text visible-md visible-lg">Date</th>
                                 <th class="col-text">Item</th>
@@ -85,10 +75,8 @@
                             <% System.out.printf("Count of allMessages %d\n", allMessages.size()); %>
                             <% for (int i = 0; i < allMessages.size(); i++) { %>
                             <tr>
-                                <td align="center" class="visible-md visible-lg"><input type="checkbox" id="checkItem" class="visible-md visible-lg"/></td>
                                 <td align="center">
-                                    <a class="btn btn-default" title="Reply"><span <i class="fa fa-reply" aria-hidden="true" ></i></span></a>
-                                    <a class="btn btn-danger" title="Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true" ></span></a>
+                                    <a href="composeEmail.jsp?replyId=<% out.print(allMessages.get(i).messageID); %>&listing_id=<% out.print(allMessages.get(i).listingRef); %>" class="btn btn-default" role="button" id="reply"><span class="fa fa-reply" aria-hidden="true"></span></a>
                                 </td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).dateSent.toString())); %></td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).listingTitle)); %></td>

@@ -3,7 +3,6 @@
  */
 package Servlets;
 
-import Database.ListingDB;
 import Database.MessagesDB;
 import Database.UserDB;
 import Objects.Messages;
@@ -11,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ikanspelwel
  */
+@WebServlet("/DeleteMessage")
 public class DeleteMessage extends HttpServlet {
 
     /**
@@ -66,64 +67,64 @@ public class DeleteMessage extends HttpServlet {
 
         /**
          * Now that we have gotten here, we have a valid session and
-         * corresponding user object. Now going to check for a valid listing_id.
+         * corresponding user object. Now going to check for a messageID.
          */
-        Database.ListingDB listingLookup = new ListingDB();
-        Integer listing_id = null;
-        Objects.Listing listing = null;
+        Database.MessagesDB messageDB = new MessagesDB();
+        Objects.Messages messages = null;
+        Integer msgId = null;
         try {
             // Try and get a number from the listing_id param. 
-            listing_id = Integer.parseInt(request.getParameter("listing_id"));
+            msgId = Integer.parseInt(request.getParameter("deleteId"));
         } catch (NumberFormatException e) {
             // Invalid Message ID. They are doing something bad, so just kick em out.
-            response.sendRedirect("/DirectSell450/listings.jsp");
+            response.sendRedirect("/DirectSell450/inbox.jsp");
             return;
         }
 
         try {
             // Try and go and get the listing information. 
-            listing = listingLookup.getListing(listing_id);
+            messages = messageDB.GetMessage(msgId);
         } catch (SQLException e) {
             //TODO Report error
             System.out.printf("DB Connection failed: %s\n", e.getMessage());
         }
 
-        if (listing == null) {
+        if (messages == null) {
             // Again trying to do something bad so just kick em out. 
-            response.sendRedirect("/DirectSell450/listings.jsp");
+            response.sendRedirect("/DirectSell450/inbox.jsp");
             return;
         }
 
         /**
-         * If we have reached this point, we now have a valid sending user, and
-         * valid listing, so we can go ahead and send our email.
+         * If we have reached this point, we now have a valid user, and valid
+         * listing, just need to check if they are trying to delete a message
+         * that they are allowed to delete. Can only delete from Inbox so
+         * message has to have been sent to them.
          */
-        Objects.Messages message = new Messages(null, user.getUid(), listing.getUid(), listing.getListingid(), 0, request.getParameter("body"), null, 0);
-
-        Database.MessagesDB messageDb = new MessagesDB();
-        try {
-            messageDb.newMessage(message);
-            response.sendRedirect("/DirectSell450/messageSent.jsp");
+        if (messages.receiverID != user.getUid()) {
+            // Oops, that doesn't compute, just kick em out. 
+            response.sendRedirect("/DirectSell450/inbox.jsp");
             return;
-        } catch (Exception e) {
-            System.out.printf("Adding new message failed: %s\n", e.getMessage());
-            //TODO add error message to display to user. 
+        } else {
+            /**
+             * Now we are good to delete the message, we have passed all of the
+             * sanity checks.
+             */
+
+            try {
+                messageDB.DeleteMessage(messages.messageID);
+                // Message deleted! send back to inbox.
+                response.sendRedirect("/DirectSell450/inbox.jsp");
+                return;
+            } catch (Exception e) {
+                System.out.printf("Deleting message failed: %s\n", e.getMessage());
+                //TODO add error message to display to user. 
+                // Failsafe, send them back to inbox. 
+                response.sendRedirect("/DirectSell450/inbox.jsp");
+            }
+
         }
-        
-        // Okay now we are good to go, we have a valid listing_id!
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SendMessage</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SendMessage at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

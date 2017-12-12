@@ -79,6 +79,7 @@
                 <label for="comment" class="control-label">Message:</label>
                 <textarea name="body" class="form-control" rows="5" id="inputComment" placeholder="Message..." required></textarea>
                 <input name="listing_id" value="<% out.print(listing.getListingid()); %>" type="hidden">
+                <input name="replyId" value="<% out.print(request.getParameter("replyId")); %>" type="hidden">
                 <br>
                 <button href="inbox.jsp" class="btn btn-primary btn-lg" type="submit" id="emailSubmit">Submit</button>
                 <a href="listings.jsp" class="btn btn-warning btn-lg" role="button" id="emailCancel">Cancel</a>

@@ -11,7 +11,7 @@
     /* Instance of our userDB and user class */
     Database.UserDB userCheck = new UserDB();
     Objects.User user = null;
-    List<Objects.Messages> allMessages = new ArrayList<>();
+    ArrayList<Objects.Messages> allMessages = new ArrayList<>();
 
     //Allow access only if user exists
     Integer uID = null;
@@ -76,7 +76,7 @@
                             <tr>
                                 <td align="center">
                                     <a href="composeEmail.jsp?replyId=<% out.print(allMessages.get(i).messageID); %>&listing_id=<% out.print(allMessages.get(i).listingRef); %>" class="btn btn-default" role="button" id="reply"><span class="fa fa-reply" aria-hidden="true"></span></a>
-                                    <a href="SendMessage?deleteId=<% out.print(allMessages.get(i).messageID); %>" class="btn btn-danger" role="button" id="delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                    <a href="DeleteMessage?deleteId=<% out.print(allMessages.get(i).messageID); %>" class="btn btn-danger" role="button" id="delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                 </td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).dateSent.toString())); %></td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).listingTitle)); %></td>

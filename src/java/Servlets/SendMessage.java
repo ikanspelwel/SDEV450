@@ -86,6 +86,8 @@ public class SendMessage extends HttpServlet {
         } catch (SQLException e) {
             //TODO Report error
             System.out.printf("DB Connection failed: %s\n", e.getMessage());
+            response.sendRedirect("/DirectSell450/listings.jsp");
+            return;
         }
 
         if (listing == null) {
@@ -94,22 +96,60 @@ public class SendMessage extends HttpServlet {
             return;
         }
 
+        Integer senderID = listing.getUid();
+
+        // Instance of our MessagesDB object.
+        Database.MessagesDB messageDb = new MessagesDB();
+
+        /**
+         * If there is a replyID sent, then this is a reply and we need to
+         * change the FK_RECEIVER_ID to the proper user.
+         */
+        if (!request.getParameter("replyId").isEmpty()) {
+            Integer messageId;
+            Objects.Messages tmpMessage;
+            try {
+                // Try and get a number from the replyId param. 
+                messageId = Integer.parseInt(request.getParameter("replyId"));
+            } catch (NumberFormatException e) {
+                // Invalid Message ID. They are doing something bad, so just kick em out.
+                response.sendRedirect("/DirectSell450/listings.jsp");
+                return;
+            }
+
+            try {
+                // Try and go and get the listing information. 
+                tmpMessage = messageDb.GetMessage(messageId);
+            } catch (SQLException e) {
+                //TODO Report error
+                System.out.printf("DB Connection failed: %s\n", e.getMessage());
+                response.sendRedirect("/DirectSell450/listings.jsp");
+                return;
+            }
+
+            /**
+             * Overwriting the sender ID to be the sender of the message we are
+             * replying to.
+             */
+            senderID = tmpMessage.senderID;
+
+        }
+
         /**
          * If we have reached this point, we now have a valid sending user, and
          * valid listing, so we can go ahead and send our email.
          */
-        Objects.Messages message = new Messages(null, user.getUid(), listing.getUid(), listing.getListingid(), 0, request.getParameter("body"), null, 0);
+        Objects.Messages message = new Messages(null, user.getUid(), senderID, listing.getListingid(), 0, request.getParameter("body"), null, 0);
 
-        Database.MessagesDB messageDb = new MessagesDB();
         try {
             messageDb.newMessage(message);
-            response.sendRedirect("/DirectSell450/messageSent.jsp");
+            response.sendRedirect("/DirectSell450/contactSent.jsp");
             return;
         } catch (Exception e) {
             System.out.printf("Adding new message failed: %s\n", e.getMessage());
             //TODO add error message to display to user. 
         }
-        
+
         // Okay now we are good to go, we have a valid listing_id!
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {

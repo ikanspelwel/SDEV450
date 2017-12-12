@@ -2,9 +2,6 @@ package Database;
 
 import Objects.Messages;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.web.util.HtmlUtils;
 
 /**
@@ -21,7 +18,13 @@ import java.util.ArrayList;
 //Begin Subclass MessagesDB
 public class MessagesDB extends BaseDBFunctions {
 
-    public void newMessage(Objects.Messages message)throws SQLException {
+    /**
+     * Adds a new message to the db.
+     * 
+     * @param message
+     * @throws SQLException 
+     */
+    public void newMessage(Objects.Messages message) throws SQLException {
 
         /* Setup a perpared statement */
         this.preparedStmt = this.con.prepareStatement(
@@ -40,7 +43,7 @@ public class MessagesDB extends BaseDBFunctions {
         this.preparedStmt.setString(4, message.messageText);
 
         this.preparedStmt.executeUpdate();
-        
+
     }
 
     /**
@@ -57,6 +60,7 @@ public class MessagesDB extends BaseDBFunctions {
     public ArrayList<Objects.Messages> GetMessages(Integer userID, String msgType) throws SQLException {
         // Array of Messages
         ArrayList<Objects.Messages> allMessages = new ArrayList<>();
+        Objects.Messages newMessage = null;
 
         String selectStatement = "SELECT `MESSAGES`.*, `LISTINGS`.`LISTING_TITLE`"
                 + " FROM `MESSAGES` LEFT JOIN `LISTINGS` "
@@ -68,12 +72,12 @@ public class MessagesDB extends BaseDBFunctions {
         switch (msgType) {
             case "Inbox":
                 // FK_RECEIVER_ID
-                selectStatement += "`FK_RECEIVER_ID` = ?";
+                selectStatement += "`FK_RECEIVER_ID` = ? AND `DELETED` = 0";
                 break;
 
             case "Sent":
                 // FK_SENDER_ID
-                selectStatement += "`FK_SENDER_ID` = ?";
+                selectStatement += "`FK_SENDER_ID` = ? AND `DELETED` = 0";
                 break;
 
             case "Trash":
@@ -107,9 +111,9 @@ public class MessagesDB extends BaseDBFunctions {
             this.rs = this.preparedStmt.executeQuery();
 
             /* Returns true if a result was found, false if not */
-            if (rs.next()) {
+            while (rs.next()) {
 
-                Objects.Messages newMessage = new Messages(rs.getInt("MESSAGE_ID"),
+                newMessage = new Messages(rs.getInt("MESSAGE_ID"),
                         rs.getInt("FK_SENDER_ID"), rs.getInt("FK_RECEIVER_ID"),
                         rs.getInt("LISTING_REF"), rs.getInt("FLAG_READ"),
                         HtmlUtils.htmlEscape(rs.getString("MESSAGE_TEXT")), rs.getDate("DATE_SENT"),
@@ -129,14 +133,72 @@ public class MessagesDB extends BaseDBFunctions {
         return allMessages;
     }
 
-    //Deletes message using message ID associated with HTML checkbox
-    public void DeleteMessage(int msgID) {
-        String sql = ("delete from Messages where MessageID =" + "'" + msgID + "'");
+    /**
+     * Method to retrieve the contents of a message from the dB. 
+     * 
+     * @param msgID
+     * @return message object.
+     * @throws SQLException 
+     */
+    public Objects.Messages GetMessage(int msgID) throws SQLException {
+        Objects.Messages message = null;
+
+        String selectStatement = "SELECT * FROM `MESSAGES` WHERE `MESSAGE_ID` = ?";
+
         try {
-            preparedStmt = con.prepareStatement(sql);
-            preparedStmt.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(MessagesDB.class.getName()).log(Level.SEVERE, null, ex);
+            /* Setup a perpared statement */
+            this.preparedStmt = this.con.prepareStatement(selectStatement);
+
+            /**
+             * Safely add the messageID into the statement, in replacement of
+             * the question marks.
+             */
+            this.preparedStmt.setInt(1, msgID);
+
+            /* Safely execute the statement */
+            this.rs = this.preparedStmt.executeQuery();
+
+            /* Returns true if a result was found, false if not */
+            if (rs.next()) {
+
+                message = new Messages(rs.getInt("MESSAGE_ID"),
+                        rs.getInt("FK_SENDER_ID"), rs.getInt("FK_RECEIVER_ID"),
+                        rs.getInt("LISTING_REF"), rs.getInt("FLAG_READ"),
+                        HtmlUtils.htmlEscape(rs.getString("MESSAGE_TEXT")), rs.getDate("DATE_SENT"),
+                        rs.getInt("DELETED"));
+            }
+        } catch (SQLException e) {
+            throw e;
         }
+
+        return message;
+    }
+
+    /**
+     * Marks a message as deleted in the db.
+     * 
+     * @param msgID
+     * @throws SQLException 
+     */
+    public void DeleteMessage(int msgID) throws SQLException {
+
+        String updateStatement = "UPDATE `MESSAGES` SET `DELETED` = 1 WHERE `MESSAGE_ID` = ?";
+
+        try {
+            /* Setup a perpared statement */
+            this.preparedStmt = this.con.prepareStatement(updateStatement);
+
+            /**
+             * Safely add the messageID into the statement, in replacement of
+             * the question marks.
+             */
+            this.preparedStmt.setInt(1, msgID);
+
+            /* Safely execute the statement */
+            this.preparedStmt.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        }
+
     }
 } //End Subclass MessagesDB
