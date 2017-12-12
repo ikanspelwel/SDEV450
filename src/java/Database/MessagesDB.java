@@ -2,6 +2,7 @@ package Database;
 
 import Objects.Messages;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.web.util.HtmlUtils;
@@ -20,17 +21,26 @@ import java.util.ArrayList;
 //Begin Subclass MessagesDB
 public class MessagesDB extends BaseDBFunctions {
 
-    public void newMessage(Objects.Messages message) {
-        /*
-        String sql = "insert into Messages (Sender, Recipient, Message) values "
-                + "('" + sender + "','" + recipient + "','" + msgContents + "')";
-        try {
-            preparedStmt = con.prepareStatement(sql);
-            preparedStmt.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(MessagesDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+    public void newMessage(Objects.Messages message)throws SQLException {
+
+        /* Setup a perpared statement */
+        this.preparedStmt = this.con.prepareStatement(
+                "INSERT INTO `MESSAGES` "
+                + "(`FK_SENDER_ID`, `LISTING_REF`, `FK_RECEIVER_ID`, `MESSAGE_TEXT`) "
+                + "VALUES (?, ?, ?, ?)"
+        );
+
+        /**
+         * Safely add the values into the statement, in replacement of the
+         * question marks.
+         */
+        this.preparedStmt.setInt(1, message.senderID);
+        this.preparedStmt.setInt(2, message.listingRef);
+        this.preparedStmt.setInt(3, message.receiverID);
+        this.preparedStmt.setString(4, message.messageText);
+
+        this.preparedStmt.executeUpdate();
+        
     }
 
     /**
@@ -88,7 +98,7 @@ public class MessagesDB extends BaseDBFunctions {
              * replacement of the question marks.
              */
             this.preparedStmt.setInt(1, userID);
-            if(msgType.equals("Trash")) {
+            if (msgType.equals("Trash")) {
                 // If trash we need to search for userID in either field.
                 this.preparedStmt.setInt(2, userID);
             }
@@ -104,9 +114,9 @@ public class MessagesDB extends BaseDBFunctions {
                         rs.getInt("LISTING_REF"), rs.getInt("FLAG_READ"),
                         HtmlUtils.htmlEscape(rs.getString("MESSAGE_TEXT")), rs.getDate("DATE_SENT"),
                         rs.getInt("DELETED"));
-                
+
                 newMessage.listingTitle = HtmlUtils.htmlEscape(rs.getString("LISTING_TITLE"));
-                
+
                 /* Add all messages in the ArrayList. */
                 allMessages.add(newMessage);
             }
@@ -120,7 +130,7 @@ public class MessagesDB extends BaseDBFunctions {
     }
 
     //Deletes message using message ID associated with HTML checkbox
-    public void deleteMessage(int msgID) {
+    public void DeleteMessage(int msgID) {
         String sql = ("delete from Messages where MessageID =" + "'" + msgID + "'");
         try {
             preparedStmt = con.prepareStatement(sql);
@@ -128,6 +138,5 @@ public class MessagesDB extends BaseDBFunctions {
         } catch (SQLException ex) {
             Logger.getLogger(MessagesDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 } //End Subclass MessagesDB

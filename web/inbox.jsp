@@ -1,7 +1,7 @@
 <%-- 
     Document   : inbox
     Created on : Nov 18, 2017, 10:30:16 AM
-    Author     : ikanspelwel
+    Author     : Adam Ring
 --%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -52,7 +52,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col col-xs-6">
-                            <h3 class="panel-title"><i class="fa fa-envelope-square"></i>&nbspInbox</h3>
+                            <h3 class="panel-title"><i class="fa fa-envelope-square"></i>&nbsp;Inbox</h3>
                         </div>                                
                     </div>
                 </div>
@@ -60,39 +60,27 @@
                     <table id="inboxTable" class="table table-striped table-bordered table-list">
                         <thead>
                             <tr>
-                                <% if(allMessages.size() == 0) { %>
-                                    <th class="col-text">None...</th>
-                                <% } else { %>
-                                <th class="col-check visible-md visible-lg">
-                                    <input type="checkbox" id="checkAll" title="Check All"/>
-                                    <a class="btn btn-danger pull-right visible-md visible-lg"  title="Delete" id="trash"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                                    <!-- JQuery to check all checkboxes -->
-                                    <script>
-                                        $("#checkAll").click(function () {
-                                            $('input:checkbox').prop('checked', this.checked);
-                                        });
-                                    </script>
-                                </th>
+                                <% if (allMessages.size() == 0) { %>
+                                <th class="col-text">None...</th>
+                                    <% } else { %>
                                 <th class="col-tools"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></th>                                    
                                 <th class="col-text visible-md visible-lg">Date</th>
                                 <th class="col-text visible-md visible-lg">Item</th>
                                 <th class="col-text">Message</th>
-                                <% } %>
+                                    <% } %>
                             </tr>
                         </thead>
                         <tbody>
                             <% System.out.printf("Count of allMessages %d\n", allMessages.size()); %>
                             <% for (int i = 0; i < allMessages.size(); i++) { %>
                             <tr>
-                                <td align="center" class="visible-md visible-lg"><input type="checkbox" id="checkItem" class="visible-md visible-lg"/></td>
                                 <td align="center">
-                                    <a class="btn btn-default" title="Reply"><span <i class="fa fa-reply" aria-hidden="true" ></i></span></a>
-                                    <a class="btn btn-danger" title="Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true" ></span></a>
+                                    <a href="composeEmail.jsp?replyId=<% out.print(allMessages.get(i).messageID); %>&listing_id=<% out.print(allMessages.get(i).listingRef); %>" class="btn btn-default" role="button" id="reply"><span class="fa fa-reply" aria-hidden="true"></span></a>
+                                    <a href="SendMessage?deleteId=<% out.print(allMessages.get(i).messageID); %>" class="btn btn-danger" role="button" id="delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                 </td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).dateSent.toString())); %></td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).listingTitle)); %></td>
-                                <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).messageText)); %></td>
-                                <td class="visible-xs visible-sm"><% out.print(String.format("%s", allMessages.get(i).messageText)); %></td>
+                                <td class="visible-md visible-lg visible-xs visible-sm"><% out.print(String.format("%s", allMessages.get(i).messageText)); %></td>
                             </tr>
                             <%}%>
                         </tbody>

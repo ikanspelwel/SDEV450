@@ -42,47 +42,48 @@
                                     <tr>
 
                                         <% Database.ListingDB listingLookup = new ListingDB();
-                                        ImageDB imageLookup = new ImageDB();
-                                        /*do we have some way to get these values from the URL to determine how many appear on the page?
+                                            ImageDB imageLookup = new ImageDB();
+                                            /*do we have some way to get these values from the URL to determine how many appear on the page?
                                            //it would be "listings.jsp?low=0&high=20"
                                             int low = Integer.parseInt(request.getParameter("low"));
                                             int high = Integer.parseInt(request.getParameter("high"));
-                                        */
-                                        //I'd like to delete these next 2 lines and use the ones above
-                                        int low=0;
-                                        int high=20;
+                                             */
+                                            //I'd like to delete these next 2 lines and use the ones above
+                                            int low = 0;
+                                            int high = 500;
                                             try {
                                                 ArrayList<Objects.Listing> arrListing = listingLookup.inOrder(low, high);
-                                            ArrayList<Integer> imageIDs = null;
-                                           if(!arrListing.isEmpty()){
-                                                for (int i=0;i<arrListing.size();i++){
-                                                    String title = arrListing.get(i).getListingTitle();
-                                                    String desc = arrListing.get(i).getDescription();
-                                                    double price = arrListing.get(i).getPrice();
-                                                    int listing_id = arrListing.get(i).getListingid();
-                                                    imageIDs = imageLookup.lookupImage(listing_id);
-                                                    out.print("<td align=\"center\">");
-                                                    out.print("<div class=\"thumbnail\">");
-                                                    if(!imageIDs.isEmpty()){
-                                                    out.print(String.format("<img src=\"ListingServlet?image_id=%d\"",imageIDs.get(0)));
-                                                    out.print("style=\"width:25%\"/>");
-                                                    out.print("</div>");
+                                                ArrayList<Integer> imageIDs = null;
+                                                if (!arrListing.isEmpty()) {
+                                                    for (int i = 0; i < arrListing.size(); i++) {
+                                                        String title = arrListing.get(i).getListingTitle();
+                                                        String desc = arrListing.get(i).getDescription();
+                                                        double price = arrListing.get(i).getPrice();
+                                                        int listing_id = arrListing.get(i).getListingid();
+                                                        imageIDs = imageLookup.lookupImage(listing_id);
+                                                        out.print("<td align=\"center\">");
+                                                        out.print("<div class=\"thumbnail\">");
+                                                        if (!imageIDs.isEmpty()) {
+                                                            out.print(String.format("<img src=\"ListingServlet?image_id=%d\"", imageIDs.get(0)));
+                                                            out.print("style=\"width:25%\"/>");
+                                                            out.print("</div>");
+                                                        }
+                                                        out.print(String.format("<a href=\"listing_detail.jsp?listing_id=%d\"><strong>%s ($%.2f):</strong> %s</a>", listing_id, title, price, desc));
+                                                        out.print("</td>");
+                                                        out.print("</tr><tr>");
+                                                        imageIDs.clear();
                                                     }
-                                                    out.print(String.format("<a href=\"listing_detail.jsp?listing_id=%d\"><strong>%s($%.2f):</strong> %s</a>", listing_id,title, price, desc));
-                                                    out.print("</td>");                                                    
-                                                    out.print("</tr><tr>");
-                                                    imageIDs.clear();
-                                                } 
-                                           }else {
-                                                out.print("<td align=\"center\">");
-                                                out.print("no listing found");
-                                                out.print("</td>");
-                                                }} catch (SQLException e) {
+                                                } else {
+                                                    out.print("<td align=\"center\">");
+                                                    out.print("no listing found");
+                                                    out.print("</td>");
+                                                }
+                                            } catch (SQLException e) {
                                                 //TODO Report error
                                                 System.out.printf("DB Connection failed: %s\n", e.getMessage());
                                             }%>
 
-                                        
+
                                     </tr>
                                 </tbody>
                             </table>        
