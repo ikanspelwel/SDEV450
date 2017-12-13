@@ -45,7 +45,12 @@ public class AccountCreation extends HttpServlet {
 	String emailConfirm = request.getParameter("emailConfirm");
         String pwd = request.getParameter("pwd");
 	String pwdConfirm = request.getParameter("pwdConfirm");
-        String zip = request.getParameter("zip").substring(0, 5); // Making sure zip is only 5 chars long.
+        String zip;
+        if(request.getParameter("zip").length() > 5) {
+            zip = request.getParameter("zip").substring(0, 5); // Making sure zip is only 5 chars long.
+        } else {
+            zip = request.getParameter("zip");
+        }
 
         /* Instance of our userDB and user class */
         Database.UserDB userCheck = new UserDB();
