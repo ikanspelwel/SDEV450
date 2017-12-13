@@ -66,7 +66,7 @@
                                     <% } else { %>
                                 <th class="col-tools"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></th>                                    
                                 <th class="col-text visible-md visible-lg">Date</th>
-                                <th class="col-text">Item</th>
+                                <th class="col-text visible-md visible-lg">Item</th>
                                 <th class="col-text">Message</th>
                                 <% } %>
                             </tr>

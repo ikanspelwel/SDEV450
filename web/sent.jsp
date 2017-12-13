@@ -64,8 +64,8 @@
                                 <% if (allMessages.size() == 0) { %>
                                 <th class="col-text">None...</th>
                                 <% } else { %>
-                                <th class="col-text">Date</th>
-                                <th class="col-text">Item</th>
+                                <th class="col-text visible-md visible-lg">Date</th>
+                                <th class="col-text visible-md visible-lg">Item</th>
                                 <th class="col-text">Message</th>
                                 <% } %>
                             </tr>
