@@ -158,28 +158,30 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Edit Profile</h4>
+                        <br />
+                        <p>Leave fields blank that you don't want changed</p>
                     </div>
                     <form class="modal-form" action="AccountUpdate" method="post">
                         <div class="form-group">
                             <label for="fullName">Full Name</label>
-                            <input name="fullName" type="text" class="form-control" id="fullName" placeholder="User's current full name">
+                            <input name="fullName" type="text" class="form-control" id="fullName" placeholder="<% out.print(user.getFullName()); %>">
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input name="email" type="email" class="form-control" id="email" placeholder="Users current email">
+                            <input name="email" type="email" class="form-control" id="email" placeholder="<% out.print(user.getEmail()); %>">
                         </div>
                         <div class="form-group">
                             <label for="zipCode">Zip Code</label>
-                            <input name="zipCode" type="text" class="form-control" id="zipCode" placeholder="Users current zip code">
+                            <input name="zipCode" type="text" class="form-control" id="zipCode" placeholder="<% out.print(user.getZip()); %>">
                         </div>
-                        <div class="form-group">
-                            <label for="password">Old Password</label>
-                            <input name="oldPwd" type="password" class="form-control" id="oldPwd" placeholder="**********">
-                        </div>  
                         <div class="form-group">
                             <label for="password">New Password</label>
                             <input name="newPwd" type="password" class="form-control" id="newPwd" placeholder="**********">
                         </div>    
+                        <div class="form-group">
+                            <label for="password" style="color:#D2691E;">Type Current Password to Confirm Changes</label>
+                            <input name="oldPwd" type="password" class="form-control" id="oldPwd" placeholder="**********">
+                        </div>  
                         <div class="modal-footer">
                             <div class="btn-group btn-group-justified" role="group" aria-label="group button">
                                 <div class="btn-group" role="group">
