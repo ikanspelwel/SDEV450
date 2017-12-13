@@ -51,6 +51,8 @@ public class DeleteMessage extends HttpServlet {
             } catch (SQLException e) {
                 // user will still be null so good to go, but lets log it.
                 System.out.printf("Error: %s\n", e.getMessage());
+            } finally {
+                userCheck.disconnect();
             }
             if (user == null) {
                 /**
@@ -124,6 +126,11 @@ public class DeleteMessage extends HttpServlet {
             }
 
         }
+
+        /**
+         * now that we are all done with the messageDB we can close it.
+         */
+        messageDB.disconnect();
 
     }
 

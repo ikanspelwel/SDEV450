@@ -21,6 +21,7 @@
     } else {
         uID = (Integer) session.getAttribute("UID");
         user = userCheck.GetUser(uID);
+        userCheck.disconnect();
         if (user == null) {
             /*
             If user is null, then that user ID wasn't found. Something very 
@@ -38,6 +39,8 @@
         allMessages = messageDb.GetMessages(user.getUid(), "Trash");
     } catch (Exception e) {
         System.out.printf("Retrieving messages failed: %s\n", e.getMessage());
+    } finally {
+        messageDb.disconnect();
     }
 
 %>

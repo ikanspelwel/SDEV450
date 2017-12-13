@@ -40,6 +40,8 @@ public class ImageDB extends BaseDBFunctions {
             this.preparedStmt.executeUpdate();
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
 
     }
@@ -74,6 +76,8 @@ public class ImageDB extends BaseDBFunctions {
            
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
        
     
@@ -113,6 +117,8 @@ public class ImageDB extends BaseDBFunctions {
            
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
        
     

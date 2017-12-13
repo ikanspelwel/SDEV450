@@ -21,6 +21,7 @@
     } else {
         uID = (Integer) session.getAttribute("UID");
         user = userCheck.GetUser(uID);
+        userCheck.disconnect();
         if (user == null) {
             /*
             If user is null, then that user ID wasn't found. Something very 
@@ -135,6 +136,9 @@
                                             } catch (SQLException e) {
                                                 //TODO Report error
                                                 System.out.printf("DB Connection failed: %s\n", e.getMessage());
+                                            } finally {
+                                                listingLookup.disconnect();
+                                                imageLookup.disconnect();
                                             }
                                         %>
 

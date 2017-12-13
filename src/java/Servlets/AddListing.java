@@ -126,6 +126,8 @@ public class AddListing extends HttpServlet {
 
         } catch (SQLException ex) {
             Logger.getLogger(AddListing.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            newListing.disconnect();
         }
     }
 

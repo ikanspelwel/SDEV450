@@ -53,6 +53,8 @@ public class ListingServlet extends HttpServlet {
             response.getOutputStream().close();
         } catch (SQLException e) {
 
+        } finally {
+            imageLookup.disconnect();
         }
     }
 

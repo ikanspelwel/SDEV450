@@ -69,6 +69,13 @@ public class BaseDBFunctions {
     }
 
     /**
+     * Very simple method to close the DB connection.
+     */
+    public void disconnect(){
+        try { this.con.close(); } catch (SQLException e) { /* ignored */ }
+    }
+    
+    /**
      * Executes SQL statements
      *
      * @param SQL

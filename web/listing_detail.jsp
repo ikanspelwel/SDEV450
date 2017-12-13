@@ -91,7 +91,11 @@
                                             } catch (SQLException e) {
                                                 //TODO Report error
                                                 System.out.printf("DB Connection failed: %s\n", e.getMessage());
-                                            }%>
+                                            } finally {
+                                                imageLookup.disconnect();
+                                                listingLookup.disconnect();
+                                            }
+                                        %>
 
 
                                     </tr>

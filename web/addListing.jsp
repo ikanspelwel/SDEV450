@@ -19,6 +19,7 @@
     } else {
         uID = (Integer) session.getAttribute("UID");
         user = userCheck.GetUser(uID);
+        userCheck.disconnect();
         if (user == null) {
             /*
             If user is null, then that user ID wasn't found. Something very 

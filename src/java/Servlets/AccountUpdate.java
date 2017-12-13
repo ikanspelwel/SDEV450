@@ -6,15 +6,10 @@
 package Servlets;
 
 import Database.UserDB;
-import Objects.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,9 +22,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/AccountUpdate")
 public class AccountUpdate extends HttpServlet {
 
-        private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-   /**
+    /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -44,30 +39,31 @@ public class AccountUpdate extends HttpServlet {
         // get the information from the front end
         String name = request.getParameter("fullName");
         String email = request.getParameter("email");
-	String zip = request.getParameter("zipCode");
+        String zip = request.getParameter("zipCode");
         String oldPwd = request.getParameter("oldPwd");
-	String newPwd = request.getParameter("newPwd");
-	
-	//Create the session
+        String newPwd = request.getParameter("newPwd");
+
+        //Create the session
         HttpSession session = request.getSession();
         Integer uID = (Integer) session.getAttribute("UID");
-	// TODO use the user info from the cookie to update the records in the db
-	/* Instance of our userDB and user class */
+        // TODO use the user info from the cookie to update the records in the db
+        /* Instance of our userDB and user class */
         Database.UserDB userUpdateDB = new UserDB();
-	try {
-	    boolean result = userUpdateDB.updateUser(uID, oldPwd, newPwd, name, zip, email);
-	    //System.out.print(result);
-	    //Get the encoded URL string
+        try {
+            boolean result = userUpdateDB.updateUser(uID, oldPwd, newPwd, name, zip, email);
+            //System.out.print(result);
+            //Get the encoded URL string
             String encodedURL = response.encodeRedirectURL("/DirectSell450/account.jsp");
             response.sendRedirect(encodedURL);
-	} catch (SQLException e) {
-	    // TODO handle error properly
-	}
+        } catch (SQLException e) {
+            // TODO handle error properly
+        } finally {
+            userUpdateDB.disconnect();
+        }
 
-        
     }
 
-     /**
+    /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description

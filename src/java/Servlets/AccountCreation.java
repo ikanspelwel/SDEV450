@@ -61,6 +61,8 @@ public class AccountCreation extends HttpServlet {
         } catch (SQLException e) {
             // report error
 	    response.sendRedirect("/DirectSell450/login.jsp?e4=true");
+        } finally {
+            userCheck.disconnect();
         }
         
         // check if user was added to the database

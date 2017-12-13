@@ -26,23 +26,29 @@ public class MessagesDB extends BaseDBFunctions {
      */
     public void newMessage(Objects.Messages message) throws SQLException {
 
-        /* Setup a perpared statement */
-        this.preparedStmt = this.con.prepareStatement(
-                "INSERT INTO `MESSAGES` "
-                + "(`FK_SENDER_ID`, `LISTING_REF`, `FK_RECEIVER_ID`, `MESSAGE_TEXT`) "
-                + "VALUES (?, ?, ?, ?)"
-        );
+        try {
+            /* Setup a perpared statement */
+            this.preparedStmt = this.con.prepareStatement(
+                    "INSERT INTO `MESSAGES` "
+                    + "(`FK_SENDER_ID`, `LISTING_REF`, `FK_RECEIVER_ID`, `MESSAGE_TEXT`) "
+                    + "VALUES (?, ?, ?, ?)"
+            );
 
-        /**
-         * Safely add the values into the statement, in replacement of the
-         * question marks.
-         */
-        this.preparedStmt.setInt(1, message.senderID);
-        this.preparedStmt.setInt(2, message.listingRef);
-        this.preparedStmt.setInt(3, message.receiverID);
-        this.preparedStmt.setString(4, message.messageText);
+            /**
+             * Safely add the values into the statement, in replacement of the
+             * question marks.
+             */
+            this.preparedStmt.setInt(1, message.senderID);
+            this.preparedStmt.setInt(2, message.listingRef);
+            this.preparedStmt.setInt(3, message.receiverID);
+            this.preparedStmt.setString(4, message.messageText);
 
-        this.preparedStmt.executeUpdate();
+            this.preparedStmt.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            this.preparedStmt.close();
+        }
 
     }
 
@@ -127,6 +133,8 @@ public class MessagesDB extends BaseDBFunctions {
 
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
 
         // Return the ArrayList
@@ -169,6 +177,8 @@ public class MessagesDB extends BaseDBFunctions {
             }
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
 
         return message;
@@ -198,6 +208,8 @@ public class MessagesDB extends BaseDBFunctions {
             this.preparedStmt.executeUpdate();
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
 
     }

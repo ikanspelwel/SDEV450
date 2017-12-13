@@ -50,6 +50,8 @@ public class SendMessage extends HttpServlet {
             } catch (SQLException e) {
                 // user will still be null so good to go, but lets log it.
                 System.out.printf("Error: %s\n", e.getMessage());
+            } finally {
+                userCheck.disconnect();
             }
             if (user == null) {
                 /**
@@ -88,6 +90,8 @@ public class SendMessage extends HttpServlet {
             System.out.printf("DB Connection failed: %s\n", e.getMessage());
             response.sendRedirect("/DirectSell450/listings.jsp");
             return;
+        } finally {
+            listingLookup.disconnect();
         }
 
         if (listing == null) {
@@ -149,6 +153,8 @@ public class SendMessage extends HttpServlet {
         } catch (Exception e) {
             System.out.printf("Adding new message failed: %s\n", e.getMessage());
             //TODO add error message to display to user. 
+        } finally {
+            messageDb.disconnect();
         }
 
         // Okay now we are good to go, we have a valid listing_id!

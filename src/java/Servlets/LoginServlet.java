@@ -48,6 +48,8 @@ public class LoginServlet extends HttpServlet {
             out.println("Error, see server log for details.");
             // Log more info to the Log file.
             System.out.printf("Error: %s\n", e.getMessage());
+        } finally {
+            userCheck.disconnect();
         }
 
         /* If user exists in the database, create session */

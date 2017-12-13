@@ -46,6 +46,8 @@ public class ListingDB extends BaseDBFunctions {
            }*/
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
 
         return arrListing;
@@ -81,6 +83,8 @@ public class ListingDB extends BaseDBFunctions {
            }*/
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
 
         return listing;
@@ -133,6 +137,8 @@ public class ListingDB extends BaseDBFunctions {
             return listingID;
         } catch (SQLException e) {
             throw e;
+        } finally {
+            this.preparedStmt.close();
         }
     }
 
