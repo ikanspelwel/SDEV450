@@ -8,11 +8,19 @@
 <%@include file="header.jsp" %>
 <%@include file="navbar.jsp" %>
 <%@include file="footer.jsp" %>
-<!DOCTYPE html>
-<html>    
-    <body>
-        
-        <!-- Sign in and registration forms -->
+<script>
+    function VerifyFields() {
+        if($('#inputEmail').val() !== $('#confirmEmail').val()) {
+            alert('Email addresses do not match.');
+            return false;
+        }
+        if($('#inputPassword').val() !== $('#confirmPassword').val()) {
+            alert('Passwords do not match.');
+            return false;
+        }
+    }
+</script>
+<!-- Sign in and registration forms -->
         <div class="container">
             <div class="row">         
                 <div class="col-sm-12 col-md-6">             
@@ -24,10 +32,10 @@
                         <% if( request.getParameter("e2") != null ) { %>
                         <h3 class="alert alert-danger">Please login first.</h3>
                         <% } %>
-                        <label for="inputEmail" class="control-label">Email</label>
-                        <input type="email" name="user" class="form-control" id="inputEmail" placeholder="Email" required>
-                        <label for="inputPassword" class="control-label">Password</label>
-                        <input type="password" name="pwd" class="form-control" id="inputPassword" placeholder="Password" required>
+                        <label for="Email" class="control-label">Email</label>
+                        <input type="email" name="user" class="form-control" id="Email" placeholder="Email" required>
+                        <label for="Password" class="control-label">Password</label>
+                        <input type="password" name="pwd" class="form-control" id="Password" placeholder="Password" required>
                         <div class="checkbox">
                             <label><input type="checkbox"> Remember me</label>
                         </div>
@@ -35,7 +43,7 @@
                      </form>
                 </div>         
                 <div class="col-sm-12 col-md-6">         
-                    <form class="form-horizontal" action="AccountCreation" method="post">
+                    <form class="form-horizontal" action="AccountCreation" method="post" onsubmit="return VerifyFields();">
                         <h2 class="register-heading">Need to make an account?</h2>
                         <% if( request.getParameter("e3") != null ) { %>
                         <h3 class="alert alert-danger">Email already in use.</h3>
@@ -66,7 +74,7 @@
                         <div class="checkbox">
                             <label><input type="checkbox"> Remember me</label>
                         </div>
-                        <button class="btn btn-primary" type="submit" id="createAccount">Create Account</button>
+                        <button class="btn btn-primary" type="submit" id="createAccount" >Create Account</button>
                     </form><br>         
                 </div>         
             </div>

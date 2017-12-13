@@ -45,7 +45,7 @@ public class AccountCreation extends HttpServlet {
 	String emailConfirm = request.getParameter("emailConfirm");
         String pwd = request.getParameter("pwd");
 	String pwdConfirm = request.getParameter("pwdConfirm");
-        String zip = request.getParameter("zip");
+        String zip = request.getParameter("zip").substring(0, 5); // Making sure zip is only 5 chars long.
 
         /* Instance of our userDB and user class */
         Database.UserDB userCheck = new UserDB();
@@ -61,6 +61,7 @@ public class AccountCreation extends HttpServlet {
         } catch (SQLException e) {
             // report error
 	    response.sendRedirect("/DirectSell450/login.jsp?e4=true");
+            return;
         } finally {
             userCheck.disconnect();
         }
@@ -83,6 +84,7 @@ public class AccountCreation extends HttpServlet {
 	} else {
             // TODO deal with error that is not SQLException or IllegalArgumentException
 	    response.sendRedirect("/DirectSell450/login.jsp?e5=true");
+            return;
         }
     }
 

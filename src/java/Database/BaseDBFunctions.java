@@ -30,12 +30,14 @@ public class BaseDBFunctions {
         String host = "jdbc:mysql://sdev450.gmavt.net:3306/demo1";
         String username = "demo1";
         String password = "DirectSellDbAccess1234";
+
         /**
-         * // Live DB
-         * String host = "jdbc:mysql://localhost:3306/directsell";
-         * String username = "directsell";
-         * String password = "moscow-ugly-brussels";
+         * Live DB
          */
+         //String host = "jdbc:mysql://localhost:3306/directsell";
+         //String username = "directsell";
+         //String password = "moscow-ugly-brussels";
+
         try {
             this.connect(host, username, password);
         } catch (Exception e) {
