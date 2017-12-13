@@ -80,7 +80,7 @@
                                 </td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).dateSent.toString())); %></td>
                                 <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).listingTitle)); %></td>
-                                <td class="visible-md visible-lg"><% out.print(String.format("%s", allMessages.get(i).messageText)); %></td>
+                                <td class="visible-md visible-lg visible-xs visible-sm"><% out.print(String.format("%s", allMessages.get(i).messageText)); %></td>
                             </tr>
                             <%}%>
                         </tbody>
