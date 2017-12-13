@@ -105,7 +105,8 @@ public class SendMessage extends HttpServlet {
          * If there is a replyID sent, then this is a reply and we need to
          * change the FK_RECEIVER_ID to the proper user.
          */
-        if (!request.getParameter("replyId").isEmpty()) {
+        
+        if (!request.getParameter("replyId").isEmpty() && !request.getParameter("replyId").equals("null")) {
             Integer messageId;
             Objects.Messages tmpMessage;
             try {
