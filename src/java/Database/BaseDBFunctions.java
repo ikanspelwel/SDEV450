@@ -20,16 +20,26 @@ public class BaseDBFunctions {
 
     /**
      * Default constructor that will auto connect to our DB.
+     *
      * @throws java.lang.Exception
      */
     public BaseDBFunctions() {
+        /**
+         * Demo DB
+         */
         String host = "jdbc:mysql://sdev450.gmavt.net:3306/demo1";
         String username = "demo1";
         String password = "DirectSellDbAccess1234";
+        /**
+         * // Live DB
+         * String host = "jdbc:mysql://localhost:3306/directsell";
+         * String username = "directsell";
+         * String password = "moscow-ugly-brussels";
+         */
         try {
             this.connect(host, username, password);
         } catch (Exception e) {
-            System.out.printf("DB Connection failed: %s\n", e.getMessage());            
+            System.out.printf("DB Connection failed: %s\n", e.getMessage());
         }
     }
 
