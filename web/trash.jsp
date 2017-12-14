@@ -51,7 +51,7 @@
 <!-- Credit for panel idea goes to harogaston @ https://bootsnipp.com/snippets/ORE6d -->
 <div class="container">            
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="row">
