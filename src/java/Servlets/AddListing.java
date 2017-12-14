@@ -93,7 +93,9 @@ public class AddListing extends HttpServlet {
             System.out.println(filePart.getContentType());
 
             // obtains input stream of the upload file
-            inputStream = filePart.getInputStream();
+            if(filePart.getSize() > 0) {
+                inputStream = filePart.getInputStream();
+            }
         }
 
         // fetches input stream of the upload file for the blob column
