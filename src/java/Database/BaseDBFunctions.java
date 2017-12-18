@@ -27,7 +27,9 @@ public class BaseDBFunctions {
         /**
          * Demo DB
          */
-        String host = "jdbc:mysql://sdev450.gmavt.net:3306/demo1";
+        
+         // Not the credentials for flameasylivin.com/DirectSell450  Contact Adam Flammino if you need those
+        String host = "jdbc:mysql://sdev450.gmavt.net:3306/demo1"; 
         String username = "demo1";
         String password = "DirectSellDbAccess1234";
 
