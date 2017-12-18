@@ -46,6 +46,7 @@ public class Contact extends HttpServlet {
                             new javax.mail.Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(
+                                // Not the email password. Contact Adam Flammino if you want the real one
                                     "sdev450directsell@gmail.com", "sdev4502017pw");// Specify the Username and the PassWord
                         }
                     });
